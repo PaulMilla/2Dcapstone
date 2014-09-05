@@ -2,21 +2,16 @@
 using System.Collections;
 
 public class PlayerInput : MonoBehaviour {
-	[SerializeField]
-	private float timeBetweenUpdates;
-	private float timeSinceUpdate { get; set; }
-
+	
 	private PlayerModel playerModel { get; set; }
 
 	void Awake() {
 		playerModel = gameObject.GetComponent<PlayerModel>() as PlayerModel;
 	}
 	void FixedUpdate() {
-		if (Time.time > timeBetweenUpdates + timeSinceUpdate) {
-			timeSinceUpdate = Time.deltaTime;
 			Vector2 direction = GetInputDirection();
+			RecordingManager.Instance.RecordMovement(direction);
 			playerModel.Move(direction);
-		}
 	}
 
 	Vector2 GetInputDirection() {
