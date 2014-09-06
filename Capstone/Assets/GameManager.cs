@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	private string nextLevelName;
 	public bool inRound { get; private set; } // true if clock is running and player's actions are currently happening
 	private SpawnPoint[] spawnPoints { get; set; }
+	private PlayerInput playerInput { get; set; }
 
 	void Awake() {
 		Instance = this;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour {
 		foreach (var point in spawnPoints) {
 			point.Spawn();
 		}
+		playerInput = GameObject.FindObjectOfType<PlayerInput>();
 	}
 
 	void Update() {
@@ -42,14 +44,16 @@ public class GameManager : MonoBehaviour {
 		//TODO: RecordingManager.ClearRecordings();
 	}
 	public void BeginRound() {
+		playerInput.OnRoundStart();
 		inRound = true;
 	}
 	public void EndRound() {
 		inRound = false;
-		RecordingManager.Instance.OnRoundEnd();
 		foreach (var point in spawnPoints) {
 			point.DestroySpawnedObject();
 			point.Spawn();
 		}
+		playerInput = GameObject.FindObjectOfType<PlayerInput>();
+		RecordingManager.Instance.OnRoundEnd();
 	}
 }

@@ -7,21 +7,31 @@ public class RecordingManager : MonoBehaviour {
 		private set;
 	}
 
-	private List<Recording> previousRecordings = new List<Recording>();
-	private Recording currentRecroding;
+	private List<Recording> recordings = new List<Recording>();
+	private List<RecordedInput> recordedInput = new List<RecordedInput>();
+	[SerializeField]
+	private RecordedInput recordedInputPrototype;
 
 	void Awake() {
 		Instance = this;
-		OnRoundEnd();
 	}
 
 	public void OnRoundEnd() {
-		if (currentRecroding != null) {
-			previousRecordings.Add(currentRecroding);
+		foreach (RecordedInput input in recordedInput) {
+			if (input != null) {
+				Destroy(input.gameObject);
+			}
 		}
-		currentRecroding = new Recording();
+		recordedInput.Clear();
+		Transform playerTransform = GameObject.FindObjectOfType<PlayerInput>().transform;
+		foreach (Recording recording in recordings) {
+			RecordedInput input = Instantiate(recordedInputPrototype, playerTransform.position, playerTransform.rotation) as RecordedInput;
+			input.recording = recording;
+			recordedInput.Add(input);
+		}
+		//Spawn Holograms
 	}
-	public void RecordMovement(Vector2 direction) {
-		currentRecroding.RecordMovement(direction);
+	public void AddRecording(Recording recording) {
+		recordings.Add(recording);
 	}
 }

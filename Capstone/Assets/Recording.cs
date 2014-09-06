@@ -1,12 +1,30 @@
-﻿using UnityEngine;
+using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
-public class Recording {
+public class Recording
+{
+	List<RecordedEvent> recordedEvents = new List<RecordedEvent>();
 
-	List<Vector2> movements = new List<Vector2>();
-	//TODO: List<Actions (using button, or ability) and the time at which they occured>
+	public void AddEvent (RecordedEvent recordedEvent)
+	{
+		recordedEvents.Add(recordedEvent);
+	}
 
-	public void RecordMovement(Vector2 direction) {
-		movements.Add(direction);
+	public int NumEvents() {
+		return recordedEvents.Count;
+	}
+
+
+	// Our own inplementation of Input.GetKey()
+	// The iteration parameter is going to be the number of the 
+	// FixedUpdate iteration
+	public bool GetKey(int iteration, KeyCode key) {
+		if (iteration >= recordedEvents.Count)
+			return false;
+		else {
+			return recordedEvents[iteration].GetKey(key);
+		}
 	}
 }
+
