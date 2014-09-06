@@ -17,21 +17,24 @@ public class PlayerInput : MonoBehaviour {
 		Record();
 	}
 
+	// Here we can create a new RecordedEvent which will be similar to 
+	// an InputEvent, after we update it based on what is going on during 
+	// the current FixedUpdate, we add it to our recording.
 	void Record() {
 		RecordedEvent recordedEvent = new RecordedEvent();
 		if (Input.GetKey(KeyCode.W)) {
 			Debug.Log ("Adding 'W'");
-			recordedEvent.AddKeyDown(KeyCode.W);
+			recordedEvent.AddKey(KeyCode.W);
 		}
 		if (Input.GetKey(KeyCode.S)) {
-			recordedEvent.AddKeyDown(KeyCode.S);
+			recordedEvent.AddKey(KeyCode.S);
 		}
 		if (Input.GetKey(KeyCode.A)) {
-			recordedEvent.AddKeyDown(KeyCode.A);
+			recordedEvent.AddKey(KeyCode.A);
 		}
 		if (Input.GetKey(KeyCode.D)) {
 			Debug.Log ("Adding 'D'");
-			recordedEvent.AddKeyDown(KeyCode.D);
+			recordedEvent.AddKey(KeyCode.D);
 		}
 		recording.AddEvent(recordedEvent);
 	}
@@ -55,6 +58,7 @@ public class PlayerInput : MonoBehaviour {
 			RecordedInput hologramCharacter = (RecordedInput) Instantiate(hologram, new Vector3(0, 0, this.transform.position.z), transform.rotation);
 			Debug.Log ("Creating hologram character with " + recording.NumEvents() + " events ");
 			hologramCharacter.recording = recording;
+			recording = new Recording2();
 		}
 		return direction.normalized;
 	}

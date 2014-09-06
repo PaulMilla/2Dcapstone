@@ -23,7 +23,7 @@ public class Recording2
 		if (iteration >= recordedEvents.Count)
 			return false;
 		else {
-			return recordedEvents[iteration].GetKeyDown(key);
+			return recordedEvents[iteration].GetKey(key);
 		}
 	}
 }

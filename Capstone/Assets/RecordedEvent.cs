@@ -4,13 +4,15 @@ using System.Collections.Generic;
 
 public class RecordedEvent
 {
+
+	// A list of keys that are down during this event
 	List<KeyCode> downKeys = new List<KeyCode>();
 
-	public void AddKeyDown(KeyCode key) {
+	public void AddKey(KeyCode key) {
 		downKeys.Add(key);
 	}
 
-	public bool GetKeyDown(KeyCode key) {
+	public bool GetKey(KeyCode key) {
 		foreach (KeyCode downKey in downKeys) {
 			if (key.CompareTo(downKey) == 0){
 				return true;
