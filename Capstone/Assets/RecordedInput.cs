@@ -6,7 +6,7 @@ public class RecordedInput : MonoBehaviour
 	private PlayerModel playerModel { get; set; }
 
 	// Holds a list of recorded actions we can iterate through every frame
-	public Recording2 recording { get; set; }
+	public Recording recording { get; set; }
 
 	// This keeps track of which frame we are on
 	// it gets updated every FixedUpdate

@@ -7,8 +7,7 @@ public class RecordingManager : MonoBehaviour {
 		private set;
 	}
 
-	private List<Recording> previousRecordings = new List<Recording>();
-	private Recording currentRecroding;
+	private List<Recording> recordings = new List<Recording>();
 
 	void Awake() {
 		Instance = this;
@@ -16,12 +15,9 @@ public class RecordingManager : MonoBehaviour {
 	}
 
 	public void OnRoundStart() {
-		if (currentRecroding != null) {
-			previousRecordings.Add(currentRecroding);
-		}
-		currentRecroding = new Recording();
+		//Spawn Holograms
 	}
-	public void RecordMovement(Vector2 direction) {
-		currentRecroding.RecordMovement(direction);
+	public void AddRecording(Recording recording) {
+		recordings.Add(recording);
 	}
 }
