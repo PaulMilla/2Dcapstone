@@ -12,10 +12,10 @@ public class RecordingManager : MonoBehaviour {
 
 	void Awake() {
 		Instance = this;
-		OnRoundStart();
+		OnRoundEnd();
 	}
 
-	public void OnRoundStart() {
+	public void OnRoundEnd() {
 		if (currentRecroding != null) {
 			previousRecordings.Add(currentRecroding);
 		}

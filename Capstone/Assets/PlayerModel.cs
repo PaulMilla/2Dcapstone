@@ -7,6 +7,7 @@ public class PlayerModel : MonoBehaviour {
 
 	public void Move(Vector2 direction)
 	{
+		transform.rigidbody.velocity = Vector3.zero;
 		transform.rigidbody.MovePosition(transform.position + (Vector3)(direction * movementSpeed * Time.fixedDeltaTime));
 	}
 }

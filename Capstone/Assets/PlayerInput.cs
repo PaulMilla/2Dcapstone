@@ -9,9 +9,11 @@ public class PlayerInput : MonoBehaviour {
 		playerModel = gameObject.GetComponent<PlayerModel>() as PlayerModel;
 	}
 	void FixedUpdate() {
+		if (GameManager.Instance.inRound) {
 			Vector2 direction = GetInputDirection();
 			RecordingManager.Instance.RecordMovement(direction);
 			playerModel.Move(direction);
+		}
 	}
 
 	Vector2 GetInputDirection() {
