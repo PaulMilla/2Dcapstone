@@ -6,7 +6,7 @@ public class RecordedInput : MonoBehaviour
 	private PlayerModel playerModel { get; set; }
 
 	// Holds a list of recorded actions we can iterate through every frame
-	public Recording2 recording { get; set; }
+	public Recording recording { get; set; }
 
 	// This keeps track of which frame we are on
 	// it gets updated every FixedUpdate
@@ -17,9 +17,11 @@ public class RecordedInput : MonoBehaviour
 	}
 	
 	void FixedUpdate() {
-		Vector2 direction = GetInputDirection();
-		playerModel.Move(direction);
-		iteration++;
+		if (GameManager.Instance.inRound) {
+			Vector2 direction = GetInputDirection();
+			playerModel.Move(direction);
+			iteration++;
+		}
 	}
 
 
