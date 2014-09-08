@@ -6,8 +6,10 @@ public class Door : MonoBehaviour {
 
 	private bool isOpen;
 
+	// I think having this will help with level design Since we can now
 	[SerializeField]
 	private bool initiallyOpen = false; // By default the door is closed
+
 
 	void Start() {
 		if(initiallyOpen) {
@@ -39,6 +41,7 @@ public class Door : MonoBehaviour {
 		return isOpen;
 	}
 
+	// For use with switch buttons
 	public void Switch() {
 		if (IsOpen ()) {
 			Close ();

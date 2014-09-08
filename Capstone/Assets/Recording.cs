@@ -28,6 +28,7 @@ public class Recording
 		}
 	}
 
+	// Our implementation of Input.GetKeyDown()
 	public bool GetKeyDown(int iteration, KeyCode key) {
 		if (iteration >= recordedEvents.Count)
 			return false;

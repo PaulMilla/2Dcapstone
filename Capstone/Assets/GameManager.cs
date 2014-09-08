@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour {
 		foreach (PressureButton button in pressureButtons) {
 			button.deactivate();
 		}
+		// Adding this so that the doors set by Switches get reset
 		foreach (Door door in doors) {
 			door.Reset();
 		}
