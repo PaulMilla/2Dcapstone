@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour {
 	private SpawnPoint[] spawnPoints { get; set; }
 	private PlayerInput playerInput { get; set; }
 
+	[SerializeField]
+	private PressureButton[] pressureButtons;
+
 	void Awake() {
 		Instance = this;
 	}
@@ -52,6 +55,9 @@ public class GameManager : MonoBehaviour {
 		foreach (var point in spawnPoints) {
 			point.DestroySpawnedObject();
 			point.Spawn();
+		}
+		foreach (PressureButton button in pressureButtons) {
+			button.deactivate();
 		}
 		playerInput = GameObject.FindObjectOfType<PlayerInput>();
 		RecordingManager.Instance.OnRoundEnd();
