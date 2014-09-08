@@ -6,6 +6,7 @@ public class Recording
 {
 	List<RecordedEvent> recordedEvents = new List<RecordedEvent>();
 
+
 	public void AddEvent (RecordedEvent recordedEvent)
 	{
 		recordedEvents.Add(recordedEvent);
@@ -24,6 +25,14 @@ public class Recording
 			return false;
 		else {
 			return recordedEvents[iteration].GetKey(key);
+		}
+	}
+
+	public bool GetKeyDown(int iteration, KeyCode key) {
+		if (iteration >= recordedEvents.Count)
+			return false;
+		else {
+			return recordedEvents[iteration].GetKeyDown(key);
 		}
 	}
 }

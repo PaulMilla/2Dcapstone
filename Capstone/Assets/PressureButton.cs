@@ -23,6 +23,7 @@ public class PressureButton : MonoBehaviour {
 		transform.position = newPosition;
 	}
 
+
 	public void activate ()
 	{
 		Door.Open();
