@@ -5,11 +5,13 @@ public class PlayerInput : MonoBehaviour {
 	
 	private PlayerModel playerModel { get; set; }
 	private Recording recording;
+
+	// Set to true for a frame whenever interaction button is down
 	private bool interactionButtonDown = false;
 
 	Vector2 direction = Vector2.zero;
 
-	public RecordedInput hologram;
+	public RecordedInput recordedInput;
 
 	void Awake() {
 		playerModel = gameObject.GetComponent<PlayerModel>() as PlayerModel;
@@ -29,7 +31,7 @@ public class PlayerInput : MonoBehaviour {
 	// Here we can create a new RecordedEvent which will be similar to 
 	// an InputEvent, after we update it based on what is going on during 
 	// the current FixedUpdate, we add it to our recording.
-	Vector2 GetInput() {
+	void GetInput() {
 		direction = Vector2.zero;
 		RecordedEvent recordedEvent = new RecordedEvent();
 		if (Input.GetKey(KeyCode.W)) {
@@ -55,7 +57,6 @@ public class PlayerInput : MonoBehaviour {
 			recordedEvent.AddKeyDown(KeyCode.E);
 		}
 		recording.AddEvent(recordedEvent);
-		return direction.normalized;
 	}
 
 	// A method which signifies whether or not this recording has pressed down the 
