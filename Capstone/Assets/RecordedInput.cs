@@ -4,6 +4,9 @@ using System.Collections;
 public class RecordedInput : MonoBehaviour
 {
 	private PlayerModel playerModel { get; set; }
+	private bool interactionButtonDown;
+	Vector2 direction = Vector2.zero;
+
 
 	// Holds a list of recorded actions we can iterate through every frame
 	public Recording recording { get; set; }
@@ -18,7 +21,7 @@ public class RecordedInput : MonoBehaviour
 	
 	void FixedUpdate() {
 		if (GameManager.Instance.inRound) {
-			Vector2 direction = GetInputDirection();
+			GetInput();
 			playerModel.Move(direction);
 			iteration++;
 		}
@@ -27,8 +30,8 @@ public class RecordedInput : MonoBehaviour
 
 	// The difference is here really Instead of using Input.GetKey, we can
 	// use our recorded input for this frame.
-	Vector2 GetInputDirection() {
-		Vector2 direction = Vector2.zero;
+	void GetInput() {
+		direction = Vector2.zero;
 		if (recording.GetKey(iteration, KeyCode.W)) {
 			direction.y = 1;
 		}
@@ -41,7 +44,17 @@ public class RecordedInput : MonoBehaviour
 		if (recording.GetKey(iteration, KeyCode.D)) {
 			direction.x = 1;
 		}
-		return direction.normalized;
+		// By default this is false
+		interactionButtonDown = false;
+		if (recording.GetKeyDown(iteration, KeyCode.E)) {
+			interactionButtonDown = true;
+		}	
+	}
+
+	// A method which signifies whether or not this recording has pressed down the 
+	// Interaction Button this frame
+	public bool InteractionButtonDown() {
+		return interactionButtonDown;
 	}
 }
 
