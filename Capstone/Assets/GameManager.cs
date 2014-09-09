@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour {
 
 	[SerializeField]
 	private PressureButton[] pressureButtons;
+	[SerializeField] 
+	private Door[] doors;
 
 	void Awake() {
 		Instance = this;
@@ -69,6 +71,11 @@ public class GameManager : MonoBehaviour {
 		foreach (PressureButton button in pressureButtons) {
 			button.deactivate();
 		}
+		// Adding this so that the doors set by Switches get reset
+		foreach (Door door in doors) {
+			door.Reset();
+		}
+
 		playerInput = GameObject.FindObjectOfType<PlayerInput>();
 		RecordingManager.Instance.OnRoundEnd();
 		if (HologramsRemaining == 0) {
