@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	private int hologramLimit;
 	public int HologramLimit { get { return hologramLimit; } private set { hologramLimit = value; } }
-	public int NumHolograms { get { return 0; } } // NYI
+	public int HologramsRemaining { get { return HologramLimit - RecordingManager.Instance.NumHolograms; } } // NYI
 	public bool inRound { get; private set; } // true if clock is running and player's actions are currently happening
 	private SpawnPoint[] spawnPoints { get; set; }
 	private PlayerInput playerInput { get; set; }
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
 	}
 	public void ResetLevel() {
 		EndRound();
-		//TODO: RecordingManager.ClearRecordings();
+		RecordingManager.Instance.ClearRecordings();
 	}
 	public void BeginRound() {
 		playerInput.OnRoundStart();
@@ -71,5 +71,8 @@ public class GameManager : MonoBehaviour {
 		}
 		playerInput = GameObject.FindObjectOfType<PlayerInput>();
 		RecordingManager.Instance.OnRoundEnd();
+		if (HologramsRemaining == 0) {
+			RecordingManager.Instance.ClearRecordings();
+		}
 	}
 }

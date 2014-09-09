@@ -13,12 +13,19 @@ public class UIView : MonoBehaviour {
 		else {
 			GUILayout.TextField("Time: "+0);
 		}
-		GUILayout.TextField("Holograms Remaining: " + (GameManager.Instance.HologramLimit - GameManager.Instance.NumHolograms));
+		GUILayout.TextField("Holograms Remaining: " + (GameManager.Instance.HologramsRemaining - 1));
+		if (GameManager.Instance.inRound) {
+			if (GUILayout.Button("End Round")) {
+				GameManager.Instance.EndRound();
+			}
+		}
+		else {
+			if (GUILayout.Button("Begin Round")) {
+				GameManager.Instance.BeginRound();
+			}
+		}
 		if (GUILayout.Button("Reset Level")) {
 			GameManager.Instance.ResetLevel();
-		}
-		if (GUILayout.Button("End Round")) {
-			GameManager.Instance.EndRound();
 		}
 	}
 	void OnRoundStart() {
