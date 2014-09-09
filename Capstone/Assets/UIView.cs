@@ -14,6 +14,12 @@ public class UIView : MonoBehaviour {
 			GUILayout.TextField("Time: "+0);
 		}
 		GUILayout.TextField("Holograms Remaining: " + (GameManager.Instance.HologramLimit - GameManager.Instance.NumHolograms));
+		if (GUILayout.Button("Reset Level")) {
+			GameManager.Instance.ResetLevel();
+		}
+		if (GUILayout.Button("End Round")) {
+			GameManager.Instance.EndRound();
+		}
 	}
 	void OnRoundStart() {
 		TimeRoundStart = Time.time;
