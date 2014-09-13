@@ -36,5 +36,18 @@ public class Recording
 			return recordedEvents[iteration].GetKeyDown(key);
 		}
 	}
+
+	public bool GetMouseButtonDown(int iteration, int button) {
+		if (iteration >= recordedEvents.Count) {
+			return false;
+		}
+		else {
+			return recordedEvents[iteration].GetMouseButtonDown(0);
+		}
+	}
+
+	public Vector3 GetMousePosition(int iteration) {
+		return recordedEvents[iteration].GetMousePosition();
+	}
 }
 

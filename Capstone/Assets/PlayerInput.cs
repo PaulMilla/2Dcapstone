@@ -1,16 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInput : MonoBehaviour {
+public class PlayerInput : CharacterInput {
 	
-	private PlayerModel playerModel { get; set; }
 	private Recording recording;
-
-	// Set to true for a frame whenever interaction button is down
-	private bool interactionButtonDown = false;
-
-	Vector2 direction = Vector2.zero;
-
+	
 	public RecordedInput recordedInput;
 
 	void Awake() {
@@ -20,7 +14,6 @@ public class PlayerInput : MonoBehaviour {
 	void FixedUpdate() {
 		if (GameManager.Instance.inRound) {
 			GetInput();
-			playerModel.Move(direction);
 		}
 	}
 	public void OnRoundStart() {
@@ -28,40 +21,17 @@ public class PlayerInput : MonoBehaviour {
 		RecordingManager.Instance.AddRecording(recording);
 	}
 
-	// Here we can create a new RecordedEvent which will be similar to 
-	// an InputEvent, after we update it based on what is going on during 
-	// the current FixedUpdate, we add it to our recording.
 	void GetInput() {
-		direction = Vector2.zero;
-		RecordedEvent recordedEvent = new RecordedEvent();
-		if (Input.GetKey(KeyCode.W)) {
-			direction.y = 1;
-			recordedEvent.AddKey(KeyCode.W);
+		RecordedEvent recordedEvent = new RecordedEvent ();
+		if (Input.GetMouseButtonDown(0)) {
+			recordedEvent.AddMouseButtonDown(0, Input.mousePosition);
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if(Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Floor")))
+			{
+				playerModel.MoveTo(hit.point);
+			}
 		}
-		if (Input.GetKey(KeyCode.S)) {
-			direction.y = -1;
-			recordedEvent.AddKey(KeyCode.S);
-		}
-		if (Input.GetKey(KeyCode.A)) {
-			direction.x = -1;
-			recordedEvent.AddKey(KeyCode.A);
-		}
-		if (Input.GetKey(KeyCode.D)) {
-			direction.x = 1;
-			recordedEvent.AddKey(KeyCode.D);
-		}
-		// By default this is false
-		interactionButtonDown = false;
-		if (Input.GetKeyDown(KeyCode.E)) {
-			interactionButtonDown = true;
-			recordedEvent.AddKeyDown(KeyCode.E);
-		}
-		recording.AddEvent(recordedEvent);
-	}
-
-	// A method which signifies whether or not this recording has pressed down the 
-	// Interaction Button this frame
-	public bool InteractionButtonDown() {
-		return interactionButtonDown;
+		recording.AddEvent (recordedEvent);
 	}
 }

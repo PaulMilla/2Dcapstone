@@ -15,15 +15,18 @@ public class PressureButton : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 newPosition = transform.position;
-		if (!Pressed && transform.position.y > +.25) 
-			newPosition.y += ButtonSpeed;
-		else if (Pressed && transform.position.y < -.1) {
-			newPosition.y -= ButtonSpeed;
+		if (!Pressed && transform.position.z > -.25) 
+			newPosition.z -= ButtonSpeed;
+		else if (Pressed && transform.position.z < .1) {
+			newPosition.z += ButtonSpeed;
 		}
 		transform.position = newPosition;
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> playing with buttons and doors
 	public void activate ()
 	{
 		Door.Open();
