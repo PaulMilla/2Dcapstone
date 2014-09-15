@@ -15,10 +15,13 @@ public class PressureButton : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 newPosition = transform.position;
-		if (!Pressed && transform.position.y > +.25) 
-			newPosition.y += ButtonSpeed;
-		else if (Pressed && transform.position.y < -.1) {
+		if (!Pressed && transform.position.y > +.25) {
+			// Move down
 			newPosition.y -= ButtonSpeed;
+		}
+		else if (Pressed && transform.position.y < -.1) {
+			// Move up
+			newPosition.y += ButtonSpeed;
 		}
 		transform.position = newPosition;
 	}
