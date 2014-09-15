@@ -14,7 +14,7 @@ public class PressureButton : MonoBehaviour {
 	public Door Door;
 	// Use this for initialization
 	void Start () {
-	
+		ButtonSpeed = 1.0f;
 	}
 	
 	// Update is called once per frame
