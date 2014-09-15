@@ -1,30 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerModel : MonoBehaviour {
 	[SerializeField]
 	private float movementSpeed;
 
-	private Vector3 positionToMoveTo;
-
-	private bool movementEnabled = false;
-
-	void FixedUpdate() {
-		if (movementEnabled)
-			Move ();
-	}
-
-	private void Move()
+	public void Move(Vector2 direction)
 	{
-		if (!positionToMoveTo.Equals(this.transform.position)) {
-			this.transform.LookAt(positionToMoveTo);
-			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, positionToMoveTo, movementSpeed * Time.fixedDeltaTime));
-		}
-	}
-
-	public void MoveTo(Vector3 pos) {
-		movementEnabled = true;
-		positionToMoveTo = pos;
-		positionToMoveTo.y = this.transform.position.y;
+		transform.rigidbody.MovePosition(transform.position + (Vector3)(direction * movementSpeed * Time.fixedDeltaTime));
 	}
 }
