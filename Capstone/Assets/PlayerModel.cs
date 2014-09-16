@@ -4,9 +4,32 @@ using System.Collections;
 public class PlayerModel : MonoBehaviour {
 	[SerializeField]
 	private float movementSpeed;
-
-	public void Move(Vector2 direction)
+	
+	private Vector3 positionToMoveTo;
+	
+	private bool movementEnabled = false;
+	
+	void FixedUpdate() {
+		if (movementEnabled)
+			Move ();
+	}
+	
+	private void Move()
 	{
-		transform.rigidbody.MovePosition(transform.position + (Vector3)(direction * movementSpeed * Time.fixedDeltaTime));
+		if ((positionToMoveTo - this.transform.position).magnitude > 0.1f) {
+			this.transform.rigidbody.velocity = Vector3.zero;
+			this.transform.rigidbody.rotation.SetLookRotation(positionToMoveTo);
+			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, positionToMoveTo, movementSpeed * Time.fixedDeltaTime));
+		}
+	}
+	
+	public void MoveTo(Vector3 pos) {
+		movementEnabled = true;
+		positionToMoveTo = pos;
+		positionToMoveTo.y = this.transform.position.y;
+	}
+
+	public void GetKilled() {
+		Destroy(this.gameObject);
 	}
 }

@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+ * Attach as a child to an enemy guard
+ */
+
 public class EnemyVision : MonoBehaviour {
 
 	Transform target;
 
-	public EnemyGuard Enemy;
-	
+	EnemyGuard Enemy;
+
+	void Start () {
+		Enemy = GetComponentInParent<EnemyGuard>();
+	}
+
 	void OnTriggerStay(Collider other) {
 		// If the player is in the trigger sphere
 		if (other.tag.Equals("Player") ||
@@ -16,12 +24,7 @@ public class EnemyVision : MonoBehaviour {
 			// Create a vector from the enemy to the player
 			Vector3 direction = other.transform.position - Enemy.transform.position;
 
-			Debug.DrawLine(Enemy.transform.position, Enemy.transform.position + Enemy.transform.right * 10, Color.blue);
-			Debug.DrawLine(Enemy.transform.position, Enemy.transform.position + Enemy.transform.up * 10, Color.red);
-			Debug.DrawLine(Enemy.transform.position, Enemy.transform.position + Enemy.transform.forward * 10, Color.yellow);
-
 			Debug.DrawRay(Enemy.transform.position,  direction.normalized * 1000,Color.white);
-
 
 			if (Enemy.HasLineOfSightTo(other.transform)) {
 				if (target != null) {
@@ -55,4 +58,5 @@ public class EnemyVision : MonoBehaviour {
 	public Transform GetTarget() {
 		return target;
 	}
+
 }
