@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Goal : MonoBehaviour {
 	void OnTriggerEnter(Collider collider) {
-		GameManager.Instance.LoadNextLevel();
+		if (collider.gameObject.layer == LayerMask.NameToLayer("Player")) {
+			GameManager.Instance.LoadNextLevel();
+		}
 	}
 }
