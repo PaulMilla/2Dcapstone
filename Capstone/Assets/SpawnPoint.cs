@@ -17,7 +17,7 @@ public class SpawnPoint : MonoBehaviour {
 		}
 	}
 	void OnDrawGizmos() {
-		Gizmos.color = (LayerMask.NameToLayer("Player") == objectToSpawn.layer) ? Color.green : Color.red;
+		Gizmos.color = (objectToSpawn != null && LayerMask.NameToLayer("Player") == objectToSpawn.layer) ? Color.green : Color.red;
 		Gizmos.DrawSphere(transform.position, 1);
 	}
 }
