@@ -1,13 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class RecordedInput : MonoBehaviour
+public class RecordedInput : CharacterInput
 {
-	private PlayerModel playerModel { get; set; }
-	private bool interactionButtonDown;
-	Vector2 direction = Vector2.zero;
-
-
 	// Holds a list of recorded actions we can iterate through every frame
 	public Recording recording { get; set; }
 
@@ -22,7 +17,6 @@ public class RecordedInput : MonoBehaviour
 	void FixedUpdate() {
 		if (GameManager.Instance.inRound) {
 			GetInput();
-			playerModel.Move(direction);
 			iteration++;
 		}
 	}
@@ -31,30 +25,23 @@ public class RecordedInput : MonoBehaviour
 	// The difference is here really Instead of using Input.GetKey, we can
 	// use our recorded input for this frame.
 	void GetInput() {
-		direction = Vector2.zero;
-		if (recording.GetKey(iteration, KeyCode.W)) {
-			direction.y = 1;
+		if (recording.GetMouseButtonDown(iteration, 0)) {
+			Debug.Log("Mouse button went down at " + recording.GetMousePosition(iteration));
+			Ray ray = Camera.main.ScreenPointToRay(recording.GetMousePosition(iteration));
+			RaycastHit hit;
+			if(Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Floor")))
+			{
+				Debug.Log("Hit Floor");
+				playerModel.MoveTo(hit.point);
+			}
 		}
-		if (recording.GetKey(iteration, KeyCode.S)) {
-			direction.y = -1;
-		}
-		if (recording.GetKey(iteration, KeyCode.A)) {
-			direction.x = -1;
-		}
-		if (recording.GetKey(iteration, KeyCode.D)) {
-			direction.x = 1;
-		}
-		// By default this is false
+
 		interactionButtonDown = false;
 		if (recording.GetKeyDown(iteration, KeyCode.E)) {
 			interactionButtonDown = true;
 		}	
 	}
 
-	// A method which signifies whether or not this recording has pressed down the 
-	// Interaction Button this frame
-	public bool InteractionButtonDown() {
-		return interactionButtonDown;
-	}
+
 }
 

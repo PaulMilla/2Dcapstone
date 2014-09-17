@@ -6,19 +6,27 @@ public class PressureButton : MonoBehaviour {
 	public bool Pressed = false;
 	public float ButtonSpeed;
 
+	// The y-dimesnion where the button is up and at rest
+	float upRestY = .2f;
+	// The y-dimension where the button is down and at rest
+	float downRestY = -.2f;
+
 	public Door Door;
 	// Use this for initialization
 	void Start () {
-	
+		ButtonSpeed = 1.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Vector3 newPosition = transform.position;
-		if (!Pressed && transform.position.z > -.25) 
-			newPosition.z -= ButtonSpeed;
-		else if (Pressed && transform.position.z < .1) {
-			newPosition.z += ButtonSpeed;
+		if (!Pressed && transform.position.y < upRestY) {
+			// Move down
+			newPosition.y += ButtonSpeed * Time.fixedDeltaTime;
+		}
+		else if (Pressed && transform.position.y > downRestY) {
+			// Move up
+			newPosition.y -= ButtonSpeed * Time.fixedDeltaTime;
 		}
 		transform.position = newPosition;
 	}
