@@ -5,11 +5,15 @@ public class MissileController : MonoBehaviour {
 	
 	Transform target; 
 	Vector3 lastDetectedPosition;
-	
+	Vector3 startingPosition;
 	bool isInMotion = false;
 	
 	public float Speed;
-	
+
+	void Start() {
+		startingPosition = this.transform.position;
+	}
+
 	void FixedUpdate() {
 		if (isInMotion) {
 			Debug.Log("InMotion");
@@ -59,9 +63,14 @@ public class MissileController : MonoBehaviour {
 	
 	void OnTriggerExit(Collider other) {
 		if (other.transform.Equals (target)) {
-			target = null;
 			lastDetectedPosition = target.position;
+			target = null;
 		}
 	}
-	
+
+	public void Reset(){ 
+		this.transform.position = startingPosition;
+		isInMotion = false;
+		target = null;
+	}
 }

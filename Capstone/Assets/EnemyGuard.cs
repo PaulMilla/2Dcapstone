@@ -13,11 +13,14 @@ public class EnemyGuard : MonoBehaviour {
 	public float PursuitSpeed;
 	public float PatrolSpeed;
 
+	PlayerModel playerModel;
+
 	// Actually we should have a GuardPath script to attach to this gameobject
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
 	void Start() {
+		playerModel = GetComponentInChildren<PlayerModel> ();
 		initialRotation = this.transform.rotation;
 		initialPosition = this.transform.position;
 	}
