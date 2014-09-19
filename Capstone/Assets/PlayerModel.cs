@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerModel : MonoBehaviour {
 	[SerializeField]
 	private float movementSpeed;
+	[SerializeField]
+	private float deathTime;
 	
 	private Vector3 positionToMoveTo;
 	
@@ -28,7 +30,17 @@ public class PlayerModel : MonoBehaviour {
 		positionToMoveTo = pos;
 		positionToMoveTo.y = this.transform.position.y;
 	}
-
+	public void Hit() {
+		Debug.Log("Hit");
+		movementSpeed = 0;
+		positionToMoveTo = transform.position;
+		StartCoroutine(Die());
+	}
+	IEnumerator Die() {
+		yield return new WaitForSeconds(deathTime);
+		GetKilled();
+		yield return null;
+	}
 	public void GetKilled() {
 		Destroy(this.gameObject);
 	}
