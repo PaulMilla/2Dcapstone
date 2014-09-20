@@ -20,7 +20,7 @@ public class EnemyGuard : MonoBehaviour {
 	Quaternion initialRotation;
 
 	void Start() {
-		playerModel = GetComponentInChildren<PlayerModel> ();
+		playerModel = GetComponent<PlayerModel> ();
 		initialRotation = this.transform.rotation;
 		initialPosition = this.transform.position;
 	}
@@ -52,7 +52,7 @@ public class EnemyGuard : MonoBehaviour {
 			// Setting in motion
 			this.transform.rigidbody.velocity = Vector3.zero;
 			this.transform.LookAt(initialPosition);
-			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, initialPosition, PursuitSpeed * Time.fixedDeltaTime));
+			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, initialPosition, PatrolSpeed * Time.fixedDeltaTime));
 		}
 		// We know we have arrived at our station
 		else {
@@ -69,12 +69,10 @@ public class EnemyGuard : MonoBehaviour {
 	}
 
 	public bool HasLineOfSightTo(Transform t) {
-		Debug.Log ("Checking LOS to " + t.name);
 		Vector3 direction = t.position - this.transform.position;
 		// Raycast to make sure we have straight line of sight
 		RaycastHit hit;
 		if (Physics.Raycast (this.transform.position, direction.normalized, out hit, 1000)) {
-			Debug.Log ("Hit Something " + hit.collider.gameObject.name);
 			if (hit.transform.Equals (t)) {
 					return true;
 			}

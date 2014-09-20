@@ -4,15 +4,19 @@ using System.Collections;
 public class Payload : MonoBehaviour {
 
 	MissileController missileController;
+
+	private static float DEFAULT_BLAST_RADIUS = 5.0f;
 	public float blastRadius;
 
 	void Start () {
 		missileController = GetComponentInParent<MissileController> ();
+		if (blastRadius <= 0) {
+			blastRadius = DEFAULT_BLAST_RADIUS;
+		}
 	}
 
 	void OnTriggerEnter(Collider other) {
-		// Blow Up!
-		Debug.Log ("Explosion!");
+ 		// Blow Up!
 		// Check surrounding area for victims
 		Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, blastRadius);
 		int i = 0;
