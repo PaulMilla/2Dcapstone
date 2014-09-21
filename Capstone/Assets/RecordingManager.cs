@@ -10,6 +10,7 @@ public class RecordingManager : MonoBehaviour {
 	private List<Recording> recordings = new List<Recording>();
 	private List<RecordedInput> recordedInput = new List<RecordedInput>();
 	public int NumHolograms { get { return recordedInput.Count; } }
+
 	[SerializeField]
 	private RecordedInput recordedInputPrototype;
 
@@ -32,9 +33,11 @@ public class RecordingManager : MonoBehaviour {
 		}
 		//Spawn Holograms
 	}
+
 	public void AddRecording(Recording recording) {
 		recordings.Add(recording);
 	}
+
 	public void ClearRecordings() {
 		recordings.Clear();
 		foreach (RecordedInput input in recordedInput) {
