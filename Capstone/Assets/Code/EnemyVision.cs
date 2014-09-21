@@ -9,7 +9,7 @@ public class EnemyVision : MonoBehaviour {
 
 	Transform target;
 
-	float fieldOfViewAngle = 55f;
+	float fieldOfViewAngle = 110f;
 
 	EnemyGuard Enemy;
 

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 // This is not really how you are supposed to do AI
@@ -13,9 +13,16 @@ public class EnemyGuard : MonoBehaviour {
 	public float PursuitSpeed;
 	public float PatrolSpeed;
 
+<<<<<<< HEAD:Capstone/Assets/EnemyGuard.cs
 	public Transform path;
 	Transform[] patrolWaypoints;
 	public bool standingGuard = false;
+=======
+	PlayerModel playerModel;
+
+	// Actually we should have a GuardPath script to attach to this gameobject
+	public Transform[] patrolWaypoints;
+>>>>>>> master:Capstone/Assets/Code/EnemyGuard.cs
 
 	// An int to keep track of which direction we are along the patrol route
 	// If 1, we are incrementing our route
@@ -26,13 +33,14 @@ public class EnemyGuard : MonoBehaviour {
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
-	PlayerModel playerModel;
-
 	void Start() {
+<<<<<<< HEAD:Capstone/Assets/EnemyGuard.cs
 		vision = GetComponentInChildren<EnemyVision> ();
 		patrolWaypoints = path.GetComponentsInChildren<Transform> ();
 
+=======
 		playerModel = GetComponent<PlayerModel> ();
+>>>>>>> master:Capstone/Assets/Code/EnemyGuard.cs
 		initialRotation = this.transform.rotation;
 		initialPosition = this.transform.position;
 
@@ -51,7 +59,6 @@ public class EnemyGuard : MonoBehaviour {
 			Chase ();
 		}
 
-		// NO TARGET
 		else {
 			Patrol();
 		}
@@ -85,7 +92,19 @@ public class EnemyGuard : MonoBehaviour {
 			}
 		}
 
+<<<<<<< HEAD:Capstone/Assets/EnemyGuard.cs
 		// The guard has a path, so follow it
+=======
+		// if we aren't at our station --- 0.1f because there is a cap on how far we move each frame,
+		// there may be a case where we cant move any further because the cap is greater than the amount we need to move
+		if ((this.transform.position - initialPosition).magnitude > 0.1f) {
+			// Setting in motion
+			this.transform.rigidbody.velocity = Vector3.zero;
+			this.transform.LookAt(initialPosition);
+			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, initialPosition, PatrolSpeed * Time.fixedDeltaTime));
+		}
+		// We know we have arrived at our station
+>>>>>>> master:Capstone/Assets/Code/EnemyGuard.cs
 		else {
 			// Guard is off route from chasing the player and needs to pick a point to return to
 			if (offPatrolRoute) {
