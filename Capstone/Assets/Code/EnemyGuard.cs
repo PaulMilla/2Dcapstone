@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 // This is not really how you are supposed to do AI
@@ -26,10 +26,13 @@ public class EnemyGuard : MonoBehaviour {
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
+	PlayerModel playerModel;
+
 	void Start() {
 		vision = GetComponentInChildren<EnemyVision> ();
 		patrolWaypoints = path.GetComponentsInChildren<Transform> ();
 
+		playerModel = GetComponent<PlayerModel> ();
 		initialRotation = this.transform.rotation;
 		initialPosition = this.transform.position;
 
@@ -48,6 +51,7 @@ public class EnemyGuard : MonoBehaviour {
 			Chase ();
 		}
 
+		// NO TARGET
 		else {
 			Patrol();
 		}

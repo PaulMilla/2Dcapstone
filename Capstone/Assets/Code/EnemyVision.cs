@@ -9,7 +9,7 @@ public class EnemyVision : MonoBehaviour {
 
 	Transform target;
 
-	float fieldOfViewAngle = 55f;
+	float fieldOfViewAngle = 110f;
 
 	EnemyGuard Enemy;
 
@@ -32,12 +32,10 @@ public class EnemyVision : MonoBehaviour {
 					if (target != null) {
 						// Already have a target, switch if new target is closer
 						if (direction.magnitude < (other.transform.position - Enemy.transform.position).magnitude) {
-							Debug.Log("Target Set");
 							target = other.transform;
 						}
 					}
 					else {
-						Debug.Log("Target Set");
 						target = other.transform;
 					}
 				}

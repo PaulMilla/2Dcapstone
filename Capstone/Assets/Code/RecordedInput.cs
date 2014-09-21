@@ -26,7 +26,6 @@ public class RecordedInput : CharacterInput
 	// use our recorded input for this frame.
 	void GetInput() {
 		if (recording.GetMouseButtonDown(iteration, 0)) {
-			Debug.Log("Mouse button went down at " + recording.GetMousePosition(iteration));
 			Ray ray = Camera.main.ScreenPointToRay(recording.GetMousePosition(iteration));
 			RaycastHit hit;
 			if(Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Floor")))
