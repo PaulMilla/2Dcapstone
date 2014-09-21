@@ -13,7 +13,14 @@ public class EnemyGuard : MonoBehaviour {
 	public float PursuitSpeed;
 	public float PatrolSpeed;
 
-	// Actually we should have a GuardPath script to attach to this gameobject
+	public Transform[] patrolWaypoints;
+
+	// An int to keep track of which direction we are along the patrol route
+	// If 1, we are incrementing our route
+	private int patrolDirection = 1;
+	private bool offPatrolRoute = false;
+
+
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
@@ -26,23 +33,29 @@ public class EnemyGuard : MonoBehaviour {
 
 		// STATE: There is a target to pursue
 		if (vision.HasTarget()) {
-			// Move towards the target
-			Vector3 targetPos = vision.GetTarget().position;
-			targetPos.y = this.transform.position.y;  // So we never move in the y direction
-
-			// Setting in motion
-			this.transform.rigidbody.velocity = Vector3.zero;
-			this.transform.LookAt(targetPos);
-			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, targetPos, PursuitSpeed * Time.fixedDeltaTime));
+			Chase ();
 		}
 
 		// NO TARGET
 		else {
-			ReturnToDuty();
+			Patrol();
 		}
 	}
 
-	void ReturnToDuty() {
+	void Chase() {
+		offPatrolRoute = true;
+		Vector3 targetPos = vision.GetTarget().position;
+		targetPos.y = this.transform.position.y;  // So we never move in the y direction
+		this.transform.rigidbody.velocity = Vector3.zero;
+		this.transform.LookAt(targetPos);
+		this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, targetPos, PursuitSpeed * Time.fixedDeltaTime));
+	}
+
+	void Patrol() {
+		if (offPatrolRoute) {
+		
+		}
+
 		// if we aren't at our station --- 0.1f because there is a cap on how far we move each frame,
 		// there may be a case where we cant move any further because the cap is greater than the amount we need to move
 		if ((this.transform.position - initialPosition).magnitude > 0.1f) {
