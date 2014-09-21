@@ -93,7 +93,6 @@ public class EnemyGuard : MonoBehaviour {
 			}
 			// We've made it to our waypoint, so choose another one
 			if ((this.transform.position - patrolWaypoints[nextWaypointIndex].position).magnitude <= 0.1f) {
-				Debug.Log("changing waypoint");
 				if (nextWaypointIndex >= patrolWaypoints.Length - 1) {
 					patrolDirection = -1;
 				}
@@ -101,10 +100,8 @@ public class EnemyGuard : MonoBehaviour {
 					patrolDirection = 1;
 				}
 				nextWaypointIndex = nextWaypointIndex + patrolDirection;
-				Debug.Log("New INDEX: " + nextWaypointIndex); 
 			}
 			Vector3 positionToGoTo = patrolWaypoints[nextWaypointIndex].position;
-			Debug.Log("Going to waypoint " + nextWaypointIndex + " at " + positionToGoTo);
 			this.transform.rigidbody.velocity = Vector3.zero;
 			this.transform.LookAt(positionToGoTo);
 			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, positionToGoTo, PatrolSpeed * Time.fixedDeltaTime));
@@ -120,12 +117,10 @@ public class EnemyGuard : MonoBehaviour {
 	}
 
 	public bool HasLineOfSightTo(Transform t) {
-		Debug.Log ("Checking LOS to " + t.name);
 		Vector3 direction = t.position - this.transform.position;
 		// Raycast to make sure we have straight line of sight
 		RaycastHit hit;
 		if (Physics.Raycast (this.transform.position, direction.normalized, out hit, 1000)) {
-			Debug.Log ("Hit Something " + hit.collider.gameObject.name);
 			if (hit.transform.Equals (t)) {
 					return true;
 			}
