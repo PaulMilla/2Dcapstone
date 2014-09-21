@@ -13,7 +13,8 @@ public class EnemyGuard : MonoBehaviour {
 	public float PursuitSpeed;
 	public float PatrolSpeed;
 
-	public Transform[] patrolWaypoints;
+	public Transform path;
+	Transform[] patrolWaypoints;
 	public bool standingGuard = false;
 
 	// An int to keep track of which direction we are along the patrol route
@@ -26,6 +27,9 @@ public class EnemyGuard : MonoBehaviour {
 	Quaternion initialRotation;
 
 	void Start() {
+		vision = GetComponentInChildren<EnemyVision> ();
+		patrolWaypoints = path.GetComponentsInChildren<Transform> ();
+
 		initialRotation = this.transform.rotation;
 		initialPosition = this.transform.position;
 
