@@ -5,6 +5,8 @@ public class Laser : Activatable {
 
 	[SerializeField]
 	private LineRenderer lineRenderer;
+	[SerializeField]
+	private float killTime = 3;
 	private GameObject currentTarget { get; set; }
 	[SerializeField]
 	private float maxDistance = 10000;
@@ -25,7 +27,7 @@ public class Laser : Activatable {
 			Debug.DrawLine(transform.position, hit.point);
 			if (currentTarget != hit.collider.gameObject) {
 				currentTarget = hit.collider.gameObject;
-				currentTarget.SendMessageUpwards("Hit", SendMessageOptions.DontRequireReceiver);
+				currentTarget.SendMessageUpwards("Hit", killTime, SendMessageOptions.DontRequireReceiver);
 			}
 		}
 	}
