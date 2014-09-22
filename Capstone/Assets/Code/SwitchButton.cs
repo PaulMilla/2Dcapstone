@@ -5,8 +5,11 @@ public class SwitchButton : MonoBehaviour {
 
 	// The list of doors that we will be calling OnSwitch on
 	[SerializeField]
-	Door[] doors;
+	Activatable[] activatableArray;
 
+	void Start() {
+		GameManager.Instance.RoundEnd += Reset;
+	}
 	// Should be something like OnInteract()
 	public void OnSwitch() {
 		// Just a visual indicator
@@ -16,8 +19,11 @@ public class SwitchButton : MonoBehaviour {
 			renderer.material.color = Color.white;
 
 		// The reason this class exists
-		foreach (Door door in doors) {
-			door.Switch();
+		foreach (Activatable activatable in activatableArray) {
+			activatable.Toggle();
 		}
+	}
+	void Reset() {
+
 	}
 }

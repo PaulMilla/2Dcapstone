@@ -5,7 +5,7 @@ using System.Collections;
 // We should actually be using states more efficiently, and making decisions based on the state we are in
 // But since the AI is simple, we might not need to do that
 
-public class EnemyGuard : MonoBehaviour {
+public class EnemyGuard : Activatable {
 
 	[SerializeField]
 	EnemyVision vision;
@@ -28,7 +28,8 @@ public class EnemyGuard : MonoBehaviour {
 
 	PlayerModel playerModel;
 
-	void Start() {
+	protected override void Start() {
+		base.Start();
 		vision = GetComponentInChildren<EnemyVision> ();
 		patrolWaypoints = path.GetComponentsInChildren<Transform> ();
 
@@ -46,6 +47,9 @@ public class EnemyGuard : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
+		if (!Activated) {
+			return;
+		}
 		// STATE: There is a target to pursue
 		if (vision.HasTarget()) {
 			Chase ();
@@ -117,6 +121,9 @@ public class EnemyGuard : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
+		if (!Activated) {
+			return;
+		}
 		if (collision.collider.tag.Equals("Player") ||
 		    collision.collider.tag.Equals("Hologram")) {
 			PlayerModel playerModel = collision.gameObject.GetComponent<PlayerModel>();
