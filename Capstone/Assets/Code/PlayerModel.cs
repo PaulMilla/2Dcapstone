@@ -28,7 +28,17 @@ public class PlayerModel : MonoBehaviour {
 		positionToMoveTo = pos;
 		positionToMoveTo.y = this.transform.position.y;
 	}
-
+	public void Hit(float killTime) {
+		Debug.Log("Hit");
+		movementSpeed = 0;
+		positionToMoveTo = transform.position;
+		StartCoroutine(Die(killTime));
+	}
+	IEnumerator Die(float killTime) {
+		yield return new WaitForSeconds(killTime);
+		GetKilled();
+		yield return null;
+	}
 	public void GetKilled() {
 		Destroy(this.gameObject);
 	}
