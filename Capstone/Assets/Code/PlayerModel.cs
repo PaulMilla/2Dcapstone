@@ -18,7 +18,7 @@ public class PlayerModel : MonoBehaviour {
 	{
 		if ((positionToMoveTo - this.transform.position).magnitude > 0.1f) {
 			this.transform.rigidbody.velocity = Vector3.zero;
-			this.transform.rigidbody.rotation.SetLookRotation(positionToMoveTo);
+			this.transform.rotation = Quaternion.LookRotation(positionToMoveTo);
 			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, positionToMoveTo, movementSpeed * Time.fixedDeltaTime));
 		}
 	}
