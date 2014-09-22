@@ -11,10 +11,12 @@ public class PressureButton : MonoBehaviour {
 	// The y-dimension where the button is down and at rest
 	float downRestY = -.2f;
 
-	public Door Door;
+	[SerializeField]
+	private Activatable[] activatableArray;
 	// Use this for initialization
 	void Start () {
 		ButtonSpeed = 1.0f;
+		GameManager.Instance.RoundEnd += Reset;
 	}
 	
 	// Update is called once per frame
@@ -34,13 +36,17 @@ public class PressureButton : MonoBehaviour {
 
 	public void activate ()
 	{
-		Door.Open();
+		foreach (var activatable in activatableArray) {
+			activatable.Toggle();
+		}
 		Pressed = true;
 	}
 
 	public void deactivate ()
 	{
-		Door.Close();
+		foreach (var activatable in activatableArray) {
+			activatable.Toggle();
+		}
 		Pressed = false;
 	}
 
@@ -60,5 +66,9 @@ public class PressureButton : MonoBehaviour {
 				deactivate();
 			}
 		}
+	}
+
+	void Reset() {
+		Pressed = false;
 	}
 }

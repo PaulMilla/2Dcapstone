@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MissileController : MonoBehaviour {
+public class MissileController : Activatable {
 	
 	Transform target; 
 	Vector3 lastDetectedPosition;
@@ -10,7 +10,8 @@ public class MissileController : MonoBehaviour {
 	
 	public float Speed;
 
-	void Start() {
+	protected override void Start() {
+		base.Start();
 		startingPosition = this.transform.position;
 	}
 
