@@ -2147,7 +2147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Pressed: 0
   ButtonSpeed: 1
-  Door: {fileID: 1730615870}
+  activatableArray:
+  - {fileID: 1730615870}
 --- !u!1 &299463345
 GameObject:
   m_ObjectHideFlags: 0
@@ -4768,11 +4769,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed06b7b49af29b84a9081d7472d9f305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelName: __testScene2
+  nextLevelName: __testScene
   hologramLimit: 2
-  pressureButtons:
-  - {fileID: 292861632}
-  doors: []
 --- !u!114 &653253637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10981,6 +10979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 826051b03cf6df54eb910c1841a18016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultActivated: 1
   vision: {fileID: 104517348}
   PursuitSpeed: 10
   PatrolSpeed: 4
@@ -11897,7 +11896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c66a92ebc688e3479efbdaf053e9719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initiallyOpen: 0
+  defaultActivated: 0
 --- !u!1 &1730896654
 GameObject:
   m_ObjectHideFlags: 0

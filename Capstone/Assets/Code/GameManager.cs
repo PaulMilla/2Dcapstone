@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	public delegate void GameEvent();
 
 	public GameEvent RoundStart;
+	public GameEvent RoundEnd;
 
 	[SerializeField]
 	private string nextLevelName;
@@ -19,11 +20,6 @@ public class GameManager : MonoBehaviour {
 	public bool inRound { get; private set; } // true if clock is running and player's actions are currently happening
 	private SpawnPoint[] spawnPoints { get; set; }
 	private PlayerInput playerInput { get; set; }
-
-	[SerializeField]
-	private PressureButton[] pressureButtons;
-	[SerializeField] 
-	private Door[] doors;
 
 	void Awake() {
 		Instance = this;
@@ -68,12 +64,8 @@ public class GameManager : MonoBehaviour {
 			point.DestroySpawnedObject();
 			point.Spawn();
 		}
-		foreach (PressureButton button in pressureButtons) {
-			button.deactivate();
-		}
-		// Adding this so that the doors set by Switches get reset
-		foreach (Door door in doors) {
-			door.Reset();
+		if (RoundEnd != null) {
+			RoundEnd();
 		}
 
 		playerInput = GameObject.FindObjectOfType<PlayerInput>();
