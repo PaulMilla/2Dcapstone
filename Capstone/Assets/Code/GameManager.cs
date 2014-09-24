@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 
 	public GameEvent RoundStart;
 	public GameEvent RoundEnd;
+	public GameEvent LevelFailed;
 
 	[SerializeField]
 	private string nextLevelName;
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour {
 		playerInput = GameObject.FindObjectOfType<PlayerInput>();
 		RecordingManager.Instance.OnRoundEnd();
 		if (HologramsRemaining == 0) {
+			LevelFailed();
 			RecordingManager.Instance.ClearRecordings();
 		}
 	}
