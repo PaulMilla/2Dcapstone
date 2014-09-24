@@ -7,9 +7,9 @@ public class PressureButton : MonoBehaviour {
 	public float ButtonSpeed;
 
 	// The y-dimesnion where the button is up and at rest
-	float upRestY = .2f;
+	float upRestY = .1f;
 	// The y-dimension where the button is down and at rest
-	float downRestY = -.2f;
+	float downRestY = -.1f;
 
 	[SerializeField]
 	private Activatable[] activatableArray;
