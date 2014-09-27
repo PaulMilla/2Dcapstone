@@ -26,14 +26,14 @@ public class EnemyGuard : Activatable {
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
-	PlayerModel playerModel;
+	//CharacterMovement characterMovement;
 
 	protected override void Start() {
 		base.Start();
 		vision = GetComponentInChildren<EnemyVision> ();
 		patrolWaypoints = path.GetComponentsInChildren<Transform> ();
 
-		playerModel = GetComponent<PlayerModel> ();
+		//characterMovement = GetComponent<characterMovement> ();
 		initialRotation = this.transform.rotation;
 		initialPosition = this.transform.position;
 
@@ -126,8 +126,8 @@ public class EnemyGuard : Activatable {
 		}
 		if (collision.collider.tag.Equals("Player") ||
 		    collision.collider.tag.Equals("Hologram")) {
-			PlayerModel playerModel = collision.gameObject.GetComponent<PlayerModel>();
-			playerModel.GetKilled();
+			CharacterStatus characterStatus = collision.gameObject.GetComponent<CharacterStatus>();
+			characterStatus.GetKilled();
 		}
 	}
 

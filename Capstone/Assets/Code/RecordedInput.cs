@@ -11,7 +11,7 @@ public class RecordedInput : CharacterInput
 	int iteration = 0;
 
 	void Awake() {
-		playerModel = gameObject.GetComponent<PlayerModel>() as PlayerModel;
+		playerMovement = gameObject.GetComponent<PlayerMovement>() as PlayerMovement;
 	}
 	
 	void FixedUpdate() {
@@ -30,8 +30,7 @@ public class RecordedInput : CharacterInput
 			RaycastHit hit;
 			if(Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Floor")))
 			{
-				Debug.Log("Hit Floor");
-				playerModel.MoveTo(hit.point);
+				playerMovement.MoveTo(hit.point);
 			}
 		}
 
@@ -40,7 +39,4 @@ public class RecordedInput : CharacterInput
 			interactionButtonDown = true;
 		}	
 	}
-
-
 }
-

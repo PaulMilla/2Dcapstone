@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 54: {fileID: 5400000}
+  - 114: {fileID: 11400004}
   m_Layer: 8
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -2794,10 +2795,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fdcce4a33c533f4293b0b7ffff53bdc, type: 3}
+  m_Script: {fileID: 11500000, guid: c61ef8dfe4724874698cc95fef2a5db6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementEnabled: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2809,7 +2810,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0422d152637952444983e94651b5a7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recordedInput: {fileID: 0}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7583dab47a980e341881d98de4cce1f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -27,7 +27,7 @@ public abstract class Activatable : MonoBehaviour {
 			Deactivate();
 		}
 	}
-	public void Reset() {
+	public virtual void Reset() {
 		Activated = defaultActivated;
 		if (Activated) {
 			Activate();

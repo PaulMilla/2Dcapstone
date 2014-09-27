@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
 
 	[SerializeField]
 	private string nextLevelName;
+
 	[SerializeField]
 	private int hologramLimit;
 	public int HologramLimit { get { return hologramLimit; } private set { hologramLimit = value; } }
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour {
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			if (inRound) {
-				EndRound();
+				//EndRound();
 			}
 			else {
 				BeginRound();
@@ -58,6 +59,9 @@ public class GameManager : MonoBehaviour {
 		if (RoundStart != null) {
 			RoundStart();
 		}
+		foreach (PlayerMovement playerModel in FindObjectsOfType<PlayerMovement>()) {
+			playerModel.movementEnabled = true;
+		}
 	}
 	public void EndRound() {
 		inRound = false;
@@ -74,6 +78,9 @@ public class GameManager : MonoBehaviour {
 		if (HologramsRemaining == 0) {
 			LevelFailed();
 			RecordingManager.Instance.ClearRecordings();
+		}
+		foreach (PlayerMovement playerMovement in FindObjectsOfType<PlayerMovement>()) {
+			playerMovement.movementEnabled = false;
 		}
 	}
 }

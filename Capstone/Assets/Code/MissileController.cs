@@ -70,7 +70,7 @@ public class MissileController : Activatable {
 		}
 	}
 
-	public void Reset(){ 
+	public override void Reset(){ 
 		this.transform.position = startingPosition;
 		isInMotion = false;
 		target = null;

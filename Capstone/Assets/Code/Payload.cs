@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Payload : MonoBehaviour {
@@ -25,8 +25,8 @@ public class Payload : MonoBehaviour {
 			    hitColliders[i].tag.Equals("Hologram") ||
 			    hitColliders[i].tag.Equals("EnemyGuard")) 
 			{
-				PlayerModel playerModel = hitColliders[i].gameObject.GetComponent<PlayerModel>();
-				playerModel.GetKilled();
+				CharacterStatus characterStatus = hitColliders[i].gameObject.GetComponent<CharacterStatus>();
+				characterStatus.GetKilled();
 			}
 			i++;
 		}

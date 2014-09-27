@@ -8,7 +8,7 @@ public class RoundControlUIElement : MonoBehaviour {
 	[SerializeField]
 	Text subText;
 
-	int displayForSeconds = 1;
+	//int displayForSeconds = 1;
 	// Use this for initialization
 	void Start () {
 		text.fontSize = 50;

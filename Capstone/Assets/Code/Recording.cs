@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Recording
 {
+	//Queue<RecordedEvent> should be more optimized.
+	//Use with recordedEvents.Enqueue(RecordingEvent) & recordedEvents.Dequeue()
 	List<RecordedEvent> recordedEvents = new List<RecordedEvent>();
 
 
