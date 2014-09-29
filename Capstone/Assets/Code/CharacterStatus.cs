@@ -11,7 +11,6 @@ public class CharacterStatus : MonoBehaviour {
 
 	public void Hit(float killTime) {
 		characterMovement.movementEnabled = false;
-		characterMovement.MoveTo(this.transform.position);
 		StartCoroutine(Die(killTime));
 	}
 

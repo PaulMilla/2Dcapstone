@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CloneInput : CharacterInput
 {
-	private Stack<Event> recordedEvents;
+	public Stack<Event> recordedEvents {private get; set;}
 	private CloneMovement cloneMovement;
 
 	override protected void Start() {
@@ -15,16 +15,12 @@ public class CloneInput : CharacterInput
 		cloneMovement = GetComponent<CloneMovement>();
 	}
 
-	public void SetEvents(Stack<Event> events) {
-		recordedEvents = events;
-	}
-	
 	void Update() {
 		if (GameManager.Instance.inRound) {
 			ReadInput();
 		}
 	}
-
+	
 	void ReadInput() {
 		if(recordedEvents.Count == 0)
 			return;

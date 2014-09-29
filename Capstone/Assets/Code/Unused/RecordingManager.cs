@@ -15,7 +15,7 @@ public class RecordingManager : MonoBehaviour {
 	private CloneInput recordedInputPrototype;
 
 	void Awake() {
-		Instance = this;
+		//Instance = this;
 	}
 
 	public void OnRoundEnd() {

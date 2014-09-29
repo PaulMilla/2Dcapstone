@@ -6,10 +6,6 @@ public class PlayerInput : CharacterInput {
 	public GameObject hologram;
 	protected PlayerMovement playerMovement;
 
-	public void OnRoundStart() {
-		playerMovement = GetComponent<PlayerMovement>();
-	}
-
 	void Awake() {
 		playerMovement = GetComponent<PlayerMovement>();
 	}
@@ -27,21 +23,23 @@ public class PlayerInput : CharacterInput {
 		}
 
 		if(Input.GetKeyUp (KeyCode.Space)) {
+			if(playerMovement.Rewind) {
+				createClone(playerMovement.cloneEvents);
+			}
 			playerMovement.Rewind = false;
-			createClone(playerMovement.cloneEvents);
 		}
 
 		if(Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if(Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Floor"))) {
-				playerMovement.MoveTo(hit.point);
+				playerMovement.MoveTo(hit);
 			}
 		}
 	}
 
 	void createClone(Stack<Event> events) {
 		GameObject clone = GameObject.Instantiate(hologram, this.transform.position, this.transform.rotation) as GameObject;
-		clone.GetComponent<CloneInput>().SetEvents(events);
+		clone.GetComponent<CloneInput>().recordedEvents = events;
 	}
 }

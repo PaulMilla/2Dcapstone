@@ -7,16 +7,20 @@ public class PlayerMovement : CharacterMovement {
 	private Stack<Event> recordedEvents;
 	private bool rewind;
 	public bool Rewind {
+		get { return rewind; }
 		set {
 			rewind = value;
-			if (value) {
+			if (rewind) {
 				cloneEvents = new Stack<Event>();
-			}
-			else {
-				MoveTo(this.transform.position);
+			} else {
+				ClearTarget();
 			}
 		}
 	}
+
+	/* Inherited from CharacterMovement */
+	/* overrive protected void Move() */
+	/* override public void MoveTo(RaycastHit target) */
 
 	override protected void Start() {
 		base.Start();
@@ -29,19 +33,21 @@ public class PlayerMovement : CharacterMovement {
 			DoRewind();
 		} else {
 			Move();
-			recordedEvents.Push(new Event(this.transform.position, interacting, target));
+			recordedEvents.Push(new Event(target, this.transform));
 		}
 	}
-
+	
 	private void DoRewind() {
-		if (recordedEvents.Count != 0) {
-			Event previous = recordedEvents.Pop();
-			cloneEvents.Push(previous);
+		if (recordedEvents.Count == 0)
+			return;
+		Event previous = recordedEvents.Pop();
+		cloneEvents.Push(previous);
 
-			Vector3 current = this.transform.position;
-			Vector3 target = previous.position;
-			Vector3 step = Vector3.MoveTowards(current, target, movementSpeed);
-			this.transform.rigidbody.MovePosition(step);
-		}
+		this.transform.rotation = previous.rotation;
+		Vector3 current = this.transform.position;
+		Vector3 past = previous.position;
+		Vector3 step = Vector3.MoveTowards(current, past, movementSpeed * Time.fixedDeltaTime);
+		this.transform.rigidbody.MovePosition(step);
+		CheckActivations();
 	}
 }

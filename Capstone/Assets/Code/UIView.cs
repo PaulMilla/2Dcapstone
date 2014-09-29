@@ -13,7 +13,6 @@ public class UIView : MonoBehaviour {
 		else {
 			GUILayout.TextField("Time: "+0);
 		}
-		GUILayout.TextField("Holograms Remaining: " + (GameManager.Instance.HologramsRemaining - 1));
 		if (GameManager.Instance.inRound) {
 			if (GUILayout.Button("End Round")) {
 				GameManager.Instance.EndRound();

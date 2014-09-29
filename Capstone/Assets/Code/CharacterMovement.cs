@@ -4,32 +4,48 @@ using System.Collections;
 public class CharacterMovement : MonoBehaviour {
 	[SerializeField]
 	protected float movementSpeed;
-	protected Vector3 target;
-	protected bool interacting;
-	public bool movementEnabled {get;set;}
+	protected RaycastHit target;
+	public float interactionRage;
+	public bool movementEnabled {get; set;}
 
-	// Use this for initialization
 	protected virtual void Start () {
-		//movementSpeed = 5.0f;
 		movementEnabled = false;
-		interacting = false;
 	}
 
 	protected virtual void Move() {
-		//TODO: Implement interacting
-		if (movementEnabled) {
-			if ((target - this.transform.position).magnitude > 0.1f) {
-				this.transform.rigidbody.velocity = Vector3.zero;
-				this.transform.rotation = Quaternion.LookRotation(target);
-				this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, target, movementSpeed * Time.fixedDeltaTime));
-			}
+		Transform current = this.transform;
+		if(!movementEnabled || (target.point - current.position).magnitude <= 0.1f)
+			return;
+		current.rotation = Quaternion.LookRotation(target.point);
+		current.rigidbody.velocity = Vector3.zero;
+		current.rigidbody.MovePosition(Vector3.MoveTowards(current.position, target.point, movementSpeed * Time.fixedDeltaTime));
+		CheckActivations();
+	}
+
+	public virtual void MoveTo(RaycastHit hit) {
+		if(hit.Equals(target))
+			return;
+		target = hit;
+		//target.point.y = this.transform.position.y;
+	}
+	
+	public virtual void CheckActivations() {
+		if (target.collider == null || target.transform == null)
+			return;
+
+		//TODO: Make sure the you can't flip a switch behind the wall
+		RaycastHit temp;
+		bool inRange = target.collider.Raycast(new Ray(this.transform.position, target.point), out temp, interactionRage);
+		if(target.transform.tag.Equals("Activatable") && inRange) {
+			//TODO: Activate the target
+			ClearTarget();
 		}
 	}
 
-	public void MoveTo(Vector3 pos) {
-		if(pos == target)
-			return;
-		target = pos;
-		target.y = this.transform.position.y;
+	public virtual void ClearTarget() {
+		RaycastHit newTarget;
+		Physics.Raycast(this.transform.position, Vector3.up, out newTarget, 100f);
+		target = newTarget;
+		target.point = this.transform.position;
 	}
 }
