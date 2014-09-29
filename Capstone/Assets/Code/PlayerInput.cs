@@ -3,16 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerInput : CharacterInput {
-	//public RecordedInput recordedInput {get; set;}
-	//private Recording recording;
-	private List<InputEvent> recording;
-	private int current;
+	public GameObject hologram;
+	protected PlayerMovement playerMovement;
 
 	public void OnRoundStart() {
-		//recording = new Recording();
-		//RecordingManager.Instance.AddRecording(recording);
-		recording = new List<InputEvent>();
-		current = 0;
+		playerMovement = GetComponent<PlayerMovement>();
+	}
+
+	void Awake() {
+		playerMovement = GetComponent<PlayerMovement>();
 	}
 
 	void Update() {
@@ -21,39 +20,28 @@ public class PlayerInput : CharacterInput {
 		}
 	}
 
-	/* Input.Get() functions operate on a single frame basis.
-	 * As such, the variant frame rates of FixedUpdate() will sometimes
-	 * cause inputs to not be read/missed.
-	 */
-	void FixedUpdate() {
-		//if (GameManager.Instance.inRound) {
-		//	ReadInput();
-		//}
-	}
-
 	void ReadInput() {
 		if(Input.GetKeyDown (KeyCode.Space)) {
 			//TODO: Destroy any clones
 			playerMovement.Rewind = true;
-			current--;
-			return;
-		}
-		if(Input.GetKeyUp (KeyCode.Space)) {
-			playerMovement.Rewind = false;
-			//TODO: Create a new clone
-			return;
 		}
 
-		InputEvent inputEvent = null;
+		if(Input.GetKeyUp (KeyCode.Space)) {
+			playerMovement.Rewind = false;
+			createClone(playerMovement.cloneEvents);
+		}
+
 		if(Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if(Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Floor"))) {
 				playerMovement.MoveTo(hit.point);
-				inputEvent = new InputEvent(hit);
 			}
 		}
-		recording.Add(inputEvent);
-		current++;
+	}
+
+	void createClone(Stack<Event> events) {
+		GameObject clone = GameObject.Instantiate(hologram, this.transform.position, this.transform.rotation) as GameObject;
+		clone.GetComponent<CloneInput>().SetEvents(events);
 	}
 }

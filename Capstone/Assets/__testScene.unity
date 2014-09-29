@@ -851,18 +851,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &104517347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: f8d7fbb592bebf9408886749ed8d1036,
-    type: 2}
-  m_PrefabInternal: {fileID: 1144347711}
-  m_GameObject: {fileID: 1542117761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fdcce4a33c533f4293b0b7ffff53bdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &104517348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4935,7 +4923,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 653253635}
-  - 114: {fileID: 653253634}
   - 114: {fileID: 653253636}
   - 114: {fileID: 653253637}
   m_Layer: 0
@@ -4945,19 +4932,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &653253634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 653253633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7a32a1fc467eb44a9dca2e00668c6c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recordedInputPrototype: {fileID: 11400002, guid: 51827a14a3d4ce84396b7bd0c9d194e4,
-    type: 2}
 --- !u!4 &653253635
 Transform:
   m_ObjectHideFlags: 0
@@ -9067,7 +9041,8 @@ Prefab:
       propertyPath: m_Radius
       value: 15
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400004, guid: f8d7fbb592bebf9408886749ed8d1036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f8d7fbb592bebf9408886749ed8d1036, type: 2}
   m_RootGameObject: {fileID: 1542117761}
   m_IsPrefabParent: 0
@@ -11307,7 +11282,6 @@ GameObject:
   - 23: {fileID: 1542117765}
   - 54: {fileID: 1542117764}
   - 114: {fileID: 1542117763}
-  - 114: {fileID: 104517347}
   m_Layer: 10
   m_Name: EnemyGuard
   m_TagString: Enemy

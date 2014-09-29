@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class RecordingManager : MonoBehaviour {
@@ -8,18 +8,18 @@ public class RecordingManager : MonoBehaviour {
 	}
 
 	private List<Recording> recordings = new List<Recording>();
-	private List<RecordedInput> recordedInput = new List<RecordedInput>();
+	private List<CloneInput> recordedInput = new List<CloneInput>();
 	public int NumHolograms { get { return recordedInput.Count; } }
 
 	[SerializeField]
-	private RecordedInput recordedInputPrototype;
+	private CloneInput recordedInputPrototype;
 
 	void Awake() {
 		Instance = this;
 	}
 
 	public void OnRoundEnd() {
-		foreach (RecordedInput input in recordedInput) {
+		foreach (CloneInput input in recordedInput) {
 			if (input != null) {
 				Destroy(input.gameObject);
 			}
@@ -27,8 +27,8 @@ public class RecordingManager : MonoBehaviour {
 		recordedInput.Clear();
 		Transform playerTransform = GameObject.FindObjectOfType<PlayerInput>().transform;
 		foreach (Recording recording in recordings) {
-			RecordedInput input = Instantiate(recordedInputPrototype, playerTransform.position, playerTransform.rotation) as RecordedInput;
-			input.recording = recording;
+			CloneInput input = Instantiate(recordedInputPrototype, playerTransform.position, playerTransform.rotation) as CloneInput;
+			//input.recording = recording;
 			recordedInput.Add(input);
 		}
 		//Spawn Holograms
@@ -40,7 +40,7 @@ public class RecordingManager : MonoBehaviour {
 
 	public void ClearRecordings() {
 		recordings.Clear();
-		foreach (RecordedInput input in recordedInput) {
+		foreach (CloneInput input in recordedInput) {
 			if (input != null) {
 				Destroy(input.gameObject);
 			}

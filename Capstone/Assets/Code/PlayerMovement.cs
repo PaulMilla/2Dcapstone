@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerMovement : CharacterMovement {
-	private Stack<PlayerState> pastStates;
+	public Stack<Event> cloneEvents {get; private set;}
+	private Stack<Event> recordedEvents;
 	private bool rewind;
 	public bool Rewind {
-		get { return rewind; }
 		set {
 			rewind = value;
-			if (value == false) {
+			if (value) {
+				cloneEvents = new Stack<Event>();
+			}
+			else {
 				MoveTo(this.transform.position);
 			}
 		}
@@ -18,32 +21,27 @@ public class PlayerMovement : CharacterMovement {
 	override protected void Start() {
 		base.Start();
 		rewind = false;
-		pastStates = new Stack<PlayerState>();
+		recordedEvents = new Stack<Event>();
 	}
-	
+
 	void FixedUpdate() {
-		if (rewind) {
+		if(rewind) {
 			DoRewind();
-		} else if (movementEnabled) {
+		} else {
 			Move();
-			pastStates.Push(new PlayerState(this.transform.position, interacting));
+			recordedEvents.Push(new Event(this.transform.position, interacting, target));
 		}
 	}
 
 	private void DoRewind() {
-		if (pastStates.Count != 0) {
-			PlayerState previous = pastStates.Pop();
-			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, previous.position, movementSpeed));
-		}
-	}
+		if (recordedEvents.Count != 0) {
+			Event previous = recordedEvents.Pop();
+			cloneEvents.Push(previous);
 
-	private class PlayerState {
-		public Vector3 position {get; set;}
-		public bool interacting {get; set;}
-		public Quaternion rotation {get; set;} //TODO: Implement rotation
-		public PlayerState (Vector3 pos, bool interact) {
-			position = pos;
-			interacting = interact;
+			Vector3 current = this.transform.position;
+			Vector3 target = previous.position;
+			Vector3 step = Vector3.MoveTowards(current, target, movementSpeed);
+			this.transform.rigidbody.MovePosition(step);
 		}
 	}
 }
