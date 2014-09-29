@@ -36,6 +36,7 @@ public class CloneInput : CharacterInput
 			return;
 
 		Event recordedEvent = recordedInputs.Pop();
-		cloneMovement.MoveTo(recordedEvent.target);
+        //Debug.Log("POPING: "+recordedEvent.interactable);
+		cloneMovement.MoveTo(recordedEvent.targetPosition, recordedEvent.interactable);
 	}
 }
