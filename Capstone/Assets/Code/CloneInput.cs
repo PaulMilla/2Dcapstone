@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CloneInput : CharacterInput
 {
-	public Stack<Event> recordedEvents {private get; set;}
+	public Stack<Event> recordedInputs {private get; set;}
 	private CloneMovement cloneMovement;
 
 	override protected void Start() {
@@ -22,9 +22,20 @@ public class CloneInput : CharacterInput
 	}
 	
 	void ReadInput() {
-		if(recordedEvents.Count == 0)
+		if(Input.GetKeyDown(rewindKey)) {
+			cloneMovement.Rewind = true;
 			return;
-		Event recordedEvent = recordedEvents.Pop();
+		}
+		if(Input.GetKeyUp(rewindKey)) {
+			cloneMovement.Rewind = false;
+			return;
+		}
+		
+		if(recordedInputs.Count == 0 ||
+		   recordedInputs.Peek() == null)
+			return;
+
+		Event recordedEvent = recordedInputs.Pop();
 		cloneMovement.MoveTo(recordedEvent.target);
 	}
 }

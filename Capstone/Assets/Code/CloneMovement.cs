@@ -2,6 +2,11 @@
 using System.Collections;
 
 public class CloneMovement : CharacterMovement {
+	public bool Rewind {
+		get { return rewind; }
+		set { rewind = value;}
+	}
+
 	/* Inherited from CharacterMovement */
 	/* overrive protected void Move() */
 	/* override public void MoveTo(Vector3 pos) */
@@ -12,6 +17,10 @@ public class CloneMovement : CharacterMovement {
 	}
 	
 	void FixedUpdate () {
-		Move();
+		if(rewind) {
+			DoRewind();
+		} else {
+			Move();
+		}
 	}
 }
