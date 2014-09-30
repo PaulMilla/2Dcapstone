@@ -11,7 +11,6 @@ public class CursorController : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit, 100, 1 << LayerMask.NameToLayer ("Interactable"))) {
 			if (flare == null) {
-				Debug.Log("Set Flare");
 				flare = Instantiate(flarePrefab, hit.point, Quaternion.identity) as LensFlare;
 			} else {
 				flare.transform.position = hit.point;
