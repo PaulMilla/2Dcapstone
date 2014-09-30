@@ -31,42 +31,16 @@ public class PressureButton : MonoBehaviour {
 			newPosition.y -= ButtonSpeed * Time.fixedDeltaTime;
 		}
 		transform.position = newPosition;
-	}
 
-
-	public void activate ()
-	{
-		foreach (var activatable in activatableArray) {
-			activatable.Toggle();
-		}
-		Pressed = true;
-	}
-
-	public void deactivate ()
-	{
-		foreach (var activatable in activatableArray) {
-			activatable.Toggle();
-		}
 		Pressed = false;
 	}
-
-	void OnTriggerEnter(Collider other) {
-		if(!Pressed) {
-			if (other.gameObject.tag.Equals("Player") || 
-			    other.gameObject.tag.Equals("Hologram")) {
-				activate();
-			}
+	
+	void OnTriggerStay(Collider other) {
+		if (other.gameObject.tag.Equals ("Player") || other.gameObject.tag.Equals ("Hologram")) {
+			Pressed = true;
 		}
 	}
 
-	void OnTriggerExit(Collider other) {
-		if(Pressed) {
-			if (other.gameObject.tag.Equals("Player") || 
-			    other.gameObject.tag.Equals("Hologram")) {
-				deactivate();
-			}
-		}
-	}
 
 	void Reset() {
 		Pressed = false;
