@@ -12,7 +12,7 @@ public class CharacterMovement : MonoBehaviour {
     private Interactable interactable;
     public Interactable Interactable {
         protected get { return interactable; }
-        set {
+        set { //BUG: Can't interact with the same object twice in a row
             if (value != interactable) {
                 hasInteracted = false;
                 interactable = value;
@@ -55,7 +55,7 @@ public class CharacterMovement : MonoBehaviour {
 	}
 
 	public virtual void MoveTo(RaycastHit hit) {
-        interactable = hit.transform.gameObject.GetComponent<Interactable>();
+        Interactable = hit.transform.gameObject.GetComponent<Interactable>();
 		targetPosition.x = hit.point.x;
         targetPosition.z = hit.point.z;
 	}
