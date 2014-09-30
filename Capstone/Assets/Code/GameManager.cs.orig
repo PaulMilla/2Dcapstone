@@ -1,0 +1,86 @@
+using UnityEngine;
+using System.Collections.Generic;
+
+public class GameManager : MonoBehaviour {
+	public static GameManager Instance {
+		get;
+		private set;
+	}
+	public delegate void GameEvent();
+
+	public GameEvent RoundStart;
+	public GameEvent RoundEnd;
+	public GameEvent LevelFailed;
+
+	[SerializeField]
+	private string nextLevelName;
+
+	[SerializeField]
+	private int hologramLimit;
+	public bool inRound { get; private set; } // true if clock is running and player's actions are currently happening
+	private SpawnPoint[] spawnPoints { get; set; }
+	private Human playerInput { get; set; }
+
+	void Awake() {
+		Instance = this;
+	}
+
+	void Start() {
+		spawnPoints = FindObjectsOfType<SpawnPoint>();
+		foreach (var point in spawnPoints) {
+			point.Spawn();
+		}
+		playerInput = GameObject.FindObjectOfType<Human>();
+	}
+
+	void Update() {
+		if (Input.GetKeyUp(KeyCode.Space)) {
+			if (inRound) {
+				//EndRound();
+			}
+			else {
+				BeginRound();
+			}
+		}
+	}
+
+	public void LoadNextLevel() {
+		Application.LoadLevel(nextLevelName);
+	}
+	public void ResetLevel() {
+		EndRound();
+	}
+	public void BeginRound() {
+		inRound = true;
+		if (RoundStart != null) {
+			RoundStart();
+		}
+		foreach (PlayerMovement playerModel in FindObjectsOfType<PlayerMovement>()) {
+			playerModel.movementEnabled = true;
+		}
+	}
+	public void EndRound() {
+		inRound = false;
+		foreach (var point in spawnPoints) {
+			point.DestroySpawnedObject();
+			point.Spawn();
+		}
+		if (RoundEnd != null) {
+			RoundEnd();
+		}
+
+<<<<<<< HEAD
+		playerInput = GameObject.FindObjectOfType<Human>();
+		RecordingManager.Instance.OnRoundEnd();
+		if (HologramsRemaining == 0) {
+			LevelFailed();
+			RecordingManager.Instance.ClearRecordings();
+=======
+		playerInput = GameObject.FindObjectOfType<PlayerInput>();
+		LevelFailed();
+		foreach (PlayerMovement playerMovement in FindObjectsOfType<PlayerMovement>()) {
+			playerMovement.movementEnabled = false;
+>>>>>>> e1f9757ebcd76ea61a61b8e1e260e3787d17cf12
+		}
+	}
+}
