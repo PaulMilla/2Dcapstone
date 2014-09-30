@@ -7,14 +7,24 @@ public class CharacterMovement : MonoBehaviour {
 	protected float movementSpeed;
 	public bool movementEnabled {get; set;}
 	protected bool rewind;
+    protected bool hasInteracted;
 	protected RaycastHit target;
-    protected Interactable interactable;
+    private Interactable interactable;
+    public Interactable Interactable {
+        protected get { return interactable; }
+        set {
+            if (value != interactable) {
+                hasInteracted = false;
+                interactable = value;
+            }
+        }
+    }
     protected Vector3 targetPosition;
 	public Stack<Event> recordedEvents;
 
 	protected virtual void Start () {
-		movementEnabled = false;
 		rewind = false;
+		movementEnabled = false;
 		recordedEvents = new Stack<Event>();
 	}
 
@@ -25,19 +35,19 @@ public class CharacterMovement : MonoBehaviour {
 		current.rotation = Quaternion.LookRotation(targetPosition);
 		current.rigidbody.velocity = Vector3.zero;
 		current.rigidbody.MovePosition(Vector3.MoveTowards(current.position, targetPosition, movementSpeed * Time.fixedDeltaTime));
-		recordedEvents.Push(new Event(targetPosition, current.position, current.rotation, interactable));
 		CheckActivations();
+        recordedEvents.Push(new Event(targetPosition, current.position, current.rotation, interactable));
 	}
 	
 	protected virtual Event DoRewind() {
-		if (recordedEvents.Count == 0)
-			return null;
+		if (recordedEvents.Count == 0) return null;
 
 		Event previous = recordedEvents.Pop();
 		this.transform.rotation = previous.rotation;
 		Vector3 current = this.transform.position;
 		Vector3 past = previous.position;
 		Vector3 step = Vector3.MoveTowards(current, past, movementSpeed * Time.fixedDeltaTime);
+        Interactable = previous.interactable;
 		this.transform.rigidbody.MovePosition(step);
 
 		CheckActivations();
@@ -53,17 +63,17 @@ public class CharacterMovement : MonoBehaviour {
     public virtual void MoveTo(Vector3 targetPosition, Interactable interactable) {
         this.targetPosition.x = targetPosition.x;
         this.targetPosition.z = targetPosition.z;
-        this.interactable = interactable;
+        this.Interactable = interactable;
     }
 	
 	public virtual void CheckActivations() {
-        if (interactable != null && interactable.TryInteract(this)) {
-            interactable = null;
+        if (interactable != null && !hasInteracted && interactable.TryInteract(this)) {
+            hasInteracted = true;
         }
 	}
 
 	public virtual void ClearTarget() {
         targetPosition = this.transform.position;
-        interactable = null;
+        hasInteracted = true;
 	}
 }

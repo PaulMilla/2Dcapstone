@@ -24,19 +24,19 @@ public class CloneInput : CharacterInput
 	void ReadInput() {
 		if(Input.GetKeyDown(rewindKey)) {
 			cloneMovement.Rewind = true;
-			return;
 		}
+
 		if(Input.GetKeyUp(rewindKey)) {
 			cloneMovement.Rewind = false;
-			return;
 		}
-		
+	}
+
+    void FixedUpdate()
+    {
 		if(recordedInputs.Count == 0 ||
 		   recordedInputs.Peek() == null)
 			return;
-
 		Event recordedEvent = recordedInputs.Pop();
-        //Debug.Log("POPING: "+recordedEvent.interactable);
 		cloneMovement.MoveTo(recordedEvent.targetPosition, recordedEvent.interactable);
-	}
+    }
 }
