@@ -9,16 +9,17 @@ public class SwitchButton : Interactable {
 
 	void Start() {
 		GameManager.Instance.RoundEnd += Reset;
+		renderer.material.color = Color.blue;
 	}
 
 
     public override void OnInteract()
     {
 		// Just a visual indicator
-		if (renderer.material.color.Equals(Color.white))
-			renderer.material.color = Color.yellow;
+		if (renderer.material.color.Equals(Color.blue))
+			renderer.material.color = Color.green;
 		else
-			renderer.material.color = Color.white;
+			renderer.material.color = Color.blue;
 
 		// The reason this class exists
 		foreach (Activatable activatable in activatableArray) {
