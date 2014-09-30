@@ -1,33 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class UIView : MonoBehaviour {
-	private float TimeRoundStart { get; set; }
+	[SerializeField]
+	private Text timer;
 	void Start() {
-		GameManager.Instance.RoundStart += OnRoundStart;
+		
 	}
-	void OnGUI() {
-		if (GameManager.Instance.inRound) {
-			GUILayout.TextField("Time: "+(Time.time - TimeRoundStart));
+	void Update() {
+		if (Time.time % 60 < 10) {
+			timer.text = (int)Time.time / 60 + ":0" + (int)Time.time % 60;
 		}
 		else {
-			GUILayout.TextField("Time: "+0);
-		}
-		if (GameManager.Instance.inRound) {
-			if (GUILayout.Button("End Round")) {
-				GameManager.Instance.EndRound();
-			}
-		}
-		else {
-			if (GUILayout.Button("Begin Round")) {
-				GameManager.Instance.BeginRound();
-			}
-		}
-		if (GUILayout.Button("Reset Level")) {
-			GameManager.Instance.ResetLevel();
+			timer.text = (int)Time.time / 60 + ":" + (int)Time.time % 60;
 		}
 	}
 	void OnRoundStart() {
-		TimeRoundStart = Time.time;
 	}
 }
