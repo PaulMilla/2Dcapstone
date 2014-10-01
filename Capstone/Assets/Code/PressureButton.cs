@@ -9,7 +9,7 @@ public class PressureButton : MonoBehaviour {
 	// If the player is not detected to be on the button for X number of frames,
 	// Deactivate the button 
 	private int framesSinceLastDetected = 0;
-	private int frameResetThreshold = 3;
+	//private int frameResetThreshold = 3;
 
 	// The y-dimesnion where the button is up and at rest
 	float upRestY = 0f;
