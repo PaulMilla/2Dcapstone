@@ -3,7 +3,18 @@ using System.Collections;
 
 public class PressureButton : MonoBehaviour {
 
-	public bool Pressed = false;
+	private bool _pressed;
+	private bool Pressed { 
+		get {return _pressed; } 
+		set {
+			if (_pressed != value) {
+				foreach (Activatable activatable in activatableArray) {
+					activatable.Toggle();
+				}
+			}
+			_pressed = value;
+		}
+	}
 	public float ButtonSpeed;
 
 	// If the player is not detected to be on the button for X number of frames,
@@ -43,16 +54,6 @@ public class PressureButton : MonoBehaviour {
 		}
 		transform.position = newPosition;
 
-		if (Pressed) {
-			foreach (Activatable activatable in activatableArray) {
-				activatable.Activate ();
-			}
-		} else {
-			foreach (Activatable activatable in activatableArray) {
-				activatable.Deactivate ();
-			}
-		}
-
 		framesSinceLastDetected++;
 		if (framesSinceLastDetected > 3) {
 				Pressed = false;
@@ -60,19 +61,12 @@ public class PressureButton : MonoBehaviour {
 	}
 	
 	void OnTriggerStay(Collider other) {
-		StartCoroutine(myOnTriggerStay (other));
-	}
-
-	private IEnumerator myOnTriggerStay(Collider other) {
-		Debug.Log ("OK");
-		yield return new WaitForEndOfFrame();
-		if (other.gameObject.tag.Equals ("Player") || other.gameObject.tag.Equals ("Hologram")) {
+		if (other.gameObject.tag.Equals("Player") || other.gameObject.tag.Equals("Hologram")) {
 			framesSinceLastDetected = 0;
 			Pressed = true;
 		}
+		//StartCoroutine(myOnTriggerStay (other));
 	}
-
-
 	void Reset() {
 		Pressed = false;
 	}

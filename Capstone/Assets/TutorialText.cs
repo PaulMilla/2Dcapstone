@@ -11,6 +11,7 @@ public class TutorialText : MonoBehaviour {
     public Collider buttonCollider2;
 	public Collider room4Collider;
 	public Collider laserCollider;
+	public Collider room5Collider;
     Animator dialog;
     Text text;
     private float hideTime;
@@ -77,6 +78,11 @@ public class TutorialText : MonoBehaviour {
 			ChangeText("Just kidding. Luckily you can still rewind time after getting fried.");
 			Destroy(laserCollider);
 			HideAfter(2);
+		}
+		else if (playerCollider.bounds.Intersects(room5Collider.bounds)) {
+			Show();
+			ChangeText("You can only exist twice.  Use this to your advantage.");
+			HideAfter(5);
 		}
 	}
 
