@@ -22,7 +22,7 @@ public class UIView : MonoBehaviour {
 		else {
 			time += Time.deltaTime;
 		}
-		if (time % 60 > 9) {
+		if (time % 60 > 10) {
 			timeText.text = (int)time / 60 + ":" + (int)time % 60;
 		}
 		else {
