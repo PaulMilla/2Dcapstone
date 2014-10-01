@@ -1,33 +1,35 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class UIView : MonoBehaviour {
-	private float TimeRoundStart { get; set; }
+	private float time { get; set; }
+
+	[SerializeField]
+	private Text timeText;
+	[SerializeField]
+	private Text hologramCountText;
 	void Start() {
-		GameManager.Instance.RoundStart += OnRoundStart;
+
 	}
-	void OnGUI() {
-		if (GameManager.Instance.inRound) {
-			GUILayout.TextField("Time: "+(Time.time - TimeRoundStart));
-		}
-		else {
-			GUILayout.TextField("Time: "+0);
-		}
-		if (GameManager.Instance.inRound) {
-			if (GUILayout.Button("End Round")) {
-				GameManager.Instance.EndRound();
+	void Update() {
+		if (Input.GetKey(KeyCode.R)) {
+			time -= Time.deltaTime;
+			if (time < 0) {
+				time = 0;
 			}
 		}
 		else {
-			if (GUILayout.Button("Begin Round")) {
-				GameManager.Instance.BeginRound();
-			}
+			time += Time.deltaTime;
 		}
-		if (GUILayout.Button("Reset Level")) {
-			GameManager.Instance.ResetLevel();
+		if (time % 60 > 9) {
+			timeText.text = (int)time / 60 + ":" + (int)time % 60;
 		}
-	}
-	void OnRoundStart() {
-		TimeRoundStart = Time.time;
+		else {
+			timeText.text = (int)time / 60 + ":0" + (int)time % 60;
+		}
+		if (Input.GetKeyUp(KeyCode.R)) {
+			hologramCountText.text = ""+1;
+		}
 	}
 }
