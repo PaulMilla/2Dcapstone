@@ -29,11 +29,11 @@ public class Laser : Activatable {
 			}
 		}
 	}
-	public override void Activate() {
+	protected override void Activate() {
 		base.Activate();
 		lineRenderer.SetWidth(0.1f, 0.1f);
 	}
-	public override void Deactivate() {
+	protected override void Deactivate() {
 		base.Deactivate();
 		lineRenderer.SetWidth(0, 0);
 	}

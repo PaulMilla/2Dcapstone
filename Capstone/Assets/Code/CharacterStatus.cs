@@ -3,14 +3,31 @@ using System.Collections;
 
 public class CharacterStatus : MonoBehaviour {
 	protected CharacterMovement characterMovement;
+	private bool isDead { get; set; }
 
 	// Use this for initialization
 	void Start() {
 		characterMovement = GetComponent<CharacterMovement>();
 	}
 
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.R)) {
+			if (isDead) {
+				characterMovement.movementEnabled = true;
+				isDead = false;
+			}
+		}
+	}
 	public void Hit(float killTime) {
+		if (Input.GetKey(KeyCode.R)) {
+			return;
+		}
 		characterMovement.movementEnabled = false;
+		isDead = true;
+		if (characterMovement as PlayerMovement != null) {
+			//Time.timeScale = 0;
+			return;
+		}
 		StartCoroutine(Die(killTime));
 	}
 
@@ -21,6 +38,7 @@ public class CharacterStatus : MonoBehaviour {
 	}
 
 	public void GetKilled() {
-		Destroy(this.gameObject);
+		if (isDead) 
+			Destroy(this.gameObject);
 	}
 }

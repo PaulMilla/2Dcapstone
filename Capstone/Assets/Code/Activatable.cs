@@ -12,10 +12,10 @@ public abstract class Activatable : MonoBehaviour {
 	}
 
 	public bool Activated { get; private set; }
-	public virtual void Activate() {
+	protected virtual void Activate() {
 		Activated = true;
 	}
-	public virtual void Deactivate() {
+	protected virtual void Deactivate() {
 		Activated = false;
 	}
 	public void Toggle() {

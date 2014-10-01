@@ -31,17 +31,10 @@ public class GameManager : MonoBehaviour {
 			point.Spawn();
 		}
 		playerInput = GameObject.FindObjectOfType<PlayerInput>();
+		BeginRound();
 	}
 
 	void Update() {
-		if (Input.GetKeyUp(KeyCode.Space)) {
-			if (inRound) {
-				//EndRound();
-			}
-			else {
-				BeginRound();
-			}
-		}
 	}
 
 	public void LoadNextLevel() {
@@ -60,19 +53,6 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	public void EndRound() {
-		inRound = false;
-		foreach (var point in spawnPoints) {
-			point.DestroySpawnedObject();
-			point.Spawn();
-		}
-		if (RoundEnd != null) {
-			RoundEnd();
-		}
 
-		playerInput = GameObject.FindObjectOfType<PlayerInput>();
-		LevelFailed();
-		foreach (PlayerMovement playerMovement in FindObjectsOfType<PlayerMovement>()) {
-			playerMovement.movementEnabled = false;
-		}
 	}
 }

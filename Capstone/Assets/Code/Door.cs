@@ -5,12 +5,12 @@ public class Door : Activatable {
 
 
 
-	public override void Activate() {
+	protected override void Activate() {
 		renderer.enabled = false;
 		collider.enabled = false;
 	}
 
-	public override void Deactivate() {
+	protected override void Deactivate() {
 		renderer.enabled = true;
 		collider.enabled = true;
 	}
