@@ -24,8 +24,9 @@ public class CharacterMovement : MonoBehaviour {
 
 	protected virtual void Start () {
 		rewind = false;
-		movementEnabled = false;
+		movementEnabled = true;
 		recordedEvents = new Stack<Event>();
+		targetPosition = transform.position;
 	}
 
 	protected virtual void Move() {
