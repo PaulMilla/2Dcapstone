@@ -16,14 +16,12 @@ public class MissileController : Activatable {
 	}
 
 	void FixedUpdate() {
-		if (GameManager.Instance.inRound) {
-			if (isInMotion) {
-				Debug.Log ("InMotion");
-				if (target != null) {
-					this.rigidbody.MovePosition (Vector3.MoveTowards (this.transform.position, target.position, Time.fixedDeltaTime * Speed));
-				} else {
-					this.rigidbody.MovePosition (Vector3.MoveTowards (this.transform.position, lastDetectedPosition, Time.fixedDeltaTime * Speed));
-				}
+		if (isInMotion) {
+			Debug.Log ("InMotion");
+			if (target != null) {
+				this.rigidbody.MovePosition (Vector3.MoveTowards (this.transform.position, target.position, Time.fixedDeltaTime * Speed));
+			} else {
+				this.rigidbody.MovePosition (Vector3.MoveTowards (this.transform.position, lastDetectedPosition, Time.fixedDeltaTime * Speed));
 			}
 		}
 	}

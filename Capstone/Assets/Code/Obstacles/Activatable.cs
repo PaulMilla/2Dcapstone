@@ -8,7 +8,6 @@ public abstract class Activatable : MonoBehaviour {
 
 	protected virtual void Start() {
 		Reset();
-		GameManager.Instance.RoundEnd += Reset;
 	}
 
 	public bool Activated { get; private set; }

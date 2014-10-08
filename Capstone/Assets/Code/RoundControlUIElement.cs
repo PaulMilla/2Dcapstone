@@ -14,9 +14,6 @@ public class RoundControlUIElement : MonoBehaviour {
 		text.fontSize = 50;
 		text.text = "LEVEL START";
 		subText.text = "Press space to begin first round";
-		GameManager.Instance.RoundEnd += OnRoundEnd;
-		GameManager.Instance.RoundStart += OnRoundStart;
-		GameManager.Instance.LevelFailed += OnLevelFailed;
 	}
 	
 	// Update is called once per frame

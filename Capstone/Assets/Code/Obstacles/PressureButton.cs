@@ -32,7 +32,6 @@ public class PressureButton : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ButtonSpeed = 1.0f;
-		GameManager.Instance.RoundEnd += Reset;
 	}
 	
 	// Update is called once per frame

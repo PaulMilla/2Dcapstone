@@ -8,7 +8,6 @@ public class SwitchButton : Interactable {
 	Activatable[] activatableArray;
 
 	void Start() {
-		GameManager.Instance.RoundEnd += Reset;
 		renderer.material.color = Color.blue;
 	}
 

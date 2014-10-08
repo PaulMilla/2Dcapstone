@@ -7,52 +7,50 @@ public class GameManager : MonoBehaviour {
 		private set;
 	}
 	public delegate void GameEvent();
-
-	public GameEvent RoundStart;
-	public GameEvent RoundEnd;
-	public GameEvent LevelFailed;
+	public GameEvent RewindEvent;
 
 	[SerializeField]
 	private string nextLevelName;
-
 	[SerializeField]
 	private int hologramLimit;
-	public bool inRound { get; private set; } // true if clock is running and player's actions are currently happening
-	private SpawnPoint[] spawnPoints { get; set; }
-	private PlayerInput playerInput { get; set; }
+
+	public float GameTime { get; private set; }
+	public bool IsRewinding { get; private set; }
+	private List<Recording> RecordingList { get; set; }
 
 	void Awake() {
 		Instance = this;
+		RecordingList = new List<Recording>();
 	}
 
 	void Start() {
-		spawnPoints = FindObjectsOfType<SpawnPoint>();
-		foreach (var point in spawnPoints) {
-			point.Spawn();
-		}
-		playerInput = GameObject.FindObjectOfType<PlayerInput>();
-		BeginRound();
-	}
 
+	}
 	void Update() {
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			IsRewinding = true;
+			RewindEvent();
+		}
+		if (Input.GetKeyUp(KeyCode.Space)) {
+			IsRewinding = false;
+			RewindEvent();
+		}
 	}
-
+	void FixedUpdate() {
+		if (!IsRewinding) {
+			GameTime += Time.fixedDeltaTime;
+		}
+		else {
+			GameTime = Mathf.Max(0, GameTime - Time.fixedDeltaTime);
+		}
+		foreach (Recording recording in RecordingList) {
+			recording.FixedUpdate();
+		}
+	}
+	public void AddRecording(Recording recording) {
+		RecordingList.Add(recording);
+	}
 	public void LoadNextLevel() {
 		Application.LoadLevel(nextLevelName);
-	}
-	public void ResetLevel() {
-		EndRound();
-	}
-	public void BeginRound() {
-		inRound = true;
-		if (RoundStart != null) {
-			RoundStart();
-		}
-		foreach (PlayerMovement playerModel in FindObjectsOfType<PlayerMovement>()) {
-			playerModel.movementEnabled = true;
-		}
-	}
-	public void EndRound() {
-
 	}
 }
