@@ -51,7 +51,7 @@ public class EnemyGuard : Activatable {
 			return;
 		}
 		// STATE: There is a target to pursue
-		if (vision.HasTarget()) {
+		if (vision.HasTarget() && !Input.GetKey(KeyCode.R)) {
 			Chase ();
 		}
 
@@ -127,7 +127,7 @@ public class EnemyGuard : Activatable {
 		if (collision.collider.tag.Equals("Player") ||
 		    collision.collider.tag.Equals("Hologram")) {
 			CharacterStatus characterStatus = collision.gameObject.GetComponent<CharacterStatus>();
-			characterStatus.GetKilled();
+			characterStatus.Hit(2);
 		}
 	}
 

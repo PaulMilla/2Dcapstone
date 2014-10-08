@@ -10,7 +10,7 @@ public class DrawFieldOfView : MonoBehaviour {
 		float angle_fov = 55;
 		
 		float dist_min = 0.0f;
-		float dist_max = 15.0f;
+		float dist_max = 8.0f;
 		
 		void Start()
 		{
