@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class UIView : MonoBehaviour {
-	private float time { get; set; }
+	private float time { get { return GameManager.Instance.GameTime; } }
 
 	[SerializeField]
 	private Text timeText;
@@ -13,15 +13,6 @@ public class UIView : MonoBehaviour {
 
 	}
 	void Update() {
-		if (Input.GetKey(KeyCode.R)) {
-			time -= Time.deltaTime;
-			if (time < 0) {
-				time = 0;
-			}
-		}
-		else {
-			time += Time.deltaTime;
-		}
 		if (time % 60 > 9) {
 			timeText.text = (int)time / 60 + ":" + (int)time % 60;
 		}

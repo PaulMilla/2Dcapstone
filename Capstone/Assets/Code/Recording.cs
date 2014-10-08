@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class Recording {
 	List<RecordedEvent> eventList = new List<RecordedEvent>();
 	private int currentEventIndex { get; set; }
-	private int nextEventIndex { get { return GameManager.Instance.IsRewinding ? currentEventIndex - 1 : currentEventIndex + 1; } }
 	public float timeNextEvent { get; private set; }
 	public UnitModel unitModel { get; set; }
 
@@ -18,22 +17,53 @@ public class Recording {
 			Debug.LogWarning("Can't record event while rewinding");
 			return;
 		}
-		for (int i = 0; i < eventList.Count; i++) {
-			if (recordedEvent.currentTime < eventList[i].currentTime) {
+		/*for (int i = 0; i < eventList.Count; i++) {
+			if (recordedEvent.startTime < eventList[i].startTime) {
 				eventList.RemoveAt(i--);
 			}
-		}
+		}*/
 		eventList.Add(recordedEvent);
-		timeNextEvent = recordedEvent.currentTime;
-		Debug.LogError("AddedEvent");
+		timeNextEvent = recordedEvent.startTime;
 	}
 	public void FixedUpdate() {
-		Debug.LogWarning(nextEventIndex);
-		if (nextEventIndex >= 0 && eventList.Count > nextEventIndex) {
-			if (eventList[nextEventIndex].IsTimeForEvent) {
-				eventList[nextEventIndex].RunEvent(unitModel);
-				currentEventIndex = nextEventIndex;
+		
+		if (!GameManager.Instance.IsRewinding) {
+			if (currentEventIndex < eventList.Count - 1) {
+				if (eventList[currentEventIndex + 1].IsTimeForEvent) {
+					eventList[currentEventIndex + 1].RunEvent(unitModel);
+					//Debug.Log(eventList[currentEventIndex + 1]);
+					currentEventIndex++;
+				}
 			}
+		}
+		else {
+			if (unitModel.name == "HologramCharacter(Clone)") {
+				Debug.Log(currentEventIndex + " " + eventList.Count + " " + eventList[0]);
+			}
+			if (currentEventIndex > 0) {
+				if (eventList[currentEventIndex - 1].IsTimeForEvent) {
+					eventList[currentEventIndex - 1].RunEvent(unitModel);
+					//Debug.Log(eventList[currentEventIndex - 1]);
+					currentEventIndex--;
+				}
+			}
+		}
+	}
+
+	public void Split(UnitModel unitModel) {
+		unitModel = GameObject.Instantiate(unitModel, this.unitModel.transform.position, this.unitModel.transform.rotation) as UnitModel;
+		Recording newRecording = new Recording(unitModel.gameObject);
+		GameManager.Instance.AddRecording(newRecording);
+		if (currentEventIndex >= 0) {
+			RecordedEvent currentEvent = eventList[currentEventIndex];
+			newRecording.AddEvent(new RecordedEvent(unitModel.transform.position, unitModel.transform.position, GameManager.Instance.GameTime, GameManager.Instance.GameTime, EventType.Create));
+			newRecording.AddEvent(new RecordedEvent(currentEvent.endPosition, unitModel.transform.position, GameManager.Instance.GameTime, currentEvent.endTime, currentEvent.eventType));
+			eventList[currentEventIndex] = new RecordedEvent(unitModel.transform.position, currentEvent.startPosition, currentEvent.startTime, GameManager.Instance.GameTime, currentEvent.eventType);
+			eventList[currentEventIndex].RunEvent(unitModel);
+		}
+		for(int i = currentEventIndex + 1; i < eventList.Count; i++) {
+			newRecording.AddEvent(eventList[i]);
+			eventList.RemoveAt(i--);
 		}
 	}
 }

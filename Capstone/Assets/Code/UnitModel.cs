@@ -8,22 +8,23 @@ public class UnitModel : MonoBehaviour {
 	private RecordedEvent currentEvent { get; set; }
 
 	void Start() {
-		GameManager.Instance.RewindEvent += () => { currentEvent.RunEvent(this); };
+		//GameManager.Instance.RewindEvent += () => { if (GameManager.Instance.IsRewinding && currentEvent != null) currentEvent.RunEvent(this); };
 	}
 
 	void FixedUpdate() {
 		if (currentEvent == null)
 			return;
-		if (currentEvent.endTime == 0) {
+		if (currentEvent.endTime == float.MaxValue) {
 			if (!(navMeshAgent.hasPath || navMeshAgent.pathPending)) {
-				currentEvent.endTime = Time.time;
+				currentEvent.endTime = GameManager.Instance.GameTime;
 			}
 		}
 	}
-	public void Move(Vector3 targetPosition, RecordedEvent currentEvent) {
-		navMeshAgent.SetDestination(targetPosition);
-		if (!GameManager.Instance.IsRewinding && this.currentEvent != null && this.currentEvent.endTime < GameManager.Instance.GameTime) {
+	public void Move(RecordedEvent currentEvent) {
+		navMeshAgent.SetDestination(currentEvent.targetPosition);
+		if (!GameManager.Instance.IsRewinding && this.currentEvent != null && this.currentEvent.endTime == float.MaxValue) {
 			this.currentEvent.endTime = GameManager.Instance.GameTime;
+			this.currentEvent.endPosition = transform.position;
 		}
 		this.currentEvent = currentEvent;
 	}
