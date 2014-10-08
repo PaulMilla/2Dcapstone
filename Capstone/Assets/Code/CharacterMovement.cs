@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class CharacterMovement : MonoBehaviour {
 	[SerializeField]
 	protected float movementSpeed;
+	[SerializeField]
+	private NavMeshAgent agent;
 	public bool movementEnabled {get; set;}
 	protected bool rewind;
     protected bool hasInteracted;
@@ -32,15 +34,16 @@ public class CharacterMovement : MonoBehaviour {
 	protected virtual void Move() {
 		Transform current = this.transform;
 		if(!movementEnabled || (targetPosition - current.position).magnitude <= 0.1f)
-			return;
-		current.rotation = Quaternion.LookRotation(targetPosition);
+			agent.Stop();
+		/*current.rotation = Quaternion.LookRotation(targetPosition);
 		current.rigidbody.velocity = Vector3.zero;
-		current.rigidbody.MovePosition(Vector3.MoveTowards(current.position, targetPosition, movementSpeed * Time.fixedDeltaTime));
+		current.rigidbody.MovePosition(Vector3.MoveTowards(current.position, targetPosition, movementSpeed * Time.fixedDeltaTime));*/
 		CheckActivations();
         recordedEvents.Push(new Event(targetPosition, current.position, current.rotation, interactable));
 	}
 	
 	protected virtual Event DoRewind() {
+		agent.Stop();
 		if (recordedEvents.Count == 0) return null;
 
 		Event previous = recordedEvents.Pop();
@@ -59,12 +62,14 @@ public class CharacterMovement : MonoBehaviour {
         Interactable = hit.transform.gameObject.GetComponent<Interactable>();
 		targetPosition.x = hit.point.x;
         targetPosition.z = hit.point.z;
+		agent.SetDestination(hit.point);
 	}
 
     public virtual void MoveTo(Vector3 targetPosition, Interactable interactable) {
         this.targetPosition.x = targetPosition.x;
         this.targetPosition.z = targetPosition.z;
         this.Interactable = interactable;
+		agent.SetDestination(targetPosition);
     }
 	
 	public virtual void CheckActivations() {
