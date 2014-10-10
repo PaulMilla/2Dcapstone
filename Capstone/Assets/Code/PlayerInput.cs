@@ -20,6 +20,7 @@ public class PlayerInput : CharacterInput {
 	void ReadInput() {
 		if(Input.GetKeyDown (rewindKey)) {
 			playerMovement.Rewind = true;
+            GetComponent<AudioSource>().Play();
 		}
 
 		if(Input.GetKeyUp (rewindKey)) {
@@ -27,6 +28,7 @@ public class PlayerInput : CharacterInput {
 				createClone(playerMovement.cloneEvents);
 			}
 			playerMovement.Rewind = false;
+            GetComponent<AudioSource>().Stop();
 		}
 
 		if(Input.GetMouseButtonDown(0)) {
