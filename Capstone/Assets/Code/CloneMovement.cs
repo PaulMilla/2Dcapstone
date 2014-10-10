@@ -18,7 +18,7 @@ public class CloneMovement : CharacterMovement {
 	
 	void FixedUpdate () {
 		if(rewind) {
-			DoRewind();
+			GameObject.Destroy(gameObject);
 		} else {
 			Move();
 		}
