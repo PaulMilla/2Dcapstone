@@ -6,7 +6,7 @@ public class CharacterMovement : MonoBehaviour {
 	[SerializeField]
 	protected float movementSpeed;
 	[SerializeField]
-	private NavMeshAgent agent;
+	protected NavMeshAgent agent;
 	public bool movementEnabled {get; set;}
 	protected bool rewind;
     protected bool hasInteracted;

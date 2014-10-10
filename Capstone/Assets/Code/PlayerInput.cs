@@ -43,9 +43,6 @@ public class PlayerInput : CharacterInput {
 	}
 
 	void createClone(Stack<Event> events) {
-		if(clone != null) {
-			GameObject.Destroy(clone);
-		}
 		clone = GameObject.Instantiate(hologramPrefab, this.transform.position, this.transform.rotation) as GameObject;
 		clone.GetComponent<CloneInput>().recordedInputs = events;
 	}
