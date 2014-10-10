@@ -33,7 +33,11 @@ Shader "Custom/GlowEffect"
 			o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap)); 
 			
 			half rim = 1.0 - saturate(dot(normalize(IN.viewDir), o.Normal));
+<<<<<<< HEAD:Capstone/Assets/Test/Shaders/GlowShader.shader
+			o.Emission = _RimColor.rgb * pow(rim, _RimPower);	
+=======
 			o.Emission = _RimColor.rgb * pow(rim, _RimPower);
+>>>>>>> FETCH_HEAD:Capstone/Assets/Shaders/GlowEffect.shader
 		}
 		ENDCG
 	} 
