@@ -7,8 +7,16 @@ public class PlayerInput : CharacterInput {
 	protected PlayerMovement playerMovement;
 	protected GameObject clone;
 
+
+	AudioSource audioRewindLoop;
+	AudioSource audioRewindBegin;
+	AudioSource audioRewindEnd;
+
 	void Awake() {
 		playerMovement = GetComponent<PlayerMovement>();
+		audioRewindLoop = transform.Find ("Sound").Find("Audio_Rewind_Loop").gameObject.GetComponent<AudioSource> ();
+		audioRewindBegin = transform.Find ("Sound").Find ("Audio_Rewind_Begin").gameObject.GetComponent<AudioSource> ();
+		audioRewindEnd = transform.Find ("Sound").Find ("Audio_Rewind_End").gameObject.GetComponent<AudioSource> ();
 	}
 
 	void Update() {
@@ -20,6 +28,8 @@ public class PlayerInput : CharacterInput {
 	void ReadInput() {
 		if(Input.GetKeyDown (rewindKey)) {
 			playerMovement.Rewind = true;
+			audioRewindBegin.Play();
+			audioRewindLoop.Play();
 		}
 
 		if(Input.GetKeyUp (rewindKey)) {
@@ -27,6 +37,8 @@ public class PlayerInput : CharacterInput {
 				createClone(playerMovement.cloneEvents);
 			}
 			playerMovement.Rewind = false;
+			audioRewindEnd.Play();
+			audioRewindLoop.Stop();
 		}
 
 		if(Input.GetMouseButtonDown(0)) {
