@@ -12,7 +12,13 @@ public class Laser : Activatable {
 	private float maxDistance = 10000;
 	// Use this for initialization
 
-	
+	AudioSource audioBeamConstant;
+
+	protected override void Start() {
+		audioBeamConstant = transform.Find ("Audio_Beam_Constant").GetComponent<AudioSource> ();
+		base.Start ();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (!Activated) {
@@ -31,10 +37,12 @@ public class Laser : Activatable {
 	}
 	protected override void Activate() {
 		base.Activate();
+		audioBeamConstant.Play ();
 		lineRenderer.SetWidth(0.1f, 0.1f);
 	}
 	protected override void Deactivate() {
 		base.Deactivate();
+		audioBeamConstant.Stop ();
 		lineRenderer.SetWidth(0, 0);
 	}
 }
