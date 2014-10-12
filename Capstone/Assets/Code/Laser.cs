@@ -13,9 +13,11 @@ public class Laser : Activatable {
 	// Use this for initialization
 
 	AudioSource audioBeamConstant;
+	AudioSource audioBeamContact;
 
 	protected override void Start() {
 		audioBeamConstant = transform.Find ("Audio_Beam_Constant").GetComponent<AudioSource> ();
+		audioBeamContact = transform.Find ("Audio_Beam_Contact").GetComponent<AudioSource> ();
 		base.Start ();
 	}
 
@@ -32,6 +34,9 @@ public class Laser : Activatable {
 			if (currentTarget != hit.collider.gameObject) {
 				currentTarget = hit.collider.gameObject;
 				currentTarget.SendMessageUpwards("Hit", killTime, SendMessageOptions.DontRequireReceiver);
+				if (currentTarget.transform.tag.Equals("Player")) {
+					audioBeamContact.Play();
+				}
 			}
 		}
 	}
