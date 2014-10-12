@@ -12,7 +12,15 @@ public class Laser : Activatable {
 	private float maxDistance = 10000;
 	// Use this for initialization
 
-	
+	AudioSource audioBeamConstant;
+	AudioSource audioBeamContact;
+
+	protected override void Start() {
+		audioBeamConstant = transform.Find ("Audio_Beam_Constant").GetComponent<AudioSource> ();
+		audioBeamContact = transform.Find ("Audio_Beam_Contact").GetComponent<AudioSource> ();
+		base.Start ();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (!Activated) {
@@ -26,15 +34,20 @@ public class Laser : Activatable {
 			if (currentTarget != hit.collider.gameObject) {
 				currentTarget = hit.collider.gameObject;
 				currentTarget.SendMessageUpwards("Hit", killTime, SendMessageOptions.DontRequireReceiver);
+				if (currentTarget.transform.tag.Equals("Player")) {
+					audioBeamContact.Play();
+				}
 			}
 		}
 	}
 	protected override void Activate() {
 		base.Activate();
+		audioBeamConstant.Play ();
 		lineRenderer.SetWidth(0.1f, 0.1f);
 	}
 	protected override void Deactivate() {
 		base.Deactivate();
+		audioBeamConstant.Stop ();
 		lineRenderer.SetWidth(0, 0);
 	}
 }
