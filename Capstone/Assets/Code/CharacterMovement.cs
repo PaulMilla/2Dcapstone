@@ -26,6 +26,11 @@ public class CharacterMovement : MonoBehaviour {
 
 	Animator animator;
 
+	public void StopMovement() {
+		movementEnabled = false;
+		agent.Stop(true);
+	}
+
 	protected virtual void Start () {
 		rewind = false;
 		movementEnabled = true;
