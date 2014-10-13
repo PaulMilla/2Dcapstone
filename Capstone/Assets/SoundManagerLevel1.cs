@@ -10,6 +10,8 @@ public class SoundManagerLevel1 : MonoBehaviour {
 
 	public float time_;
 
+	bool triggered = false;
+
 	// Use this for initialization
 	void Start () {
 		current = welcome;
@@ -35,11 +37,18 @@ public class SoundManagerLevel1 : MonoBehaviour {
 		}
 	}
 
-	void StartClock() {
-
+	void OnTriggerEnter(Collider other) {
+		if (triggered) {
+			return;
+		}
+		if (other.tag.Equals("Player")) {
+			triggered = true;
+			if (current != null) {
+				current.Stop();
+				current = alert;
+				alert.Play();
+			}
+		}
 	}
 
-	void StopClock() {
-
-	}
 }
