@@ -20,13 +20,13 @@ public class CloneInput : MonoBehaviour {
 	}
 	
 	void ReadInput() {
-		if(Input.GetButtonDown("Rewind")) {
+		if (Input.GetButton ("Rewind")) {
 			cloneMovement.Rewind = true;
-		}
-
-		if(Input.GetButtonDown("Rewind")) {
+		} else {
 			cloneMovement.Rewind = false;
 		}
+
+
 	}
 
     void FixedUpdate()

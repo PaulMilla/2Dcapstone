@@ -51,4 +51,16 @@ public class SoundManagerLevel1 : MonoBehaviour {
 		}
 	}
 
+	void Pause() {
+		if (current != null) {
+			current.Pause();
+		}
+	}
+
+	void Resume() {
+		if (current != null) {
+			current.Play();
+		}
+	}
+
 }
