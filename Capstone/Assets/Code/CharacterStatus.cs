@@ -22,7 +22,7 @@ public class CharacterStatus : MonoBehaviour {
 		if (Input.GetKey(KeyCode.R)) {
 			return;
 		}
-		characterMovement.movementEnabled = false;
+		characterMovement.StopMovement();
 		isDead = true;
 		if (characterMovement as PlayerMovement != null) {
 			//Time.timeScale = 0;
