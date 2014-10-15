@@ -2,11 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerInput : CharacterInput {
+public class PlayerInput : MonoBehaviour {
 	public GameObject hologramPrefab;
 	protected PlayerMovement playerMovement;
 	protected GameObject clone;
-
 
 	AudioSource audioRewindLoop;
 	AudioSource audioRewindBegin;
@@ -26,13 +25,13 @@ public class PlayerInput : CharacterInput {
 	}
 
 	void ReadInput() {
-		if(Input.GetKeyDown (rewindKey)) {
+		if(Input.GetButtonDown("Rewind")) {
 			playerMovement.Rewind = true;
 			audioRewindBegin.Play();
 			audioRewindLoop.Play();
 		}
 
-		if(Input.GetKeyUp (rewindKey)) {
+		if(Input.GetButtonUp("Rewind")) {
 			if(playerMovement.Rewind) {
 				createClone(playerMovement.cloneEvents);
 			}
@@ -44,8 +43,7 @@ public class PlayerInput : CharacterInput {
 		if(Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Interactable")))
-            {
+            if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Interactable"))) {
                 playerMovement.MoveTo(hit);
             }
 			else if(Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Floor"))) {
