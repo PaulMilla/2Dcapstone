@@ -43,10 +43,10 @@ public class PlayerInput : MonoBehaviour {
 		if(Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Interactable"))) {
+            if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Interactable"))) {
                 playerMovement.MoveTo(hit);
             }
-			else if(Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Floor"))) {
+			else if(Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Floor"))) {
 				playerMovement.MoveTo(hit);
 			}
 		}

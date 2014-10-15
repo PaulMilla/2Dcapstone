@@ -13,9 +13,10 @@ public class ClockAppearRewindEffect : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.R)) {
+		if (Input.GetKeyDown (KeyCode.Space)) {
 			StartAnimation ();
-		} else if (Input.GetKeyUp (KeyCode.R)) {
+		}
+		else if (Input.GetKeyUp(KeyCode.Space)) {
 			Reset ();
 		}
 

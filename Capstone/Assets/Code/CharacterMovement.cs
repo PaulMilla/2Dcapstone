@@ -38,14 +38,16 @@ public class CharacterMovement : MonoBehaviour {
 		targetPosition = transform.position;
 		animator = GetComponent<Animator>();
 	}
-
 	protected virtual void Move() {
 		Transform current = this.transform;
 		animator.speed = 1f;
 		animator.SetBool("Walking", true);
-		if(!movementEnabled || (targetPosition - current.position).magnitude <= 0.1f) {
+		if(!movementEnabled || (targetPosition - current.position).magnitude <= 0.3f) {
 			agent.Stop();
 			animator.SetBool("Walking", false);
+		}
+		if (rigidbody != null) {
+			rigidbody.velocity = Vector3.zero;
 		}
 		/*current.rotation = Quaternion.LookRotation(targetPosition);
 		current.rigidbody.velocity = Vector3.zero;

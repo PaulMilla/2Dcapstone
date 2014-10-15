@@ -18,7 +18,16 @@ public class EnemyVision : MonoBehaviour {
 		Enemy = GetComponentInParent<EnemyGuard>();
 	}
 
+	void FixedUpdate() {
+		if (Input.GetKeyUp(KeyCode.Space)) {
+			target = null;
+			return;
+		}
+	}
 	void OnTriggerStay(Collider other) {
+		if (Input.GetKey(KeyCode.Space)) {
+			return;
+		}
 		// If the player is in the trigger sphere
 		if (other.tag.Equals("Player") || other.tag.Equals("Hologram")) {
 				
@@ -48,6 +57,9 @@ public class EnemyVision : MonoBehaviour {
 
 	void OnTriggerExit (Collider other)
 	{
+		if (Input.GetKey(KeyCode.Space)) {
+			return;
+		}
 		// If the target leaves the trigger zone...
 		if(other.gameObject.transform.Equals(target)) {
 			target = null;
