@@ -5,33 +5,54 @@ public class CharacterStatus : MonoBehaviour {
 	protected CharacterMovement characterMovement;
 	public bool isDead { get; private set; }
 
+	public bool dissolve = false;
+
+
+	SkinnedMeshRenderer meshRenderer;
 	// Use this for initialization
 	void Start() {
 		characterMovement = GetComponent<CharacterMovement>();
+		meshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
 	}
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.R)) {
+		if (Input.GetButtonDown("Rewind")) {
 			if (isDead) {
+				Time.timeScale = 1.0f;
 				characterMovement.movementEnabled = true;
 				isDead = false;
 			}
 		}
+
+		if (dissolve) {						
+			Dissolve ();				
+		}
 	}
+
+	float dissolveParam = 0.0f;
+	public float dissolveSpeed;
+	Transform matTransform;
+
+	void Dissolve() {
+		dissolveParam += dissolveSpeed;
+		meshRenderer.renderer.material.SetFloat ("_SliceAmount", dissolveParam);
+	}
+
 	public void Hit(float killTime) {
-		if (Input.GetKey(KeyCode.R)) {
+		if (Input.GetButton("Rewind")) {
 			return;
 		}
 		characterMovement.StopMovement();
 		isDead = true;
-		if (characterMovement as PlayerMovement != null) {
-			//Time.timeScale = 0;
+		if (characterMovement is PlayerMovement) {
+			Time.timeScale = 0f;
 			return;
 		}
 		StartCoroutine(Die(killTime));
 	}
 
 	IEnumerator Die(float killTime) {
+		dissolve = true;
 		yield return new WaitForSeconds(killTime);
 		GetKilled();
 		yield return null;
