@@ -8,8 +8,9 @@ using System.Collections;
 public class EnemyVision : MonoBehaviour {
 
 	Transform target;
+	CharacterStatus targetStatus;
 
-	float fieldOfViewAngle = 110f;
+	float fieldOfViewAngle = 60f;
 
 	EnemyGuard Enemy;
 
@@ -17,7 +18,16 @@ public class EnemyVision : MonoBehaviour {
 		Enemy = GetComponentInParent<EnemyGuard>();
 	}
 
+	void FixedUpdate() {
+		if (Input.GetKeyUp(KeyCode.Space)) {
+			target = null;
+			return;
+		}
+	}
 	void OnTriggerStay(Collider other) {
+		if (Input.GetKey(KeyCode.Space)) {
+			return;
+		}
 		// If the player is in the trigger sphere
 		if (other.tag.Equals("Player") || other.tag.Equals("Hologram")) {
 				
@@ -33,10 +43,12 @@ public class EnemyVision : MonoBehaviour {
 						// Already have a target, switch if new target is closer
 						if (direction.magnitude < (other.transform.position - Enemy.transform.position).magnitude) {
 							target = other.transform;
+							targetStatus = target.GetComponent<CharacterStatus>();
 						}
 					}
 					else {
 						target = other.transform;
+						targetStatus = target.GetComponent<CharacterStatus>();
 					}
 				}
 			}
@@ -45,14 +57,18 @@ public class EnemyVision : MonoBehaviour {
 
 	void OnTriggerExit (Collider other)
 	{
+		if (Input.GetKey(KeyCode.Space)) {
+			return;
+		}
 		// If the target leaves the trigger zone...
 		if(other.gameObject.transform.Equals(target)) {
 			target = null;
+			targetStatus = null;
 		}
 	}
 
 	public bool HasTarget() {
-		return target != null;
+		return target != null && targetStatus.isDead == false;
 	}
 
 	public Transform GetTarget() {

@@ -7,20 +7,26 @@ public class SwitchButton : Interactable {
 	[SerializeField]
 	Activatable[] activatableArray;
 
+	AudioSource audioOn;
+	AudioSource audioOff;
+
 	void Start() {
 		GameManager.Instance.RoundEnd += Reset;
 		renderer.material.color = Color.blue;
+		audioOn = transform.Find ("Audio_On").GetComponent<AudioSource> ();
+		audioOff = transform.Find ("Audio_Off").GetComponent<AudioSource> ();
 	}
-
 
     public override void OnInteract()
     {
 		// Just a visual indicator
-		if (renderer.material.color.Equals(Color.blue))
+		if (renderer.material.color.Equals (Color.blue)) {
+			audioOn.Play ();
 			renderer.material.color = Color.green;
-		else
+		} else {
+			audioOff.Play ();
 			renderer.material.color = Color.blue;
-
+		}
 		// The reason this class exists
 		foreach (Activatable activatable in activatableArray) {
 			activatable.Toggle();

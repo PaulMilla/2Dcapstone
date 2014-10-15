@@ -2,13 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class CloneInput : CharacterInput
-{
+public class CloneInput : MonoBehaviour {
 	public Stack<Event> recordedInputs {private get; set;}
 	private CloneMovement cloneMovement;
 
-	override protected void Start() {
-		base.Start();
+	void Start() {
 	}
 
 	void Awake() {
@@ -22,13 +20,13 @@ public class CloneInput : CharacterInput
 	}
 	
 	void ReadInput() {
-		if(Input.GetKeyDown(rewindKey)) {
+		if (Input.GetButton ("Rewind")) {
 			cloneMovement.Rewind = true;
-		}
-
-		if(Input.GetKeyUp(rewindKey)) {
+		} else {
 			cloneMovement.Rewind = false;
 		}
+
+
 	}
 
     void FixedUpdate()
