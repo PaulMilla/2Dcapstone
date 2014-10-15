@@ -46,7 +46,7 @@ public class PlayerInput : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Interactable"))) {
                 playerMovement.MoveTo(hit);
             }
-			else if(Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Floor"))) {
+			else if(Physics.Raycast(ray, out hit, 1000)) {
 				playerMovement.MoveTo(hit);
 			}
 		}
