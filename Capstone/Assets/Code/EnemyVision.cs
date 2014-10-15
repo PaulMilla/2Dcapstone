@@ -8,8 +8,9 @@ using System.Collections;
 public class EnemyVision : MonoBehaviour {
 
 	Transform target;
+	CharacterStatus targetStatus;
 
-	float fieldOfViewAngle = 110f;
+	float fieldOfViewAngle = 60f;
 
 	EnemyGuard Enemy;
 
@@ -33,10 +34,12 @@ public class EnemyVision : MonoBehaviour {
 						// Already have a target, switch if new target is closer
 						if (direction.magnitude < (other.transform.position - Enemy.transform.position).magnitude) {
 							target = other.transform;
+							targetStatus = target.GetComponent<CharacterStatus>();
 						}
 					}
 					else {
 						target = other.transform;
+						targetStatus = target.GetComponent<CharacterStatus>();
 					}
 				}
 			}
@@ -48,11 +51,12 @@ public class EnemyVision : MonoBehaviour {
 		// If the target leaves the trigger zone...
 		if(other.gameObject.transform.Equals(target)) {
 			target = null;
+			targetStatus = null;
 		}
 	}
 
 	public bool HasTarget() {
-		return target != null;
+		return target != null && targetStatus.isDead == false;
 	}
 
 	public Transform GetTarget() {

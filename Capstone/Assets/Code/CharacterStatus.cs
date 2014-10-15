@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CharacterStatus : MonoBehaviour {
 	protected CharacterMovement characterMovement;
-	private bool isDead { get; set; }
+	public bool isDead { get; private set; }
 
 	// Use this for initialization
 	void Start() {
@@ -22,7 +22,7 @@ public class CharacterStatus : MonoBehaviour {
 		if (Input.GetKey(KeyCode.R)) {
 			return;
 		}
-		characterMovement.movementEnabled = false;
+		characterMovement.StopMovement();
 		isDead = true;
 		if (characterMovement as PlayerMovement != null) {
 			//Time.timeScale = 0;

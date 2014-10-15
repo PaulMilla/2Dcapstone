@@ -2,13 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerInput : CharacterInput {
+public class PlayerInput : MonoBehaviour {
 	public GameObject hologramPrefab;
 	protected PlayerMovement playerMovement;
 	protected GameObject clone;
 
+	AudioSource audioRewindLoop;
+	AudioSource audioRewindBegin;
+	AudioSource audioRewindEnd;
+
 	void Awake() {
 		playerMovement = GetComponent<PlayerMovement>();
+		audioRewindLoop = transform.Find ("Sound").Find("Audio_Rewind_Loop").gameObject.GetComponent<AudioSource> ();
+		audioRewindBegin = transform.Find ("Sound").Find ("Audio_Rewind_Begin").gameObject.GetComponent<AudioSource> ();
+		audioRewindEnd = transform.Find ("Sound").Find ("Audio_Rewind_End").gameObject.GetComponent<AudioSource> ();
 	}
 
 	void Update() {
@@ -18,22 +25,25 @@ public class PlayerInput : CharacterInput {
 	}
 
 	void ReadInput() {
-		if(Input.GetKeyDown (rewindKey)) {
+		if(Input.GetButtonDown("Rewind")) {
 			playerMovement.Rewind = true;
+			audioRewindBegin.Play();
+			audioRewindLoop.Play();
 		}
 
-		if(Input.GetKeyUp (rewindKey)) {
+		if(Input.GetButtonUp("Rewind")) {
 			if(playerMovement.Rewind) {
 				createClone(playerMovement.cloneEvents);
 			}
 			playerMovement.Rewind = false;
+			audioRewindEnd.Play();
+			audioRewindLoop.Stop();
 		}
 
 		if(Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Interactable")))
-            {
+            if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Interactable"))) {
                 playerMovement.MoveTo(hit);
             }
 			else if(Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("Floor"))) {
@@ -43,9 +53,6 @@ public class PlayerInput : CharacterInput {
 	}
 
 	void createClone(Stack<Event> events) {
-		if(clone != null) {
-			GameObject.Destroy(clone);
-		}
 		clone = GameObject.Instantiate(hologramPrefab, this.transform.position, this.transform.rotation) as GameObject;
 		clone.GetComponent<CloneInput>().recordedInputs = events;
 	}

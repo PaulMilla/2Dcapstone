@@ -2,6 +2,11 @@
 using System.Collections;
 
 public class CloneMovement : CharacterMovement {
+
+	[SerializeField]
+	private GameObject deathParticle;
+	private bool dead;
+
 	public bool Rewind {
 		get { return rewind; }
 		set { rewind = value;}
@@ -17,10 +22,21 @@ public class CloneMovement : CharacterMovement {
 	}
 	
 	void FixedUpdate () {
-		if(rewind) {
-			DoRewind();
+		if (dead) {
+			return;
+		}
+		if(rewind && !dead) {
+			StartCoroutine(DeathCoroutine());
+			dead = true;
+			agent.Stop();
 		} else {
 			Move();
 		}
+	}
+
+	IEnumerator DeathCoroutine() {
+		GameObject.Instantiate(deathParticle, transform.position, transform.rotation);
+		yield return new WaitForSeconds(1);
+		Destroy(gameObject);
 	}
 }

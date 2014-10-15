@@ -20,16 +20,18 @@ public class EnemyGuard : Activatable {
 	// An int to keep track of which direction we are along the patrol route
 	// If 1, we are incrementing our route
 	private int patrolDirection = 1;
-	private bool offPatrolRoute = false;
+	public bool offPatrolRoute = false;
 	private int nextWaypointIndex = 0; 
 
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
 	//CharacterMovement characterMovement;
+	public bool movementEnabled {get; set;}
 
 	protected override void Start() {
 		base.Start();
+		movementEnabled = true;
 		vision = GetComponentInChildren<EnemyVision> ();
 		patrolWaypoints = path.GetComponentsInChildren<Transform> ();
 
@@ -47,9 +49,10 @@ public class EnemyGuard : Activatable {
 	}
 
 	void FixedUpdate () {
-		if (!Activated) {
+		if (!Activated || !movementEnabled) {
 			return;
 		}
+
 		// STATE: There is a target to pursue
 		if (vision.HasTarget()) {
 			Chase ();
@@ -127,7 +130,7 @@ public class EnemyGuard : Activatable {
 		if (collision.collider.tag.Equals("Player") ||
 		    collision.collider.tag.Equals("Hologram")) {
 			CharacterStatus characterStatus = collision.gameObject.GetComponent<CharacterStatus>();
-			characterStatus.GetKilled();
+			characterStatus.Hit(2);
 		}
 	}
 
