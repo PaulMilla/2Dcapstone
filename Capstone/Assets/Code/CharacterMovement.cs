@@ -39,11 +39,17 @@ public class CharacterMovement : MonoBehaviour {
 		animator = GetComponent<Animator>();
 	}
 
+	void FixedUpdate() {
+		if (rigidbody != null) {
+			rigidbody.velocity = Vector3.zero;
+		}
+	}
+
 	protected virtual void Move() {
 		Transform current = this.transform;
 		animator.speed = 1f;
 		animator.SetBool("Walking", true);
-		if(!movementEnabled || (targetPosition - current.position).magnitude <= 0.1f) {
+		if(!movementEnabled || (targetPosition - current.position).magnitude <= 0.3f) {
 			agent.Stop();
 			animator.SetBool("Walking", false);
 		}
