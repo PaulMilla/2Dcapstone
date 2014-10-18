@@ -50,6 +50,8 @@ public class EnemyVision : MonoBehaviour {
 						target = other.transform;
 						targetStatus = target.GetComponent<CharacterStatus>();
 					}
+				} else if (other.transform.Equals(target)) {
+					target = null;
 				}
 			}
 		}
@@ -73,6 +75,10 @@ public class EnemyVision : MonoBehaviour {
 
 	public Transform GetTarget() {
 		return target;
+	}
+
+	public void ResetTarget() {
+		target = null;
 	}
 
 }
