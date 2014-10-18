@@ -77,6 +77,11 @@ public class EnemyVision : MonoBehaviour {
 		return target;
 	}
 
+	public void SetTarget(Transform t) {
+		target = t;
+		targetStatus = t.GetComponent<CharacterStatus> ();
+	}
+
 	public void ResetTarget() {
 		target = null;
 	}

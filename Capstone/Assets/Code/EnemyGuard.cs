@@ -179,7 +179,7 @@ public class EnemyGuard : Activatable {
 	}
 
 	
-	void SetDestination(Vector3 pos, float speed) {
+	public void SetDestination(Vector3 pos, float speed) {
 		Vector3 targetPos = pos;
 		targetPos.y = this.transform.position.y;  // So we never move in the y direction
 		this.transform.rigidbody.velocity = Vector3.zero;
@@ -208,6 +208,10 @@ public class EnemyGuard : Activatable {
 			chasing = false;
 			pauseAfterKillTimer = 0.0f;
 		}
+	}
+
+	public void SetTarget(Transform t) {
+		vision.SetTarget (t);
 	}
 
 	public bool HasLineOfSightTo(Transform t) {
