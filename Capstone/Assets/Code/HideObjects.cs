@@ -8,8 +8,10 @@ public class HideObjects : MonoBehaviour {
 	public float alphaValue = 0.5f; // our alpha value
 	public List<string> transparentTags = new List<string>();   // transparency layers.
 	public Transform target;
+	public float sphereCastRadius;
 
-
+	List<Transform> previousObjects = new List<Transform>();
+	RaycastHit[] hits;
 	// Use this for initialization
 	void Start () {
 	
@@ -18,30 +20,55 @@ public class HideObjects : MonoBehaviour {
 	void Update () {
 		// Cast ray from camera.position to target.position and check if the specified layers are between them.
 		Ray ray = new Ray(this.transform.position, (target.position - this.transform.position).normalized);
-		RaycastHit transHit;
-		if (Physics.Raycast(ray, out transHit, (target.transform.position - this.transform.position).magnitude))
-		{
-			Transform objectHit = transHit.transform;
-			if(transparentTags.Contains(objectHit.gameObject.tag))
-			{
-				if(prevTransObject != null)
-				{
-					prevTransObject.renderer.material.color = new Color(1,1,1,1);
-				}
-				
-				if(objectHit.renderer != null)
-				{
-					prevTransObject = objectHit;
-					
-					// Can only apply alpha if this material shader is transparent.
-					prevTransObject.renderer.material.color = new Color(1,1,1, alphaValue);
-				}
-			}
-			else if(prevTransObject != null)
-			{
-				prevTransObject.renderer.material.color = new Color(1,1,1,1);
-				prevTransObject = null;
+		hits = Physics.SphereCastAll (ray, sphereCastRadius, (target.transform.position - this.transform.position).magnitude, 1 << LayerMask.NameToLayer("Hideable"));
+		foreach (Transform previousObject in previousObjects) {
+			if (!inHits(previousObject)) {
+				setAlpha(previousObject, 1.0f);
 			}
 		}
+
+		previousObjects.Clear ();
+		foreach (RaycastHit hit in hits) {
+			setAlpha(hit.transform, alphaValue);
+			previousObjects.Add(hit.transform);
+		}
+
+
+
+//		RaycastHit transHit;
+//		if (Physics.Raycast(ray, out transHit, (target.transform.position - this.transform.position).magnitude))
+//		{
+//			Transform objectHit = transHit.transform;
+//			if(transparentTags.Contains(objectHit.gameObject.tag))
+//			{
+//				if(prevTransObject != null) {
+//					setAlpha(prevTransObject, 1.0f);
+//				}
+//				if(objectHit.renderer != null) {
+//					prevTransObject = objectHit;
+//					setAlpha(prevTransObject, alphaValue);
+//				}
+//			}
+//			else if(prevTransObject != null)
+//			{
+//				setAlpha(prevTransObject, 1.0f);
+//				prevTransObject = null;
+//			}
+//		}
+	}
+
+	bool inHits(Transform t) {
+		foreach (RaycastHit hit in hits) {
+			if (t.Equals(hit.transform)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void setAlpha(Transform obj, float alpha) {
+		Color color = obj.renderer.material.color;
+		color.a = alpha;
+		obj.renderer.material.color = color;
 	}
 }
