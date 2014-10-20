@@ -18,18 +18,11 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 2800000, guid: 29058d37f30e3274b8eebeeffb3a584f, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Scale: {x: 20, y: 35}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Illum
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -41,11 +34,18 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Illum
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
-          name: _RimPower
-        second: 6
+          name: _Shininess
+        second: 1
       data:
         first:
           name: _Stencil
@@ -72,20 +72,24 @@ Material:
         second: 15
       data:
         first:
-          name: _EmissionLM
-        second: 0
-      data:
-        first:
-          name: _Shininess
-        second: 1
-      data:
-        first:
           name: _Parallax
         second: .0226785708
+      data:
+        first:
+          name: _RimPower
+        second: 6
+      data:
+        first:
+          name: _EmissionLM
+        second: 0
     m_Colors:
       data:
         first:
           name: _Color
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _SpecColor
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
@@ -94,8 +98,4 @@ Material:
       data:
         first:
           name: _RimColor
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _SpecColor
         second: {r: 1, g: 1, b: 1, a: 1}
