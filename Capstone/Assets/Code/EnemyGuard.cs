@@ -32,7 +32,7 @@ public class EnemyGuard : Activatable {
 	RewindManager rewindingManager;
 
 	public float pauseAfterKillTime = 3.0f;
-		public bool movementEnabled {get; set;}
+	public bool movementEnabled {get; set;}
 	bool pausingAfterKill = false;
 	private float pauseAfterKillTimer = 0.0f;
 
@@ -63,6 +63,11 @@ public class EnemyGuard : Activatable {
 						waypoint.position = fixedPos;
 				}
 		}
+	}
+
+	public void ResetTarget() {
+		vision.ResetTarget ();
+
 	}
 
 	void FixedUpdate () {
