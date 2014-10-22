@@ -153,7 +153,7 @@ public class EnemyGuard : Activatable {
 					}
 				}
 				// We've made it to our waypoint, so choose another one
-				if ((this.transform.position - patrolWaypoints [nextWaypointIndex].position).magnitude <= 0.1f) {
+				if (this.hasArrivedAt (patrolWaypoints[nextWaypointIndex].position)) {
 					if (nextWaypointIndex >= patrolWaypoints.Length - 1) {
 						patrolDirection = -1;
 					} else if (nextWaypointIndex == 0) {
