@@ -120,7 +120,6 @@ public class EnemyGuard : Activatable {
 
 	void Patrol() {
 		// If the guard is standing guard, just go to the initial position
-		Debug.Log ("Patrol");
 		if (!pausingAfterKill) {
 			emoticon.text = "Patrolling";
 			this.agent.speed = PatrolSpeed;
