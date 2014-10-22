@@ -40,7 +40,7 @@ public class PlayerInput : MonoBehaviour {
 			audioRewindLoop.Stop();
 		}
 
-		if(Input.GetMouseButtonDown(0)) {
+		if(Input.GetMouseButton(0)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Interactable"))) {
