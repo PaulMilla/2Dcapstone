@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class RewindManager : MonoBehaviour {
 	private Stack<Position> recordedEvents;
-	private bool isRewinding;
+	public bool isRewinding;
 
 	// Use this for initialization
 	void Start () {
