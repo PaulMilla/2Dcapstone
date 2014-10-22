@@ -32,7 +32,6 @@ public class LevelOneCheckPointOne : MonoBehaviour {
 			timer += Time.deltaTime;
 			switch (currentStage) {
 			case STAGE.STAGE_ONE:
-
 				StageOneUpdate();
 				break;
 			case STAGE.STAGE_TWO:
@@ -64,6 +63,15 @@ public class LevelOneCheckPointOne : MonoBehaviour {
 		}
 	}
 
+	
+	void FinishCheckpoint() {
+		Debug.Log("Stage Finish");
+		//MainCamera.transform.position = Vector3.Lerp(MainCamera.transform.position, cameraInitialPosition, cameraMoveSpeed);
+		player.enabled = true;
+		player.movementEnabled = true;
+		MainCamera.GetComponent<CameraFollow>().enabled = true;
+	}
+
 	void OnTriggerEnter(Collider other) {
 		if (other.tag.Equals("Player")) {
 			Debug.Log("Player Entered");
@@ -79,11 +87,4 @@ public class LevelOneCheckPointOne : MonoBehaviour {
 		}
 	}
 
-	void FinishCheckpoint() {
-		Debug.Log("Stage Finish");
-		//MainCamera.transform.position = Vector3.Lerp(MainCamera.transform.position, cameraInitialPosition, cameraMoveSpeed);
-		player.enabled = true;
-		player.movementEnabled = true;
-		MainCamera.GetComponent<CameraFollow>().enabled = true;
-	}
 }
