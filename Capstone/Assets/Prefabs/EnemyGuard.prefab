@@ -60,12 +60,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 400006}
   - 33: {fileID: 3300002}
-  - 136: {fileID: 13600000}
   - 23: {fileID: 2300004}
+  - 136: {fileID: 13600000}
   - 54: {fileID: 5400000}
+  - 195: {fileID: 19500000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
-  - 195: {fileID: 19500000}
   m_Layer: 10
   m_Name: EnemyGuard
   m_TagString: Enemy
@@ -116,9 +116,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.0450001, y: 1.06470001, z: 59.2459984}
-  m_LocalScale: {x: .889999986, y: 1, z: 1.02999997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
   - {fileID: 400004}
@@ -257,9 +257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultActivated: 1
-  PursuitSpeed: 2.4000001
-  PatrolSpeed: 2
-  path: {fileID: 0}
+  PursuitSpeed: 6
+  PatrolSpeed: 5
+  path: {fileID: 400006}
   standingGuard: 1
   offPatrolRoute: 0
   pauseAfterKillTime: 3
@@ -297,7 +297,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .556872427
+  m_Radius: .5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

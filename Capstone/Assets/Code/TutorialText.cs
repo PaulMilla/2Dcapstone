@@ -4,14 +4,8 @@ using System.Collections;
 
 public class TutorialText : MonoBehaviour {
     public Collider playerCollider;
-	public Collider room1Collider;
-    public Collider switchCollider1;
-    public Collider buttonCollider1;
-    public Collider switchCollider2;
-    public Collider buttonCollider2;
-	public Collider room4Collider;
-	public Collider laserCollider;
-	public Collider room5Collider;
+    public Collider[] colliders;
+    public string[] texts;
     Animator dialog;
     Text text;
     private float hideTime;
@@ -38,52 +32,13 @@ public class TutorialText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (playerCollider.bounds.Intersects(room1Collider.bounds)) {
-			Show();
-			ChangeText("Buttons are there for a reason.  Why don't you try pressing it?");
-			HideAfter(2);
-		}
-        else if (playerCollider.bounds.Intersects(switchCollider1.bounds))
-        {
-			Show();
-            ChangeText("Hey you can press a switch! Not bad, but what about that button over there?");
-            HideAfter(2);
+        for(int x = 0; x < colliders.Length; ++x) {
+            if (playerCollider.bounds.Intersects(colliders[x].bounds)) {
+                Show();
+                ChangeText(texts[x]);
+                HideAfter(3.5f);
+            }
         }
-        else if (playerCollider.bounds.Intersects(buttonCollider1.bounds))
-        {
-            Show();
-            ChangeText("Did you not bring anyone other than yourself? This is a multi-man operation!");
-            HideAfter(2);
-        }
-        else if (playerCollider.bounds.Intersects(switchCollider2.bounds))
-        {
-            Show();
-            ChangeText("Wait, what? What just happened?");
-            HideAfter(2);
-        }
-        else if (playerCollider.bounds.Intersects(buttonCollider2.bounds))
-        {
-            Show();
-            ChangeText("Ok, well it seems like you've got it from here. Make it out and you're hired!");
-            HideAfter(2);
-        }
-		else if (room4Collider != null && playerCollider.bounds.Intersects(room4Collider.bounds)) {
-			Show();
-			ChangeText("Lasers are harmless. I promise.");
-			Destroy(room4Collider);
-			HideAfter(2);
-		}
-		else if (laserCollider != null && playerCollider.bounds.Intersects(laserCollider.bounds)) {
-			Show();
-			ChangeText("Just kidding. Luckily you can still rewind time after getting fried.");
-			Destroy(laserCollider);
-			HideAfter(2);
-		}
-		else if (playerCollider.bounds.Intersects(room5Collider.bounds)) {
-			Show();
-			ChangeText("You can only exist twice.  Use this to your advantage.");
-			HideAfter(5);
-		}
 	}
 
     void FixedUpdate()
@@ -108,5 +63,14 @@ public class TutorialText : MonoBehaviour {
 
     public void ChangeText(string s) {
         text.text = s;
+    }
+}
+
+public class dialogEvent {
+    public Collider collider;
+    public string text;
+    public dialogEvent(Collider c, string s) {
+        collider = c;
+        text = s;
     }
 }
