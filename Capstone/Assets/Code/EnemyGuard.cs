@@ -7,18 +7,21 @@ using System.Collections;
 
 public class EnemyGuard : Activatable {
 
-	[SerializeField]
 	EnemyVision vision;
+	Vector3 lastSeenPosition;
 
 	public float PursuitSpeed;
 	public float PatrolSpeed;
 
+	NavMeshAgent agent;
+
 	public Transform path;
 	Transform[] patrolWaypoints;
 	public bool standingGuard = false;
+	bool chasing = false;
 
 	// An int to keep track of which direction we are along the patrol route
-	// If 1, we are incrementing our route
+	// If 1, we are incrementing our route, we are going backwards
 	private int patrolDirection = 1;
 	public bool offPatrolRoute = false;
 	private int nextWaypointIndex = 0; 
@@ -26,112 +29,189 @@ public class EnemyGuard : Activatable {
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
-	//CharacterMovement characterMovement;
-	public bool movementEnabled {get; set;}
+	RewindManager rewindingManager;
+
+	public float pauseAfterKillTime = 3.0f;
+		public bool movementEnabled {get; set;}
+	bool pausingAfterKill = false;
+	private float pauseAfterKillTimer = 0.0f;
+
+	TextMesh emoticon;
+	
+	[SerializeField]
+	private float investigateTime = 3.0f;
+	private float investigateTimer = 0.0f;
 
 	protected override void Start() {
 		base.Start();
+		emoticon = GetComponentInChildren<TextMesh> ();
+		agent = GetComponent<NavMeshAgent> ();
 		movementEnabled = true;
 		vision = GetComponentInChildren<EnemyVision> ();
-		patrolWaypoints = path.GetComponentsInChildren<Transform> ();
+		rewindingManager = GetComponent<RewindManager> ();
 
 		//characterMovement = GetComponent<characterMovement> ();
 		initialRotation = this.transform.rotation;
 		initialPosition = this.transform.position;
 
 		// Fix the y axis of the waypoint to our y position
-		float fixedY = this.transform.position.y;
-		foreach (Transform waypoint in patrolWaypoints) {
-			Vector3 fixedPos = waypoint.position;
-			fixedPos.y = fixedY;
-			waypoint.position = fixedPos;
+
+		if (!standingGuard) {
+				patrolWaypoints = path.GetComponentsInChildren<Transform> ();
+				foreach (Transform waypoint in patrolWaypoints) {
+						Vector3 fixedPos = waypoint.position;
+						waypoint.position = fixedPos;
+				}
 		}
 	}
 
 	void FixedUpdate () {
+
+		if (rewindingManager.isRewinding) {
+			agent.Stop();
+			vision.ResetTarget();
+			return;
+		}
+
 		if (!Activated || !movementEnabled) {
 			return;
 		}
 
-		// STATE: There is a target to pursue
-		if (vision.HasTarget()) {
+		// WE HAVE A CLEAR SIGHT TO TARGET SO PURSUE
+		if (vision.HasTarget ()) {
 			Chase ();
+		} else if (chasing) {
+			// NO TARGET BUT WE ARE IN PURSUIT 
+			Investigate();
 		}
-
-		// NO TARGET
+		// NO TARGET AND NOT IN PURSUIT, RETURN TO PATROL
 		else {
 			Patrol();
 		}
 	}
 
+	void Investigate() {
+		Debug.Log ("Investigate");
+		if (hasArrivedAt(lastSeenPosition)) {
+			// We arrived at the last spot we saw the player
+			if (investigateTimer >= investigateTime) {
+				chasing = false;
+				investigateTimer = 0.0f;
+			} else {
+				emoticon.text = "?";
+				investigateTimer += Time.deltaTime;
+			}
+		} else {
+			// We haven't reached the spot where we last saw the player
+			emoticon.text = "Investigating";
+			investigateTimer = 0.0f;
+			SetDestination(lastSeenPosition, PursuitSpeed);
+		}
+	}
+
 	void Chase() {
+		Debug.Log ("Chase");
+		emoticon.text = "Chase!!!!";
+		chasing = true;
 		offPatrolRoute = true;
-		Vector3 targetPos = vision.GetTarget().position;
-		targetPos.y = this.transform.position.y;  // So we never move in the y direction
-		this.transform.rigidbody.velocity = Vector3.zero;
-		this.transform.LookAt(targetPos);
-		this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, targetPos, PursuitSpeed * Time.fixedDeltaTime));
+		lastSeenPosition = vision.GetTarget ().position;
+		SetDestination (lastSeenPosition, PursuitSpeed);
 	}
 
 	void Patrol() {
 		// If the guard is standing guard, just go to the initial position
-		if (standingGuard) {
-			offPatrolRoute = false;
-			// If the guard isn't at his station, go to it
-			if ((this.transform.position - initialPosition).magnitude > 0.1f) {
-				// Setting in motion
-				this.transform.rigidbody.velocity = Vector3.zero;
-				this.transform.LookAt(initialPosition);
-				this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, initialPosition, PursuitSpeed * Time.fixedDeltaTime));
-				return;
-			}
-			// We are already at our position, so face the right way
-			else {
-				this.transform.rotation = initialRotation;
-				return;
-			}
-		}
-
-		// The guard has a path, so follow it
-		else {
-			// Guard is off route from chasing the player and needs to pick a point to return to
-			if (offPatrolRoute) {
+		Debug.Log ("Patrol");
+		if (!pausingAfterKill) {
+			emoticon.text = "Patrolling";
+			this.agent.speed = PatrolSpeed;
+			if (standingGuard) {
 				offPatrolRoute = false;
-				// Find the nearest position in the Patrol Route and go there
-				float shortestDistance = Mathf.Infinity;
-				for (int i = 0; i < patrolWaypoints.Length; i++) {
-					if ((patrolWaypoints[i].position - this.transform.position).magnitude < shortestDistance) {
-						nextWaypointIndex = i;
-						shortestDistance = (patrolWaypoints[i].position - this.transform.position).magnitude;
+				// If the guard isn't at his station, go to it
+				if (!hasArrivedAt(initialPosition)) {
+					// Setting in motion
+					SetDestination(initialPosition, PatrolSpeed);
+					return;
+				}
+				// We are already at our position, so face the right way
+				else {
+					this.agent.Stop ();
+					this.transform.rotation = initialRotation;
+					return;
+				}	
+			}
+			// The guard has a path, so follow it
+			else {
+				// Guard is off route from chasing the player and needs to pick a point to return to
+				if (offPatrolRoute) {
+					offPatrolRoute = false;
+					// Find the nearest position in the Patrol Route and go there
+					float shortestDistance = Mathf.Infinity;
+					for (int i = 0; i < patrolWaypoints.Length; i++) {
+						if ((patrolWaypoints [i].position - this.transform.position).magnitude < shortestDistance) {
+							nextWaypointIndex = i;
+							shortestDistance = (patrolWaypoints [i].position - this.transform.position).magnitude;
+						}
 					}
 				}
-			}
-			// We've made it to our waypoint, so choose another one
-			if ((this.transform.position - patrolWaypoints[nextWaypointIndex].position).magnitude <= 0.1f) {
-				if (nextWaypointIndex >= patrolWaypoints.Length - 1) {
-					patrolDirection = -1;
+				// We've made it to our waypoint, so choose another one
+				if ((this.transform.position - patrolWaypoints [nextWaypointIndex].position).magnitude <= 0.1f) {
+					if (nextWaypointIndex >= patrolWaypoints.Length - 1) {
+						patrolDirection = -1;
+					} else if (nextWaypointIndex == 0) {
+						patrolDirection = 1;
+					}
+					nextWaypointIndex = nextWaypointIndex + patrolDirection;
 				}
-				else if (nextWaypointIndex == 0) {
-					patrolDirection = 1;
-				}
-				nextWaypointIndex = nextWaypointIndex + patrolDirection;
+				Vector3 positionToGoTo = patrolWaypoints [nextWaypointIndex].position;
+				SetDestination(positionToGoTo, PatrolSpeed);
 			}
-			Vector3 positionToGoTo = patrolWaypoints[nextWaypointIndex].position;
-			this.transform.rigidbody.velocity = Vector3.zero;
-			this.transform.LookAt(positionToGoTo);
-			this.transform.rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, positionToGoTo, PatrolSpeed * Time.fixedDeltaTime));
 		}
+		// PAUSING AFTER KILLING THE ENEMY
+		else {
+			emoticon.text = "Hahaha :)";
+			if (pauseAfterKillTimer >= pauseAfterKillTime) {
+				pausingAfterKill = false;
+				pauseAfterKillTimer = 0.0f;
+			} else {
+				pauseAfterKillTimer += Time.deltaTime;  
+			}
+		}
+	}
+
+	
+	public void SetDestination(Vector3 pos, float speed) {
+		Vector3 targetPos = pos;
+		targetPos.y = this.transform.position.y;  // So we never move in the y direction
+		this.transform.rigidbody.velocity = Vector3.zero;
+		this.transform.LookAt(targetPos);
+		this.agent.speed = speed;
+		this.agent.SetDestination (targetPos);
+	}
+
+	bool hasArrivedAt(Vector3 pos) {
+		pos.y = this.transform.position.y;
+		if ((pos - this.transform.position).magnitude == 0) {
+			return true;
+		}
+		return false;
 	}
 
 	void OnCollisionEnter(Collision collision) {
 		if (!Activated) {
 			return;
 		}
-		if (collision.collider.tag.Equals("Player") ||
-		    collision.collider.tag.Equals("Hologram")) {
+		if (collision.collider.tag.Equals("Player") || collision.collider.tag.Equals("Hologram")) {
 			CharacterStatus characterStatus = collision.gameObject.GetComponent<CharacterStatus>();
 			characterStatus.Hit(2);
+			agent.Stop();
+			pausingAfterKill = true;
+			chasing = false;
+			pauseAfterKillTimer = 0.0f;
 		}
+	}
+
+	public void SetTarget(Transform t) {
+		vision.SetTarget (t);
 	}
 
 	public bool HasLineOfSightTo(Transform t) {
@@ -140,7 +220,7 @@ public class EnemyGuard : Activatable {
 		RaycastHit hit;
 		if (Physics.Raycast (this.transform.position, direction.normalized, out hit, 1000)) {
 			if (hit.transform.Equals (t)) {
-					return true;
+				return true;
 			}
 			else {
 				return false;
