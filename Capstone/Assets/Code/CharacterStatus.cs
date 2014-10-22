@@ -45,8 +45,10 @@ public class CharacterStatus : MonoBehaviour {
 		characterMovement.StopMovement();
 		isDead = true;
 		if (characterMovement is PlayerMovement) {
-			Time.timeScale = 0f;
-			return;
+				Time.timeScale = 0f;
+				return;
+		} else {
+			Die(2);
 		}
 		StartCoroutine(Die(killTime));
 	}
