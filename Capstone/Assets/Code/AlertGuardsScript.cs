@@ -15,9 +15,10 @@ public class AlertGuardsScript : Activatable {
 		if (!beenActivated) {
 			beenActivated = true;
 			foreach (EnemyGuard enemy in enemies) {
-				enemy.SetDestination(player.transform.position, enemy.PursuitSpeed);
-				enemy.movementEnabled = true;
+				enemy.Toggle();
 				enemy.enabled = true;
+				enemy.movementEnabled = true;
+				enemy.SetDestination(player.transform.position, enemy.PursuitSpeed);
 				enemy.SetTarget(player.transform);
 			//	enemy.transform.LookAt(player.transform.position);
 			}

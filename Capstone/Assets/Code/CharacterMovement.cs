@@ -73,8 +73,6 @@ public class CharacterMovement : MonoBehaviour {
 		Vector3 step = Vector3.MoveTowards(current, past, movementSpeed * Time.fixedDeltaTime);
 		agent.Stop();
 
-
-
         Interactable = previous.interactable;
 		this.transform.rigidbody.MovePosition(step);
 
@@ -105,5 +103,9 @@ public class CharacterMovement : MonoBehaviour {
 	public virtual void ClearTarget() {
         targetPosition = this.transform.position;
         hasInteracted = true;
+	}
+
+	public NavMeshAgent GetAgent() {
+		return agent;
 	}
 }
