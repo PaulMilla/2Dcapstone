@@ -17,9 +17,9 @@ public class SoundManagerLevel1 : MonoBehaviour {
 		current = welcome;
 	}
 
-	float rewindTime = 0.0f;
+	//float rewindTime = 0.0f;
+	//bool rewinding = false;
 	float stopTime;
-	bool rewinding = false;
 
 	// Update is called once per frame
 	void Update () {
