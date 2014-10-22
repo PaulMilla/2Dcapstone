@@ -10,6 +10,7 @@ public class RewindManager : MonoBehaviour {
 	void Start () {
 		recordedEvents = new Stack<Position>();
 		isRewinding = false;
+
 	}
 	
 	// Update is called once per frame
@@ -21,6 +22,7 @@ public class RewindManager : MonoBehaviour {
 			GetComponent<EnemyGuard>().movementEnabled = true;
 			GetComponent<EnemyGuard>().offPatrolRoute = true;
 			isRewinding = false;
+			GetComponent<EnemyGuard>().ResetTarget();
 		}
 	}
 
