@@ -14,6 +14,9 @@ public class Footstep : MonoBehaviour {
 	void Update () {
 		if (Input.GetButton ("Rewind")) {
 			sprite.color += new Color(0.0f, 0.0f, 0.0f, fadeRate);
+			if (sprite.color.a > 1) {
+				Destroy(this.gameObject);
+			}
 		} else {
 			sprite.color -= new Color(0.0f, 0.0f, 0.0f, fadeRate);
 		}
