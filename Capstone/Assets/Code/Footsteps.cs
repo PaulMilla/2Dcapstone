@@ -2,31 +2,40 @@
 using System.Collections;
 
 public class Footsteps : MonoBehaviour {
-	static float time;
+	public GameObject footstepPrefab;
+	public float footstepDistances;
+
+	private Vector3 lastFootstep;
+	private bool isRewinding;
 
 	// Use this for initialization
 	void Start () {
-		//TODO: Separate this out better and/or find our previous implementation
-		time = GameTime.gameTime;
+		lastFootstep = Vector3.zero;
+		isRewinding = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(Input.GetButtonDown("Rewind")) {
+			isRewinding = true;
+		}
+		if(Input.GetButtonUp("Rewind")) {
+			isRewinding = false;
+		}
 	}
 
-	public class GameTime {
-		public static float gameTime;
-
-		void Start() {
-			gameTime = 0;
+	void FixedUpdate() {
+		if (isRewinding) {
+			return;
 		}
 
-		void Update() {
-			if(Input.GetButtonDown ("Rewind")) {
-				--gameTime;
-			} else {
-				++gameTime;
-			}
+		if (Vector3.Distance(lastFootstep, transform.position) > footstepDistances) {
+			Vector3 newPosition = this.transform.position;
+			Quaternion newRotation = this.transform.rotation;
+			newRotation.eulerAngles = new Vector3(90, newRotation.eulerAngles.y, newRotation.eulerAngles.z);
+
+			GameObject.Instantiate(footstepPrefab, newPosition, newRotation);
+			lastFootstep = newPosition;
 		}
 	}
 }
