@@ -16,6 +16,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 195: {fileID: 19500000}
   - 81: {fileID: 8100000}
+  - 114: {fileID: 11400006}
   m_Layer: 8
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -1478,7 +1479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0422d152637952444983e94651b5a7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hologramPrefab: {fileID: 100000, guid: 51827a14a3d4ce84396b7bd0c9d194e4, type: 2}
+  hologramPrefab: {fileID: 100028, guid: 51827a14a3d4ce84396b7bd0c9d194e4, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1492,6 +1493,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissolve: 0
   dissolveSpeed: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb9eb635f6254a52b99d31c5a4bcf19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepPrefab: {fileID: 100000, guid: de10ecd549c1f46a5828be65fefd6e0a, type: 2}
+  footstepDistances: 1
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
