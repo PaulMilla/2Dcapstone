@@ -67,7 +67,8 @@ public class EnemyGuard : Activatable {
 
 	public void ResetTarget() {
 		vision.ResetTarget ();
-
+		pausingAfterKill = false;
+		chasing = false;
 	}
 
 	void FixedUpdate () {

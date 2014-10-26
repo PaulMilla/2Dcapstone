@@ -42,9 +42,8 @@ public class RewindManager : MonoBehaviour {
 		Position pastState = recordedEvents.Pop();
 		Vector3 current = this.transform.position;
 		Vector3 past = pastState.position;
-		Vector3 step = Vector3.MoveTowards(current, past, GetComponent<EnemyGuard>().PursuitSpeed * Time.fixedDeltaTime);
 
-		this.transform.rigidbody.MovePosition(step);
+		this.transform.position =  past;
 		this.transform.rotation = pastState.rotation;
 	}
 
