@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300002}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: VisionCone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - 114: {fileID: 11400000}
   m_Layer: 2
   m_Name: EnemySight
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -373,8 +373,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.5060005, y: 1.005, z: -8.2215004}
+  m_LocalRotation: {x: 0, y: .719339788, z: 0, w: .694658399}
+  m_LocalPosition: {x: -2.64157486, y: -.0771484971, z: -1.82619858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -742,9 +742,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultActivated: 1
-  PursuitSpeed: 6
+  PursuitSpeed: 7
   PatrolSpeed: 5
-  path: {fileID: 400006}
+  path: {fileID: 0}
   standingGuard: 1
   offPatrolRoute: 0
   pauseAfterKillTime: 3
@@ -782,7 +782,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .616142273
+  m_Radius: .551959515
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: .150000006, z: 0}
@@ -851,8 +851,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
+  m_Height: 1.85000002
+  m_BaseOffset: .610000014
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1001 &100100000
