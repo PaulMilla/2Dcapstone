@@ -61,7 +61,8 @@ public class PressureButton : MonoBehaviour {
 	}
 	
 	void OnTriggerStay(Collider other) {
-		if (other.gameObject.tag.Equals("Player") || other.gameObject.tag.Equals("Hologram")) {
+		if (other.gameObject.tag.Equals("Player") || other.gameObject.tag.Equals("Hologram")
+		    || other.gameObject.tag.Equals("Enemy") ) {
 			framesSinceLastDetected = 0;
 			Pressed = true;
 		}
