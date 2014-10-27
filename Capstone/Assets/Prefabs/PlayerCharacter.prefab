@@ -16,6 +16,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 195: {fileID: 19500000}
   - 81: {fileID: 8100000}
+  - 114: {fileID: 11400006}
   m_Layer: 8
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -680,7 +681,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.767539978, y: -1.81459999, z: -16.3500004}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .800000012, y: .800000012, z: .800000012}
   m_Children:
   - {fileID: 400144}
   - {fileID: 400078}
@@ -835,7 +836,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100024}
-  m_LocalRotation: {x: .418989003, y: -.0860103294, z: .0310511235, w: .90337491}
+  m_LocalRotation: {x: .418989033, y: -.0860103369, z: .0310511254, w: .90337497}
   m_LocalPosition: {x: 1.22192895e-10, y: .170894906, z: -1.86639398e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1478,7 +1479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0422d152637952444983e94651b5a7e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hologramPrefab: {fileID: 100000, guid: 51827a14a3d4ce84396b7bd0c9d194e4, type: 2}
+  hologramPrefab: {fileID: 100028, guid: 51827a14a3d4ce84396b7bd0c9d194e4, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1492,6 +1493,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissolve: 0
   dissolveSpeed: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb9eb635f6254a52b99d31c5a4bcf19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepPrefab: {fileID: 100000, guid: de10ecd549c1f46a5828be65fefd6e0a, type: 2}
+  footstepDistances: 1
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
