@@ -161,11 +161,10 @@ public class EnemyGuard : Activatable {
 				// We've made it to our waypoint, so choose another one
 				if (this.hasArrivedAt (patrolWaypoints[nextWaypointIndex].position)) {
 					if (nextWaypointIndex >= patrolWaypoints.Length - 1) {
-						patrolDirection = -1;
-					} else if (nextWaypointIndex == 0) {
-						patrolDirection = 1;
+						nextWaypointIndex = 0;
+					} else {
+						nextWaypointIndex++;
 					}
-					nextWaypointIndex = nextWaypointIndex + patrolDirection;
 				}
 				Vector3 positionToGoTo = patrolWaypoints [nextWaypointIndex].position;
 				SetDestination(positionToGoTo, PatrolSpeed);
