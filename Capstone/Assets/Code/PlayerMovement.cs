@@ -7,6 +7,7 @@ public class PlayerMovement : CharacterMovement {
 	public bool Rewind {
 		get { return rewind; }
 		set {
+			hasInteracted = false;
 			rewind = value;
 			if (rewind) {
 				cloneEvents = new Stack<Event>();
