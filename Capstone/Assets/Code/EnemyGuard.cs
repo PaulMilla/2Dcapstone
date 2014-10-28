@@ -16,13 +16,12 @@ public class EnemyGuard : Activatable {
 	NavMeshAgent agent;
 
 	public Transform path;
-	Transform[] patrolWaypoints;
+	Transform[] patrolWaypoints; 
 	public bool standingGuard = false;
 	bool chasing = false;
 
 	// An int to keep track of which direction we are along the patrol route
 	// If 1, we are incrementing our route, we are going backwards
-	private int patrolDirection = 1;
 	public bool offPatrolRoute = false;
 	private int nextWaypointIndex = 0; 
 
@@ -41,7 +40,7 @@ public class EnemyGuard : Activatable {
 	[SerializeField]
 	private float investigateTime = 3.0f;
 	private float investigateTimer = 0.0f;
-
+	
 	protected override void Start() {
 		base.Start();
 		emoticon = GetComponentInChildren<TextMesh> ();
@@ -65,6 +64,18 @@ public class EnemyGuard : Activatable {
 		}
 	}
 
+	public Transform[] GetWaypoints() {
+		return patrolWaypoints;
+	}
+
+	public void SetNextWaypointIndex(int i) {
+		nextWaypointIndex = i;
+	}
+
+	public int GetNextWaypointIndex() {
+		return nextWaypointIndex;
+	}
+
 	public void ResetTarget() {
 		vision.ResetTarget ();
 		pausingAfterKill = false;
@@ -76,6 +87,7 @@ public class EnemyGuard : Activatable {
 		if (rewindingManager.isRewinding) {
 			agent.Stop();
 			vision.ResetTarget();
+
 			return;
 		}
 
@@ -161,11 +173,10 @@ public class EnemyGuard : Activatable {
 				// We've made it to our waypoint, so choose another one
 				if (this.hasArrivedAt (patrolWaypoints[nextWaypointIndex].position)) {
 					if (nextWaypointIndex >= patrolWaypoints.Length - 1) {
-						patrolDirection = -1;
-					} else if (nextWaypointIndex == 0) {
-						patrolDirection = 1;
+						nextWaypointIndex = 0;
+					} else {
+						nextWaypointIndex++;
 					}
-					nextWaypointIndex = nextWaypointIndex + patrolDirection;
 				}
 				Vector3 positionToGoTo = patrolWaypoints [nextWaypointIndex].position;
 				SetDestination(positionToGoTo, PatrolSpeed);
@@ -193,7 +204,7 @@ public class EnemyGuard : Activatable {
 		this.agent.SetDestination (targetPos);
 	}
 
-	bool hasArrivedAt(Vector3 pos) {
+	public bool hasArrivedAt(Vector3 pos) {
 		pos.y = this.transform.position.y;
 		if ((pos - this.transform.position).magnitude == 0) {
 			return true;

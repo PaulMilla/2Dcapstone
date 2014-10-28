@@ -7,7 +7,8 @@ public class Siren : Activatable {
 	private float sustainTime = 2.0f;
 	private float timer;
 
-	void Start() {
+	override protected void Start() {
+		base.Start ();
 		timer = sustainTime;
 	}
 
