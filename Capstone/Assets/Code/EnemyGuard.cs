@@ -16,7 +16,7 @@ public class EnemyGuard : Activatable {
 	NavMeshAgent agent;
 
 	public Transform path;
-	Transform[] patrolWaypoints;
+	Transform[] patrolWaypoints; 
 	public bool standingGuard = false;
 	bool chasing = false;
 
@@ -41,7 +41,7 @@ public class EnemyGuard : Activatable {
 	[SerializeField]
 	private float investigateTime = 3.0f;
 	private float investigateTimer = 0.0f;
-
+	
 	protected override void Start() {
 		base.Start();
 		emoticon = GetComponentInChildren<TextMesh> ();
@@ -65,6 +65,18 @@ public class EnemyGuard : Activatable {
 		}
 	}
 
+	public Transform[] GetWaypoints() {
+		return patrolWaypoints;
+	}
+
+	public void SetNextWaypointIndex(int i) {
+		nextWaypointIndex = i;
+	}
+
+	public int GetNextWaypointIndex() {
+		return nextWaypointIndex;
+	}
+
 	public void ResetTarget() {
 		vision.ResetTarget ();
 		pausingAfterKill = false;
@@ -76,6 +88,7 @@ public class EnemyGuard : Activatable {
 		if (rewindingManager.isRewinding) {
 			agent.Stop();
 			vision.ResetTarget();
+
 			return;
 		}
 
@@ -192,7 +205,7 @@ public class EnemyGuard : Activatable {
 		this.agent.SetDestination (targetPos);
 	}
 
-	bool hasArrivedAt(Vector3 pos) {
+	public bool hasArrivedAt(Vector3 pos) {
 		pos.y = this.transform.position.y;
 		if ((pos - this.transform.position).magnitude == 0) {
 			return true;
