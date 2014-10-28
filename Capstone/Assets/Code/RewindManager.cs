@@ -55,10 +55,7 @@ public class RewindManager : MonoBehaviour {
 		if(recordedEvents.Count == 0 || recordedEvents.Peek() == null)
 			return;
 
-
-
 		Position pastState = recordedEvents.Pop();
-		Vector3 current = this.transform.position;
 		Vector3 past = pastState.position;
 
 		this.transform.position =  past;
