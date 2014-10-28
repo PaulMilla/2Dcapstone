@@ -22,7 +22,6 @@ public class EnemyGuard : Activatable {
 
 	// An int to keep track of which direction we are along the patrol route
 	// If 1, we are incrementing our route, we are going backwards
-	private int patrolDirection = 1;
 	public bool offPatrolRoute = false;
 	private int nextWaypointIndex = 0; 
 
