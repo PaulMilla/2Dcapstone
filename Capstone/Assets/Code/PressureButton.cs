@@ -29,10 +29,19 @@ public class PressureButton : MonoBehaviour {
 
 	[SerializeField]
 	private Activatable[] activatableArray;
+
+	public Transform connectorsParent;
+	private Transform[] connectors;
+	private Color pressedColor = Color.blue;
+	private Color unpressedColor = Color.gray;
+
 	// Use this for initialization
 	void Start () {
 		ButtonSpeed = 1.0f;
 		GameManager.Instance.RoundEnd += Reset;
+		if (connectorsParent != null) {
+			connectors = connectorsParent.GetComponentsInChildren<Transform> ();
+		}
 	}
 	
 	// Update is called once per frame
@@ -57,6 +66,7 @@ public class PressureButton : MonoBehaviour {
 		framesSinceLastDetected++;
 		if (framesSinceLastDetected > 3) {
 				Pressed = false;
+				ChangeColor(unpressedColor);
 		}
 	}
 	
@@ -65,10 +75,23 @@ public class PressureButton : MonoBehaviour {
 		    || other.gameObject.tag.Equals("Enemy") ) {
 			framesSinceLastDetected = 0;
 			Pressed = true;
+
+			ChangeColor(pressedColor);
 		}
 		//StartCoroutine(myOnTriggerStay (other));
 	}
 	void Reset() {
 		Pressed = false;
+	}
+
+	void ChangeColor(Color c) {
+		this.renderer.material.color = c;
+		if (connectors != null) {
+			foreach (Transform connector in connectors) {
+				if (connector.renderer != null) {
+					connector.renderer.material.color = c;							
+				}
+			}			
+		}
 	}
 }
