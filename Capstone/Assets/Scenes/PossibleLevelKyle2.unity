@@ -3809,6 +3809,10 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1497651231}
+    - target: {fileID: 11400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: nextLevelName
+      value: PaulLevel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
   m_RootGameObject: {fileID: 1774028672}
@@ -25500,8 +25504,6 @@ GameObject:
   - 124: {fileID: 1774028680}
   - 92: {fileID: 1774028679}
   - 114: {fileID: 1774028678}
-  - 114: {fileID: 1774028677}
-  - 114: {fileID: 1774028676}
   - 114: {fileID: 1774028675}
   - 114: {fileID: 1774028674}
   m_Layer: 0
@@ -25554,32 +25556,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1497651231}
   smoothing: 5
---- !u!114 &1774028676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 0d48c7fa1d40c49ef8baf1284bf4725e,
-    type: 2}
-  m_PrefabInternal: {fileID: 252919466}
-  m_GameObject: {fileID: 1774028672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c3c578c1a5cb1468ba2e576acf6d0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementSpeed: .300000012
---- !u!114 &1774028677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 0d48c7fa1d40c49ef8baf1284bf4725e,
-    type: 2}
-  m_PrefabInternal: {fileID: 252919466}
-  m_GameObject: {fileID: 1774028672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8622e4a628ab3435780a712d05676f94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flarePrefab: {fileID: 12300000, guid: 34999918ce26f4a3998304ba9569c4ed, type: 2}
 --- !u!114 &1774028678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25592,7 +25568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed06b7b49af29b84a9081d7472d9f305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelName: __tutorial_scene
+  nextLevelName: PaulLevel
   hologramLimit: 0
 --- !u!92 &1774028679
 Behaviour:

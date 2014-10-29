@@ -6298,7 +6298,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da0eb66f1f0e6ce45a27e4d577389554, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -16122,7 +16122,7 @@ MonoBehaviour:
   PursuitSpeed: 7
   PatrolSpeed: 5
   path: {fileID: 0}
-  standingGuard: 1
+  standingGuard: 0
   offPatrolRoute: 0
   pauseAfterKillTime: 3
   investigateTime: 3
@@ -16143,7 +16143,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.85000002
+  m_Height: 2
   m_BaseOffset: .899999976
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -16173,10 +16173,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .551959515
-  m_Height: 2
+  m_Radius: .398410946
+  m_Height: 2.37638903
   m_Direction: 1
-  m_Center: {x: 0, y: .150000006, z: 0}
+  m_Center: {x: 0, y: .300000012, z: 0}
 --- !u!33 &427655180
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -19470,7 +19470,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da0eb66f1f0e6ce45a27e4d577389554, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -23106,7 +23106,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da0eb66f1f0e6ce45a27e4d577389554, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -26164,7 +26164,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da0eb66f1f0e6ce45a27e4d577389554, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -40094,7 +40094,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da0eb66f1f0e6ce45a27e4d577389554, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -41782,7 +41782,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da0eb66f1f0e6ce45a27e4d577389554, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -41882,7 +41882,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.85000002
+  m_Height: 2
   m_BaseOffset: .639999986
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -41912,10 +41912,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .551959515
-  m_Height: 2
+  m_Radius: .398410946
+  m_Height: 2.37638903
   m_Direction: 1
-  m_Center: {x: 0, y: .150000006, z: 0}
+  m_Center: {x: 0, y: .300000012, z: 0}
 --- !u!33 &1115078260
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -51749,6 +51749,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: nextLevelName
+      value: PaulLevel2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
   m_RootGameObject: {fileID: 1597338049}
@@ -52944,7 +52948,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da0eb66f1f0e6ce45a27e4d577389554, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -58242,8 +58246,6 @@ GameObject:
   - 124: {fileID: 1597338056}
   - 92: {fileID: 1597338055}
   - 114: {fileID: 1597338054}
-  - 114: {fileID: 1597338053}
-  - 114: {fileID: 1597338052}
   - 114: {fileID: 1597338051}
   - 114: {fileID: 1597338050}
   - 114: {fileID: 1597338059}
@@ -58285,32 +58287,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1875076051}
   smoothing: 5
---- !u!114 &1597338052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 0d48c7fa1d40c49ef8baf1284bf4725e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1379373287}
-  m_GameObject: {fileID: 1597338049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c3c578c1a5cb1468ba2e576acf6d0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementSpeed: .300000012
---- !u!114 &1597338053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 0d48c7fa1d40c49ef8baf1284bf4725e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1379373287}
-  m_GameObject: {fileID: 1597338049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8622e4a628ab3435780a712d05676f94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flarePrefab: {fileID: 12300000, guid: 34999918ce26f4a3998304ba9569c4ed, type: 2}
 --- !u!114 &1597338054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58323,7 +58299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed06b7b49af29b84a9081d7472d9f305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelName: __tutorial_scene
+  nextLevelName: PaulLevel2
   hologramLimit: 0
 --- !u!92 &1597338055
 Behaviour:
@@ -67291,7 +67267,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da0eb66f1f0e6ce45a27e4d577389554, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

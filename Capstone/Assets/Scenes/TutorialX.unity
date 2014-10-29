@@ -2474,8 +2474,6 @@ GameObject:
   - 124: {fileID: 152833081}
   - 92: {fileID: 152833080}
   - 114: {fileID: 152833078}
-  - 114: {fileID: 152833077}
-  - 114: {fileID: 152833076}
   - 114: {fileID: 152833075}
   - 114: {fileID: 152833079}
   m_Layer: 0
@@ -2499,32 +2497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1240698687}
   smoothing: 5
---- !u!114 &152833076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 0d48c7fa1d40c49ef8baf1284bf4725e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1803153417}
-  m_GameObject: {fileID: 152833074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c3c578c1a5cb1468ba2e576acf6d0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementSpeed: .300000012
---- !u!114 &152833077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 0d48c7fa1d40c49ef8baf1284bf4725e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1803153417}
-  m_GameObject: {fileID: 152833074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8622e4a628ab3435780a712d05676f94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flarePrefab: {fileID: 12300000, guid: 34999918ce26f4a3998304ba9569c4ed, type: 2}
 --- !u!114 &152833078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2537,7 +2509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed06b7b49af29b84a9081d7472d9f305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelName: Level01
+  nextLevelName: XiliLevel
   hologramLimit: 0
 --- !u!114 &152833079
 MonoBehaviour:
@@ -2611,7 +2583,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
   m_PrefabInternal: {fileID: 1803153417}
   m_GameObject: {fileID: 152833074}
-  m_LocalRotation: {x: .258572698, y: .0421330929, z: -.0112895276, w: .965006471}
+  m_LocalRotation: {x: .258572727, y: .0421330966, z: -.0112895286, w: .96500653}
   m_LocalPosition: {x: 3.79999995, y: 10, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5882,8 +5854,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.85000002
-  m_BaseOffset: .610000014
+  m_Height: 2
+  m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &371487526
@@ -5912,10 +5884,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .551959515
-  m_Height: 2
+  m_Radius: .398410946
+  m_Height: 2.37638903
   m_Direction: 1
-  m_Center: {x: 0, y: .150000006, z: 0}
+  m_Center: {x: 0, y: .300000012, z: 0}
 --- !u!33 &371487528
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -23954,6 +23926,7 @@ MonoBehaviour:
   ButtonSpeed: 1
   activatableArray:
   - {fileID: 746195874}
+  connectorsParent: {fileID: 0}
 --- !u!23 &1625726394
 Renderer:
   m_ObjectHideFlags: 0
@@ -24216,6 +24189,7 @@ MonoBehaviour:
   ButtonSpeed: 1
   activatableArray:
   - {fileID: 987336581}
+  connectorsParent: {fileID: 0}
 --- !u!23 &1645042578
 Renderer:
   m_ObjectHideFlags: 0
@@ -26715,7 +26689,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: nextLevelName
-      value: Level01
+      value: XiliLevel
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: orthographic
@@ -30668,8 +30642,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.85000002
-  m_BaseOffset: .610000014
+  m_Height: 2
+  m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!54 &2103440289
@@ -30698,10 +30672,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .551959515
-  m_Height: 2
+  m_Radius: .398410946
+  m_Height: 2.37638903
   m_Direction: 1
-  m_Center: {x: 0, y: .150000006, z: 0}
+  m_Center: {x: 0, y: .300000012, z: 0}
 --- !u!33 &2103440291
 MeshFilter:
   m_ObjectHideFlags: 0
