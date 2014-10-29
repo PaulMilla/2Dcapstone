@@ -7,6 +7,7 @@ public class CharacterStatus : MonoBehaviour {
 
 	public bool dissolve = false;
 	Animator animator;
+	private Vector3 deathPosition;
 
 	SkinnedMeshRenderer meshRenderer;
 	// Use this for initialization
@@ -17,6 +18,9 @@ public class CharacterStatus : MonoBehaviour {
 	}
 
 	void Update() {
+		if (isDead) {
+			transform.position = deathPosition;
+		}
 		if (Input.GetButtonDown("Rewind")) {
 			if (isDead) {
 				Time.timeScale = 1.0f;
@@ -44,6 +48,7 @@ public class CharacterStatus : MonoBehaviour {
 			return;
 		}
 		characterMovement.StopMovement();
+		deathPosition = transform.position;
 		isDead = true;
 		if (characterMovement is PlayerMovement) {
 				Time.timeScale = 0f;
