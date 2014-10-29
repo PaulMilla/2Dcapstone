@@ -6,16 +6,21 @@ public class CharacterStatus : MonoBehaviour {
 	public bool isDead { get; private set; }
 
 	public bool dissolve = false;
-
+	Animator animator;
+	private Vector3 deathPosition;
 
 	SkinnedMeshRenderer meshRenderer;
 	// Use this for initialization
 	void Start() {
 		characterMovement = GetComponent<CharacterMovement>();
+		animator = GetComponent<Animator>();
 		meshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
 	}
 
 	void Update() {
+		if (isDead) {
+			transform.position = deathPosition;
+		}
 		if (Input.GetButtonDown("Rewind")) {
 			if (isDead) {
 				Time.timeScale = 1.0f;
@@ -43,6 +48,7 @@ public class CharacterStatus : MonoBehaviour {
 			return;
 		}
 		characterMovement.StopMovement();
+		deathPosition = transform.position;
 		isDead = true;
 		if (characterMovement is PlayerMovement) {
 				Time.timeScale = 0f;
@@ -55,6 +61,7 @@ public class CharacterStatus : MonoBehaviour {
 
 	IEnumerator Die(float killTime) {
 		dissolve = true;
+		animator.SetBool("Dead", true);
 		yield return new WaitForSeconds(killTime);
 		GetKilled();
 		yield return null;
