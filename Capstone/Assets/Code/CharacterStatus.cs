@@ -6,12 +6,13 @@ public class CharacterStatus : MonoBehaviour {
 	public bool isDead { get; private set; }
 
 	public bool dissolve = false;
-
+	Animator animator;
 
 	SkinnedMeshRenderer meshRenderer;
 	// Use this for initialization
 	void Start() {
 		characterMovement = GetComponent<CharacterMovement>();
+		animator = GetComponent<Animator>();
 		meshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
 	}
 
@@ -55,6 +56,7 @@ public class CharacterStatus : MonoBehaviour {
 
 	IEnumerator Die(float killTime) {
 		dissolve = true;
+		animator.SetBool("Dead", true);
 		yield return new WaitForSeconds(killTime);
 		GetKilled();
 		yield return null;
