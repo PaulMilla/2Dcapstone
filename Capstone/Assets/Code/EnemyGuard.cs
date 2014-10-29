@@ -109,7 +109,6 @@ public class EnemyGuard : Activatable {
 	}
 
 	void Investigate() {
-		Debug.Log ("Investigate");
 		if (hasArrivedAt(lastSeenPosition)) {
 			// We arrived at the last spot we saw the player
 			if (investigateTimer >= investigateTime) {
@@ -128,7 +127,6 @@ public class EnemyGuard : Activatable {
 	}
 
 	void Chase() {
-		Debug.Log ("Chase");
 		emoticon.text = "Chase!!!!";
 		chasing = true;
 		offPatrolRoute = true;
