@@ -40,9 +40,20 @@ public class EnemyGuard : Activatable {
 	[SerializeField]
 	private float investigateTime = 3.0f;
 	private float investigateTimer = 0.0f;
-	
+
+	private const string ANIMATION_NUMBER_STRING = "AnimationNumber";
+	enum AnimationNumber {
+		Idle,
+		Patrolling,
+		Chasing, 
+		Confused
+	}
+
+	private Animator animator;
+
 	protected override void Start() {
 		base.Start();
+		animator = GetComponent<Animator>();
 		emoticon = GetComponentInChildren<TextMesh> ();
 		agent = GetComponent<NavMeshAgent> ();
 		movementEnabled = true;
@@ -56,11 +67,11 @@ public class EnemyGuard : Activatable {
 		// Fix the y axis of the waypoint to our y position
 
 		if (!standingGuard) {
-				patrolWaypoints = path.GetComponentsInChildren<Transform> ();
-				foreach (Transform waypoint in patrolWaypoints) {
-						Vector3 fixedPos = waypoint.position;
-						waypoint.position = fixedPos;
-				}
+			patrolWaypoints = path.GetComponentsInChildren<Transform> ();
+			foreach (Transform waypoint in patrolWaypoints) {
+				Vector3 fixedPos = waypoint.position;
+				waypoint.position = fixedPos;
+			}
 		}
 	}
 
@@ -83,11 +94,9 @@ public class EnemyGuard : Activatable {
 	}
 
 	void FixedUpdate () {
-
 		if (rewindingManager.isRewinding) {
 			agent.Stop();
 			vision.ResetTarget();
-
 			return;
 		}
 
@@ -111,6 +120,7 @@ public class EnemyGuard : Activatable {
 	void Investigate() {
 		if (hasArrivedAt(lastSeenPosition)) {
 			// We arrived at the last spot we saw the player
+			this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Confused);
 			if (investigateTimer >= investigateTime) {
 				chasing = false;
 				investigateTimer = 0.0f;
@@ -120,6 +130,7 @@ public class EnemyGuard : Activatable {
 			}
 		} else {
 			// We haven't reached the spot where we last saw the player
+			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Chasing);
 			emoticon.text = "Investigating";
 			investigateTimer = 0.0f;
 			SetDestination(lastSeenPosition, PursuitSpeed);
@@ -128,6 +139,7 @@ public class EnemyGuard : Activatable {
 
 	void Chase() {
 		emoticon.text = "Chase!!!!";
+		this.animator.SetInteger (ANIMATION_NUMBER_STRING, (int)AnimationNumber.Chasing); 
 		chasing = true;
 		offPatrolRoute = true;
 		lastSeenPosition = vision.GetTarget ().position;
@@ -144,11 +156,13 @@ public class EnemyGuard : Activatable {
 				// If the guard isn't at his station, go to it
 				if (!hasArrivedAt(initialPosition)) {
 					// Setting in motion
+					this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
 					SetDestination(initialPosition, PatrolSpeed);
 					return;
 				}
 				// We are already at our position, so face the right way
 				else {
+					this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Idle);
 					this.agent.Stop ();
 					this.transform.rotation = initialRotation;
 					return;
@@ -177,12 +191,14 @@ public class EnemyGuard : Activatable {
 					}
 				}
 				Vector3 positionToGoTo = patrolWaypoints [nextWaypointIndex].position;
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
 				SetDestination(positionToGoTo, PatrolSpeed);
 			}
 		}
 		// PAUSING AFTER KILLING THE ENEMY
 		else {
 			emoticon.text = "Hahaha :)";
+			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Confused);
 			if (pauseAfterKillTimer >= pauseAfterKillTime) {
 				pausingAfterKill = false;
 				pauseAfterKillTimer = 0.0f;
