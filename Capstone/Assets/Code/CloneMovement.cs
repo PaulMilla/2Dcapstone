@@ -39,4 +39,8 @@ public class CloneMovement : CharacterMovement {
 		yield return new WaitForSeconds(1);
 		Destroy(gameObject);
 	}
+
+	void PlayFootstepSound() {
+		// Play hologram footstep
+	}
 }
