@@ -50,7 +50,9 @@ public class EnemyGuard : Activatable {
 	}
 
 	private Transform soundBank;
-	private AudioSource alertSoundEffect;
+	private AudioSource soundEffectAlert;
+	private AudioSource soundEffectMotor;
+	private AudioSource soundEffectMotorStart;
 
 	private Animator animator;
 
@@ -58,7 +60,10 @@ public class EnemyGuard : Activatable {
 		base.Start();
 
 		soundBank = this.transform.FindChild ("SoundBank");
-		alertSoundEffect = soundBank.FindChild ("Alert").GetComponent<AudioSource> ();
+		soundEffectAlert = soundBank.FindChild ("Alert").GetComponent<AudioSource> ();
+		soundEffectMotor = soundBank.FindChild ("Motor").GetComponent<AudioSource> ();
+		soundEffectMotorStart = soundBank.FindChild ("MotorStart").GetComponent<AudioSource> ();
+		soundEffectMotor.Play (); // To avoid th annoying PlayOnAwake
 
 		animator = GetComponent<Animator>();
 		emoticon = GetComponentInChildren<TextMesh> ();
@@ -105,7 +110,7 @@ public class EnemyGuard : Activatable {
 			agent.Stop();
 			vision.ResetTarget();
 			return;
-		}
+		} 
 
 		if (!Activated || !movementEnabled) {
 			return;
@@ -122,6 +127,15 @@ public class EnemyGuard : Activatable {
 		else {
 			Patrol();
 		}
+
+		UpdateMotorSound ();
+	}
+
+	void UpdateMotorSound() {
+		// Volume and Pitch double if guard is in pursuit
+		float maxValue = this.agent.speed == PatrolSpeed ? 1.0f : 2.0f;
+		this.soundEffectMotor.volume = map(agent.velocity.magnitude, 0.0f, this.agent.speed, 0.0f, maxValue);
+		this.soundEffectMotor.pitch = map(agent.velocity.magnitude, 0.0f, this.agent.speed, 0.0f, maxValue);
 	}
 
 	void Investigate() {
@@ -178,6 +192,7 @@ public class EnemyGuard : Activatable {
 			// The guard has a path, so follow it
 			else {
 				// Guard is off route from chasing the player and needs to pick a point to return to
+
 				if (offPatrolRoute) {
 					offPatrolRoute = false;
 					// Find the nearest position in the Patrol Route and go there
@@ -191,6 +206,7 @@ public class EnemyGuard : Activatable {
 				}
 				// We've made it to our waypoint, so choose another one
 				if (this.hasArrivedAt (patrolWaypoints[nextWaypointIndex].position)) {
+					soundEffectMotorStart.Play();
 					if (nextWaypointIndex >= patrolWaypoints.Length - 1) {
 						nextWaypointIndex = 0;
 					} else {
@@ -267,6 +283,11 @@ public class EnemyGuard : Activatable {
 	}
 
 	public void playSoundAlert() {
-		alertSoundEffect.Play ();
+		soundEffectAlert.Play ();
+	}
+
+	float map(float s, float a1, float a2, float b1, float b2)
+	{
+		return b1 + (s-a1)*(b2-b1)/(a2-a1);
 	}
 }
