@@ -10,7 +10,7 @@ public class EnergyDoor : Door
 	AudioSource audioActivate;
 	AudioSource audioDeactivate;
 
-	void Start() {
+	void Awake() {
 		audioActivate = transform.Find ("AudioActivate").gameObject.GetComponent<AudioSource> ();
 		audioDeactivate = transform.Find ("AudioDeactivate").gameObject.GetComponent<AudioSource> ();
 	}
