@@ -42,13 +42,17 @@ public class EnemyVision : MonoBehaviour {
 					if (target != null) {
 						// Already have a target, switch if new target is closer
 						if (direction.magnitude < (other.transform.position - Enemy.transform.position).magnitude) {
+							// New Target!!
 							target = other.transform;
 							targetStatus = target.GetComponent<CharacterStatus>();
+							Enemy.playSoundAlert();
 						}
 					}
 					else {
+						// New Target!!
 						target = other.transform;
 						targetStatus = target.GetComponent<CharacterStatus>();
+						Enemy.playSoundAlert();
 					}
 				} else if (other.transform.Equals(target)) {
 					target = null;
