@@ -30,7 +30,6 @@ public class Footsteps : MonoBehaviour {
 	void PlayFootstepSound() {
 		audioFootstep.pitch = Random.Range (0.6f, 1.0f);;
 		audioFootstep.Play ();
-		Debug.Log ("Play Footstep Sound");
 	}
 
 	void FixedUpdate() {
