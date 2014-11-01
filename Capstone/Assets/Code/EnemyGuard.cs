@@ -49,10 +49,17 @@ public class EnemyGuard : Activatable {
 		Confused
 	}
 
+	private Transform soundBank;
+	private AudioSource alertSoundEffect;
+
 	private Animator animator;
 
 	protected override void Start() {
 		base.Start();
+
+		soundBank = this.transform.FindChild ("SoundBank");
+		alertSoundEffect = soundBank.FindChild ("Alert").GetComponent<AudioSource> ();
+
 		animator = GetComponent<Animator>();
 		emoticon = GetComponentInChildren<TextMesh> ();
 		agent = GetComponent<NavMeshAgent> ();
@@ -257,5 +264,9 @@ public class EnemyGuard : Activatable {
 			}
 		}
 		return false;
+	}
+
+	public void playSoundAlert() {
+		alertSoundEffect.Play ();
 	}
 }
