@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerMovement : CharacterMovement {
+	
 	public Stack<Event> cloneEvents {get; private set;}
 	public bool Rewind {
 		get { return rewind; }
@@ -16,6 +17,7 @@ public class PlayerMovement : CharacterMovement {
 			}
 		}
 	}
+
 
 	/* Inherited from CharacterMovement */
 	/* overrive protected void Move() */
