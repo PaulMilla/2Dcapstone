@@ -53,6 +53,7 @@ public class EnemyGuard : Activatable {
 	private AudioSource soundEffectAlert;
 	private AudioSource soundEffectMotor;
 	private AudioSource soundEffectMotorStart;
+	private AudioSource[] soundDialoguesSeesPlayer;
 
 	private Animator animator;
 
@@ -63,7 +64,9 @@ public class EnemyGuard : Activatable {
 		soundEffectAlert = soundBank.FindChild ("Alert").GetComponent<AudioSource> ();
 		soundEffectMotor = soundBank.FindChild ("Motor").GetComponent<AudioSource> ();
 		soundEffectMotorStart = soundBank.FindChild ("MotorStart").GetComponent<AudioSource> ();
-		soundEffectMotor.Play (); // To avoid th annoying PlayOnAwake
+		soundDialoguesSeesPlayer = soundBank.FindChild ("SeesPlayer").GetComponents<AudioSource> ();
+
+		soundEffectMotor.Play ();
 
 		animator = GetComponent<Animator>();
 		emoticon = GetComponentInChildren<TextMesh> ();
@@ -284,6 +287,12 @@ public class EnemyGuard : Activatable {
 
 	public void playSoundAlert() {
 		soundEffectAlert.Play ();
+	}
+
+	public void playSoundSeesPlayer() {
+		int randomIndex = Random.Range (0, soundDialoguesSeesPlayer.Length - 1);
+		soundDialoguesSeesPlayer [randomIndex].Play ();
+		playSoundAlert ();
 	}
 
 	float map(float s, float a1, float a2, float b1, float b2)
