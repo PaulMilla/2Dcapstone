@@ -54,6 +54,8 @@ public class EnemyGuard : Activatable {
 	private AudioSource soundEffectMotor;
 	private AudioSource soundEffectMotorStart;
 	private AudioSource[] soundDialoguesSeesPlayer;
+	private AudioSource[] soundDialoguesBackToPatrol;
+	private AudioSource[] soundDialoguesInvestigate;
 
 	private Animator animator;
 
@@ -65,6 +67,8 @@ public class EnemyGuard : Activatable {
 		soundEffectMotor = soundBank.FindChild ("Motor").GetComponent<AudioSource> ();
 		soundEffectMotorStart = soundBank.FindChild ("MotorStart").GetComponent<AudioSource> ();
 		soundDialoguesSeesPlayer = soundBank.FindChild ("SeesPlayer").GetComponents<AudioSource> ();
+		soundDialoguesBackToPatrol = soundBank.FindChild ("ReturnToPatrol").GetComponents<AudioSource> ();
+		soundDialoguesInvestigate = soundBank.FindChild ("Investigating").GetComponents<AudioSource> ();
 
 		soundEffectMotor.Play ();
 
@@ -144,10 +148,16 @@ public class EnemyGuard : Activatable {
 	void Investigate() {
 		if (hasArrivedAt(lastSeenPosition)) {
 			// We arrived at the last spot we saw the player
+
+			// This is the first iteration that we are in investigate mode
+			if (investigateTimer == 0.0f) {
+				playSoundInvestigating();
+			}
 			this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Confused);
 			if (investigateTimer >= investigateTime) {
 				chasing = false;
 				investigateTimer = 0.0f;
+				playSoundBackToPatrol();
 			} else {
 				emoticon.text = "?";
 				investigateTimer += Time.deltaTime;
@@ -295,8 +305,17 @@ public class EnemyGuard : Activatable {
 		playSoundAlert ();
 	}
 
-	float map(float s, float a1, float a2, float b1, float b2)
-	{
+	public void playSoundBackToPatrol() {
+		int randomIndex = Random.Range (0, soundDialoguesBackToPatrol.Length - 1);
+		soundDialoguesBackToPatrol [randomIndex].Play ();
+	}
+
+	public void playSoundInvestigating() {
+		int randomIndex = Random.Range (0, soundDialoguesInvestigate.Length - 1);
+		soundDialoguesInvestigate [randomIndex].Play ();
+	}
+
+	float map(float s, float a1, float a2, float b1, float b2) {
 		return b1 + (s-a1)*(b2-b1)/(a2-a1);
 	}
 }
