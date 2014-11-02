@@ -45,14 +45,14 @@ public class EnemyVision : MonoBehaviour {
 							// New Target!!
 							target = other.transform;
 							targetStatus = target.GetComponent<CharacterStatus>();
-							Enemy.playSoundAlert();
+							Enemy.playSoundSeesPlayer();
 						}
 					}
 					else {
 						// New Target!!
 						target = other.transform;
 						targetStatus = target.GetComponent<CharacterStatus>();
-						Enemy.playSoundAlert();
+						Enemy.playSoundSeesPlayer();
 					}
 				} else if (other.transform.Equals(target)) {
 					target = null;
