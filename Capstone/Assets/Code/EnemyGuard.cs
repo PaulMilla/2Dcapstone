@@ -120,9 +120,12 @@ public class EnemyGuard : Activatable {
 		UpdateMotorSound();
 	}
 
+
+	float maxValPatrol = 0.5f;
+	float maxValPursuit = 1.0f;
 	void UpdateMotorSound() {
 		// Volume and Pitch double if guard is in pursuit
-		float maxValue = this.agent.speed == PatrolSpeed ? 1.0f : 2.0f;
+		float maxValue = this.agent.speed == PatrolSpeed ? maxValPatrol : maxValPursuit;
 		this.soundEffectMotor.volume = map(agent.velocity.magnitude, 0.0f, this.agent.speed, 0.0f, maxValue);
 		this.soundEffectMotor.pitch = map(agent.velocity.magnitude, 0.0f, this.agent.speed, 0.0f, maxValue);
 	}
@@ -238,7 +241,7 @@ public class EnemyGuard : Activatable {
 
 	public bool hasArrivedAt(Vector3 pos) {
 		pos.y = this.transform.position.y;
-		if ((pos - this.transform.position).magnitude == 0) {
+		if ((pos - this.transform.position).magnitude <= 0.01f) {
 			return true;
 		}
 		return false;
