@@ -7,8 +7,6 @@ public class RewindManager : MonoBehaviour {
 	public bool isRewinding;
 	EnemyGuard guard;
 
-	int nextWaypointIndex;
-
 	// Use this for initialization
 	void Start () {
 		guard = GetComponent<EnemyGuard> ();
