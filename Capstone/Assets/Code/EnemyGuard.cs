@@ -6,7 +6,6 @@ using System.Collections;
 // But since the AI is simple, we might not need to do that
 
 public class EnemyGuard : Activatable {
-
 	EnemyVision vision;
 	Vector3 lastSeenPosition;
 
@@ -28,7 +27,7 @@ public class EnemyGuard : Activatable {
 	Vector3 initialPosition;
 	Quaternion initialRotation;
 
-	RewindManager rewindingManager;
+	//RewindManager rewindingManager;
 
 	public float pauseAfterKillTime = 3.0f;
 	public bool movementEnabled {get; set;}
@@ -77,7 +76,7 @@ public class EnemyGuard : Activatable {
 		agent = GetComponent<NavMeshAgent> ();
 		movementEnabled = true;
 		vision = GetComponentInChildren<EnemyVision> ();
-		rewindingManager = GetComponent<RewindManager> ();
+		//rewindingManager = GetComponent<RewindManager> ();
 
 		//characterMovement = GetComponent<characterMovement> ();
 		initialRotation = this.transform.rotation;
@@ -107,19 +106,18 @@ public class EnemyGuard : Activatable {
 	}
 
 	public void ResetTarget() {
-		vision.ResetTarget ();
+		vision.ResetTarget();
 		pausingAfterKill = false;
 		chasing = false;
 	}
 
 	void FixedUpdate () {
-		if (rewindingManager.isRewinding) {
+		checkPatrolRoute();
+
+		// Implies that we are being moved by some other force (Rewinding, etc)
+		if (!Activated || !movementEnabled) {
 			agent.Stop();
 			vision.ResetTarget();
-			return;
-		} 
-
-		if (!Activated || !movementEnabled) {
 			return;
 		}
 
@@ -317,5 +315,35 @@ public class EnemyGuard : Activatable {
 
 	float map(float s, float a1, float a2, float b1, float b2) {
 		return b1 + (s-a1)*(b2-b1)/(a2-a1);
+	}
+
+
+	private int GetNextWaypoint() {
+		return (++nextWaypointIndex) % patrolWaypoints.Length;
+	}
+
+	private int GetPreviousWaypoint() {
+		if (nextWaypointIndex - 1 < 0)
+			return patrolWaypoints.Length;
+		else
+			return nextWaypointIndex - 1;
+	}
+
+	private void checkPatrolRoute() {
+		Vector3 NextWaypoint = patrolWaypoints[nextWaypointIndex].position;
+		NextWaypoint.y = this.transform.position.y;
+		if ((NextWaypoint - this.transform.position).magnitude == 0) {
+			nextWaypointIndex = (movementEnabled) ? GetNextWaypoint() : GetPreviousWaypoint();
+		}
+	}
+
+	public void preRewind() {
+		movementEnabled = false;
+	}
+
+	public void postRewind() {
+		movementEnabled = true;
+		ResetTarget();
+		SetNextWaypointIndex(nextWaypointIndex);
 	}
 }
