@@ -9,7 +9,7 @@ public class RewindManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		guard = GetComponent<EnemyGuard> ();
+		guard = GetComponent<EnemyGuard>();
 		recordedEvents = new Stack<Position>();
 		isRewinding = false;
 

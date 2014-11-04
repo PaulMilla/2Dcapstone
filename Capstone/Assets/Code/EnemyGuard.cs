@@ -94,10 +94,12 @@ public class EnemyGuard : Activatable {
 	}
 
 	void FixedUpdate () {
-		checkPatrolRoute();
-
 		// Implies that we are being moved by some other force (RewindManager, etc)
 		if (!Activated || !movementEnabled) {
+			if (hasArrivedAt(GetPreviousWaypoint())) {
+				if(--targetWaypoint < 0)
+					targetWaypoint = patrolWaypoints.Length-1;
+			}
 			agent.Stop();
 			return;
 		}
@@ -124,13 +126,13 @@ public class EnemyGuard : Activatable {
 	}
 
 	void Investigate() {
+		// We arrived at the last spot we saw the player
 		if (hasArrivedAt(lastSeenPosition)) {
-			// We arrived at the last spot we saw the player
-
 			// This is the first iteration that we are in investigate mode
 			if (investigateTimer == 0.0f) {
 				playSoundInvestigating();
 			}
+
 			this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Confused);
 			if (investigateTimer >= investigateTime) {
 				chasing = false;
@@ -209,6 +211,7 @@ public class EnemyGuard : Activatable {
 				}
 			}
 			// We've made it to our waypoint, so choose another one
+			Debug.Log (targetWaypoint);
 			if (this.hasArrivedAt (patrolWaypoints[targetWaypoint].position)) {
 				soundEffectMotorStart.Play();
 				if (targetWaypoint >= patrolWaypoints.Length - 1) {
@@ -300,22 +303,14 @@ public class EnemyGuard : Activatable {
 
 
 	private int GetNextWaypoint() {
-		return (++targetWaypoint) % patrolWaypoints.Length;
+		return (targetWaypoint+1) % patrolWaypoints.Length;
 	}
 
-	private int GetPreviousWaypoint() {
+	private Vector3 GetPreviousWaypoint() {
 		if (targetWaypoint - 1 < 0)
-			return patrolWaypoints.Length;
+			return patrolWaypoints[patrolWaypoints.Length - 1].position;
 		else
-			return targetWaypoint - 1;
-	}
-
-	private void checkPatrolRoute() {
-		Vector3 NextWaypoint = patrolWaypoints[targetWaypoint].position;
-		NextWaypoint.y = this.transform.position.y;
-		if (Vector3.Distance(NextWaypoint, this.transform.position) <= 0.1f) {
-			targetWaypoint = (movementEnabled) ? GetNextWaypoint() : GetPreviousWaypoint();
-		}
+			return patrolWaypoints[targetWaypoint - 1].position;
 	}
 
 	public void preRewind() {
