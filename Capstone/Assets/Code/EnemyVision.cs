@@ -61,9 +61,6 @@ public class EnemyVision : MonoBehaviour {
 
 	void OnTriggerExit (Collider other)
 	{
-		if (Input.GetKey(KeyCode.Space)) {
-			return;
-		}
 		// If the target leaves the trigger zone...
 		if(other.gameObject.transform.Equals(target)) {
 			target = null;
@@ -83,9 +80,4 @@ public class EnemyVision : MonoBehaviour {
 		target = t;
 		targetStatus = t.GetComponent<CharacterStatus> ();
 	}
-
-	public void ResetTarget() {
-		target = null;
-	}
-
 }

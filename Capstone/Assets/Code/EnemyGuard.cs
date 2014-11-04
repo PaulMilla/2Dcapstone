@@ -93,19 +93,12 @@ public class EnemyGuard : Activatable {
 		}
 	}
 
-	public void ResetTarget() {
-		vision.ResetTarget();
-		pausingAfterKill = false;
-		chasing = false;
-	}
-
 	void FixedUpdate () {
 		checkPatrolRoute();
 
 		// Implies that we are being moved by some other force (RewindManager, etc)
 		if (!Activated || !movementEnabled) {
 			agent.Stop();
-			vision.ResetTarget();
 			return;
 		}
 
@@ -166,58 +159,8 @@ public class EnemyGuard : Activatable {
 	}
 
 	void Patrol() {
-		// If the guard is standing guard, just go to the initial position
-		if (!pausingAfterKill) {
-			emoticon.text = "Patrolling";
-			this.agent.speed = PatrolSpeed;
-			if (standingGuard) {
-				offPatrolRoute = false;
-				// If the guard isn't at his station, go to it
-				if (!hasArrivedAt(initialPosition)) {
-					// Setting in motion
-					this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
-					SetDestination(initialPosition, PatrolSpeed);
-					return;
-				}
-				// We are already at our position, so face the right way
-				else {
-					this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Idle);
-					this.agent.Stop ();
-					this.transform.rotation = initialRotation;
-					return;
-				}	
-			}
-			// The guard has a path, so follow it
-			else {
-				// Guard is off route from chasing the player and needs to pick a point to return to
-
-				if (offPatrolRoute) {
-					offPatrolRoute = false;
-					// Find the nearest position in the Patrol Route and go there
-					float shortestDistance = Mathf.Infinity;
-					for (int i = 0; i < patrolWaypoints.Length; i++) {
-						if ((patrolWaypoints [i].position - this.transform.position).magnitude < shortestDistance) {
-							targetWaypoint = i;
-							shortestDistance = (patrolWaypoints [i].position - this.transform.position).magnitude;
-						}
-					}
-				}
-				// We've made it to our waypoint, so choose another one
-				if (this.hasArrivedAt (patrolWaypoints[targetWaypoint].position)) {
-					soundEffectMotorStart.Play();
-					if (targetWaypoint >= patrolWaypoints.Length - 1) {
-						targetWaypoint = 0;
-					} else {
-						targetWaypoint++;
-					}
-				}
-				Vector3 positionToGoTo = patrolWaypoints [targetWaypoint].position;
-				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
-				SetDestination(positionToGoTo, PatrolSpeed);
-			}
-		}
-		// PAUSING AFTER KILLING THE ENEMY
-		else {
+		// PAUSE AFTER KILLING THE ENEMY
+		if (pausingAfterKill) {
 			emoticon.text = "Hahaha :)";
 			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Confused);
 			if (pauseAfterKillTimer >= pauseAfterKillTime) {
@@ -226,6 +169,57 @@ public class EnemyGuard : Activatable {
 			} else {
 				pauseAfterKillTimer += Time.deltaTime;  
 			}
+
+			return;
+		}
+
+		// Else if the guard is standing guard, just go to the initial position
+		emoticon.text = "Patrolling";
+		this.agent.speed = PatrolSpeed;
+		if (standingGuard) {
+			offPatrolRoute = false;
+			// If the guard isn't at his station, go to it
+			if (!hasArrivedAt(initialPosition)) {
+				// Setting in motion
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
+				SetDestination(initialPosition, PatrolSpeed);
+				return;
+			}
+			// We are already at our position, so face the right way
+			else {
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Idle);
+				this.agent.Stop();
+				this.transform.rotation = initialRotation;
+				return;
+			}	
+		}
+
+		// The guard has a path, so follow it
+		else if (patrolWaypoints != null) {
+			// Guard is off route from chasing the player and needs to pick a point to return to
+			if (offPatrolRoute) {
+				offPatrolRoute = false;
+				// Find the nearest position in the Patrol Route and go there
+				float shortestDistance = Mathf.Infinity;
+				for (int i = 0; i < patrolWaypoints.Length; i++) {
+					if ((patrolWaypoints [i].position - this.transform.position).magnitude < shortestDistance) {
+						targetWaypoint = i;
+						shortestDistance = (patrolWaypoints [i].position - this.transform.position).magnitude;
+					}
+				}
+			}
+			// We've made it to our waypoint, so choose another one
+			if (this.hasArrivedAt (patrolWaypoints[targetWaypoint].position)) {
+				soundEffectMotorStart.Play();
+				if (targetWaypoint >= patrolWaypoints.Length - 1) {
+					targetWaypoint = 0;
+				} else {
+					targetWaypoint++;
+				}
+			}
+			Vector3 positionToGoTo = patrolWaypoints [targetWaypoint].position;
+			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
+			SetDestination(positionToGoTo, PatrolSpeed);
 		}
 	}
 
@@ -319,7 +313,7 @@ public class EnemyGuard : Activatable {
 	private void checkPatrolRoute() {
 		Vector3 NextWaypoint = patrolWaypoints[targetWaypoint].position;
 		NextWaypoint.y = this.transform.position.y;
-		if ((NextWaypoint - this.transform.position).magnitude == 0) {
+		if (Vector3.Distance(NextWaypoint, this.transform.position) <= 0.1f) {
 			targetWaypoint = (movementEnabled) ? GetNextWaypoint() : GetPreviousWaypoint();
 		}
 	}
@@ -330,7 +324,7 @@ public class EnemyGuard : Activatable {
 
 	public void postRewind() {
 		movementEnabled = true;
-		ResetTarget();
-		//SetNextWaypointIndex(nextWaypointIndex);
+		pausingAfterKill = false;
+		chasing = false;
 	}
 }
