@@ -17,7 +17,7 @@ public class EnemyGuard : Activatable {
 
 	public float pauseAfterKillTime = 3.0f;
 	float pauseAfterKillTimer;
-	bool pausingAfterKill;
+	bool isPausingAfterKill;
 
 	Transform[] patrolWaypoints; 
 	int targetWaypoint; 
@@ -78,7 +78,7 @@ public class EnemyGuard : Activatable {
 		targetWaypoint = 0;
 		chasing = false;
 		pauseAfterKillTimer = 0.0f;
-		pausingAfterKill = false;
+		isPausingAfterKill = false;
 		initialRotation = this.transform.rotation;
 		initialPosition = this.transform.position;
 
@@ -162,11 +162,11 @@ public class EnemyGuard : Activatable {
 
 	void Patrol() {
 		// PAUSE AFTER KILLING THE ENEMY
-		if (pausingAfterKill) {
+		if (isPausingAfterKill) {
 			emoticon.text = "Hahaha :)";
 			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Confused);
 			if (pauseAfterKillTimer >= pauseAfterKillTime) {
-				pausingAfterKill = false;
+				isPausingAfterKill = false;
 				pauseAfterKillTimer = 0.0f;
 			} else {
 				pauseAfterKillTimer += Time.deltaTime;  
@@ -211,7 +211,6 @@ public class EnemyGuard : Activatable {
 				}
 			}
 			// We've made it to our waypoint, so choose another one
-			Debug.Log (targetWaypoint);
 			if (this.hasArrivedAt (patrolWaypoints[targetWaypoint].position)) {
 				soundEffectMotorStart.Play();
 				if (targetWaypoint >= patrolWaypoints.Length - 1) {
@@ -226,7 +225,6 @@ public class EnemyGuard : Activatable {
 		}
 	}
 
-	
 	public void SetDestination(Vector3 pos, float speed) {
 		Vector3 targetPos = pos;
 		targetPos.y = this.transform.position.y;  // So we never move in the y direction
@@ -252,7 +250,7 @@ public class EnemyGuard : Activatable {
 			CharacterStatus characterStatus = collision.gameObject.GetComponent<CharacterStatus>();
 			characterStatus.Hit(2);
 			agent.Stop();
-			pausingAfterKill = true;
+			isPausingAfterKill = true;
 			chasing = false;
 			pauseAfterKillTimer = 0.0f;
 		}
@@ -319,7 +317,8 @@ public class EnemyGuard : Activatable {
 
 	public void postRewind() {
 		movementEnabled = true;
-		pausingAfterKill = false;
+		isPausingAfterKill = false;
 		chasing = false;
+        offPatrolRoute = false;
 	}
 }
