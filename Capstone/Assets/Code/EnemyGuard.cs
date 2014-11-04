@@ -96,7 +96,7 @@ public class EnemyGuard : Activatable {
 	void FixedUpdate () {
 		// Implies that we are being moved by some other force (RewindManager, etc)
 		if (!Activated || !movementEnabled) {
-			if (hasArrivedAt(GetPreviousWaypoint())) {
+			if (!standingGuard && hasArrivedAt(GetPreviousWaypoint())) {
 				if(--targetWaypoint < 0)
 					targetWaypoint = patrolWaypoints.Length-1;
 			}
