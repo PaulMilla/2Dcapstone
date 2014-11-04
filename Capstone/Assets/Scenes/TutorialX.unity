@@ -5346,6 +5346,83 @@ Prefab:
   m_RootGameObject: {fileID: 2037459189}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1001 &211083772
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -25.0330009
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.120350003
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 13.7209997
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: text
+      value: If you couldn't see the only BLUE SQUARE in the room, you're going to
+        need some glasses. Otherwise, go PUSH THE BUTTON TO OPEN THE DOOR.
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: duration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.x
+      value: 7.81810188
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.x
+      value: -.0297851562
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.z
+      value: 3.52362347
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.z
+      value: 1.59464598
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.y
+      value: 2.20653629
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.y
+      value: 1.24571228
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_RootGameObject: {fileID: 718727279}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &212600397
 GameObject:
   m_ObjectHideFlags: 0
@@ -5685,6 +5762,7 @@ GameObject:
   - 114: {fileID: 232847642}
   - 114: {fileID: 232847641}
   - 95: {fileID: 232847647}
+  - 114: {fileID: 232847648}
   m_Layer: 10
   m_Name: EnemyGuard2
   m_TagString: Enemy
@@ -5817,6 +5895,20 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &232847648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 232847639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276112dfcdec2455a8c49c2cd5ee7e2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Good job getting yourself caught. PRESS AND HOLD SPACE and RELEASE WHEN YOU
+    are out of the guard's way.
+  showCount: 1
 --- !u!1 &233760200
 GameObject:
   m_ObjectHideFlags: 0
@@ -6215,7 +6307,7 @@ Transform:
   - {fileID: 645404158}
   - {fileID: 101041478}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
 --- !u!114 &251648917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9072,6 +9164,84 @@ Prefab:
   m_RootGameObject: {fileID: 1908620035}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1001 &387222278
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 15.665
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.120350003
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 10.8459997
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_RootOrder
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: text
+      value: "Inside intel has informed us that there's heavy guards at the top floor.
+        We are confident your special abilities will suffice to guarantee results.
+        Good luck, and Death to TheCorporation\xA9."
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: duration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.x
+      value: 9.05934334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.x
+      value: -.524427414
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.z
+      value: 39.9035873
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.z
+      value: 21.3886833
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.y
+      value: 2.20653629
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.y
+      value: 1.24571228
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_RootGameObject: {fileID: 415656777}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &393819779
 GameObject:
   m_ObjectHideFlags: 0
@@ -9234,6 +9404,64 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1566092275}
   m_GameObject: {fileID: 410781037}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &415656777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 387222278}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 415656780}
+  - 65: {fileID: 415656779}
+  - 114: {fileID: 415656778}
+  m_Layer: 0
+  m_Name: TextBoxEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &415656778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 387222278}
+  m_GameObject: {fileID: 415656777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d923e3a3f2bb84e90b8725a6a2177a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "Inside intel has informed us that there's heavy guards at the top floor.
+    We are confident your special abilities will suffice to guarantee results. Good
+    luck, and Death to TheCorporation\xA9."
+  duration: 15
+--- !u!65 &415656779
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 387222278}
+  m_GameObject: {fileID: 415656777}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.05934334, y: 2.20653629, z: 39.9035873}
+  m_Center: {x: -.524427414, y: 1.24571228, z: 21.3886833}
+--- !u!4 &415656780
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 387222278}
+  m_GameObject: {fileID: 415656777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.665, y: -.120350003, z: 10.8459997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
 --- !u!1 &415941567
 GameObject:
   m_ObjectHideFlags: 0
@@ -11328,7 +11556,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 0eeb8c4165f750c4d8dc71871b0ad357, type: 3}
+  - {fileID: 2100000, guid: 814ac13723718de4aa1abb4216bebfc9, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -11343,7 +11571,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 532091273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.663200021, y: .95539999, z: -1.30700004}
+  m_LocalPosition: {x: -.663200021, y: .95539999, z: -1.70280004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1562443594}
@@ -14164,6 +14392,63 @@ Prefab:
   m_RootGameObject: {fileID: 1708747699}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &718727279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 211083772}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 718727282}
+  - 65: {fileID: 718727281}
+  - 114: {fileID: 718727280}
+  m_Layer: 0
+  m_Name: TextBoxEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &718727280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 211083772}
+  m_GameObject: {fileID: 718727279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d923e3a3f2bb84e90b8725a6a2177a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: If you couldn't see the only BLUE SQUARE in the room, you're going to need
+    some glasses. Otherwise, go PUSH THE BUTTON TO OPEN THE DOOR.
+  duration: 8
+--- !u!65 &718727281
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 211083772}
+  m_GameObject: {fileID: 718727279}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.81810188, y: 2.20653629, z: 3.52362347}
+  m_Center: {x: -.0297851562, y: 1.24571228, z: 1.59464598}
+--- !u!4 &718727282
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 211083772}
+  m_GameObject: {fileID: 718727279}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.0330009, y: -.120350003, z: 13.7209997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
 --- !u!1 &722086010
 GameObject:
   m_ObjectHideFlags: 0
@@ -14712,6 +14997,84 @@ Transform:
   - {fileID: 731561740}
   m_Father: {fileID: 2010233394}
   m_RootOrder: 0
+--- !u!1001 &745282633
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -14.7419996
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.120350003
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 20.7679996
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_RootOrder
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: text
+      value: "We've equipped you with our TimeTracker\xA9 prototype. All you have
+        to do is TAP SPACE TO SPAWN YOUR DOPPELGANGER. Maybe you can use it to open
+        this door."
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: duration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.x
+      value: 8.61964798
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.x
+      value: -.00628185272
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.z
+      value: 10.6606331
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.z
+      value: 5.16314507
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.y
+      value: 2.20653629
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.y
+      value: 1.24571228
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_RootGameObject: {fileID: 1718211764}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &745296630
 GameObject:
   m_ObjectHideFlags: 0
@@ -21157,6 +21520,83 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1376893045}
   m_GameObject: {fileID: 1214179001}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1220303541
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -5.37849998
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.120350003
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 10.8459997
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_RootOrder
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: text
+      value: This part is simple. Just PRESS that seemingly harmless BLUE BUTTON to
+        go to the next room.
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: duration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.x
+      value: 13.6842556
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.x
+      value: 2.52602291
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.z
+      value: 9.05654335
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.z
+      value: 5.96519184
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.y
+      value: 2.20653629
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.y
+      value: 1.24571228
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_RootGameObject: {fileID: 1723470910}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1001 &1227246470
 Prefab:
   m_ObjectHideFlags: 0
@@ -22960,6 +23400,83 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1273802942}
   m_RootOrder: 0
+--- !u!1001 &1276772469
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -5.37849998
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.120350003
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 20.7679996
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: text
+      value: There's another button, but there's a guard in the way. You think you
+        can USE YOUR HOLOGRAM TO DISTRACT THE GUARD and get out of this place?
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: duration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.x
+      value: 17.2832069
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.x
+      value: 4.32549667
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.z
+      value: 9.05654335
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.z
+      value: 5.96519279
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Size.y
+      value: 2.20653629
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: m_Center.y
+      value: 1.24571228
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_RootGameObject: {fileID: 1425605231}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1001 &1280548693
 Prefab:
   m_ObjectHideFlags: 0
@@ -24583,6 +25100,63 @@ MeshFilter:
   m_PrefabInternal: {fileID: 110532940}
   m_GameObject: {fileID: 1423763846}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1425605231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 1276772469}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1425605234}
+  - 65: {fileID: 1425605233}
+  - 114: {fileID: 1425605232}
+  m_Layer: 0
+  m_Name: TextBoxEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1425605232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 1276772469}
+  m_GameObject: {fileID: 1425605231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d923e3a3f2bb84e90b8725a6a2177a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: There's another button, but there's a guard in the way. You think you can
+    USE YOUR HOLOGRAM TO DISTRACT THE GUARD and get out of this place?
+  duration: 8
+--- !u!65 &1425605233
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 1276772469}
+  m_GameObject: {fileID: 1425605231}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 17.2832069, y: 2.20653629, z: 9.05654335}
+  m_Center: {x: 4.32549667, y: 1.24571228, z: 5.96519279}
+--- !u!4 &1425605234
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 1276772469}
+  m_GameObject: {fileID: 1425605231}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.37849998, y: -.120350003, z: 20.7679996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
 --- !u!1 &1427730373
 GameObject:
   m_ObjectHideFlags: 0
@@ -25172,8 +25746,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d923e3a3f2bb84e90b8725a6a2177a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: TESTING TESTING
-  duration: 5
+  text: "Welcome to your next assignment Agent. Your objective is to infiltrate The
+    Corporation\xA9 and locate their secret. CLICK THE MOUSE TO MOVE."
+  duration: 10
 --- !u!65 &1496893196
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26439,11 +27014,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: text
-      value: TESTING TESTING
+      value: "Welcome to your next assignment Agent. Your objective is to infiltrate
+        The Corporation\xA9 and locate their secret. CLICK THE MOUSE TO MOVE."
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: duration
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: m_Size.x
@@ -27618,7 +28194,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
 --- !u!1 &1636118679
 GameObject:
   m_ObjectHideFlags: 0
@@ -28664,7 +29240,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1166bd0f95084e04b827b6b19ae7af1, type: 2}
       propertyPath: m_RootOrder
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1166bd0f95084e04b827b6b19ae7af1, type: 2}
@@ -29092,6 +29668,120 @@ Transform:
   - {fileID: 287660063}
   m_Father: {fileID: 1049867132}
   m_RootOrder: 0
+--- !u!1 &1718211764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 745282633}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1718211767}
+  - 65: {fileID: 1718211766}
+  - 114: {fileID: 1718211765}
+  m_Layer: 0
+  m_Name: TextBoxEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1718211765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 745282633}
+  m_GameObject: {fileID: 1718211764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d923e3a3f2bb84e90b8725a6a2177a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: "We've equipped you with our TimeTracker\xA9 prototype. All you have to do
+    is TAP SPACE TO SPAWN YOUR DOPPELGANGER. Maybe you can use it to open this door."
+  duration: 8
+--- !u!65 &1718211766
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 745282633}
+  m_GameObject: {fileID: 1718211764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.61964798, y: 2.20653629, z: 10.6606331}
+  m_Center: {x: -.00628185272, y: 1.24571228, z: 5.16314507}
+--- !u!4 &1718211767
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 745282633}
+  m_GameObject: {fileID: 1718211764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.7419996, y: -.120350003, z: 20.7679996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+--- !u!1 &1723470910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 1220303541}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1723470913}
+  - 65: {fileID: 1723470912}
+  - 114: {fileID: 1723470911}
+  m_Layer: 0
+  m_Name: TextBoxEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1723470911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 1220303541}
+  m_GameObject: {fileID: 1723470910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d923e3a3f2bb84e90b8725a6a2177a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: This part is simple. Just PRESS that seemingly harmless BLUE BUTTON to go
+    to the next room.
+  duration: 8
+--- !u!65 &1723470912
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15,
+    type: 2}
+  m_PrefabInternal: {fileID: 1220303541}
+  m_GameObject: {fileID: 1723470910}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 13.6842556, y: 2.20653629, z: 9.05654335}
+  m_Center: {x: 2.52602291, y: 1.24571228, z: 5.96519184}
+--- !u!4 &1723470913
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+  m_PrefabInternal: {fileID: 1220303541}
+  m_GameObject: {fileID: 1723470910}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.37849998, y: -.120350003, z: 10.8459997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
 --- !u!1001 &1732986329
 Prefab:
   m_ObjectHideFlags: 0
