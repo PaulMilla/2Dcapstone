@@ -10,6 +10,7 @@ public class SoundMananger : MonoBehaviour {
 	void Start () {
 		levelMusic = this.GetComponent<AudioSource> ();
 		currentMusic = levelMusic;
+		DontDestroyOnLoad (this.gameObject);
 	}
 	
 	// Update is called once per frame
