@@ -23,7 +23,7 @@ public class PressureButton : MonoBehaviour {
 	//private int frameResetThreshold = 3;
 
 	// The y-dimesnion where the button is up and at rest
-	float upRestY = 0f;
+	float upRestY = 0.1f;
 	// The y-dimension where the button is down and at rest
 	float downRestY = -.05f;
 
@@ -32,8 +32,8 @@ public class PressureButton : MonoBehaviour {
 
 	public Transform connectorsParent;
 	private Transform[] connectors;
-	private Color pressedColor = Color.blue;
-	private Color unpressedColor = Color.gray;
+	private Color pressedColor =  new Color(.15625f, .89843f, .27343f, 1f);
+	private Color unpressedColor = new Color(.15625f, .78125f, .95703f, 0.75f);
 
 	// Use this for initialization
 	void Start () {

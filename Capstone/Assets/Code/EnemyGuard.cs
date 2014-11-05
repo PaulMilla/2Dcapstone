@@ -6,120 +6,145 @@ using System.Collections;
 // But since the AI is simple, we might not need to do that
 
 public class EnemyGuard : Activatable {
-
-	EnemyVision vision;
-	Vector3 lastSeenPosition;
-
-	public float PursuitSpeed;
-	public float PatrolSpeed;
-
-	NavMeshAgent agent;
-
-	public Transform path;
-	Transform[] patrolWaypoints; 
-	public bool standingGuard = false;
-	bool chasing = false;
-
 	// An int to keep track of which direction we are along the patrol route
 	// If 1, we are incrementing our route, we are going backwards
 	public bool offPatrolRoute = false;
-	private int nextWaypointIndex = 0; 
-
-	Vector3 initialPosition;
-	Quaternion initialRotation;
-
-	RewindManager rewindingManager;
+	public float PursuitSpeed;
+	public float PatrolSpeed;
+	public Transform path;
+	public bool standingGuard = false;
+	public bool movementEnabled {get; set;}
 
 	public float pauseAfterKillTime = 3.0f;
-	public bool movementEnabled {get; set;}
-	bool pausingAfterKill = false;
-	private float pauseAfterKillTimer = 0.0f;
+	float pauseAfterKillTimer;
+	bool isPausingAfterKill;
+
+	Transform[] patrolWaypoints; 
+	int targetWaypoint; 
+
+	NavMeshAgent agent;
+	EnemyVision vision;
+
+	Vector3 lastSeenPosition;
+	Vector3 initialPosition;
+	Quaternion initialRotation;
+	bool chasing = false;
 
 	TextMesh emoticon;
 	
 	[SerializeField]
 	private float investigateTime = 3.0f;
 	private float investigateTimer = 0.0f;
-	
+
+	private const string ANIMATION_NUMBER_STRING = "AnimationNumber";
+	enum AnimationNumber {
+		Idle,
+		Patrolling,
+		Chasing, 
+		Confused
+	}
+
+	private Transform soundBank;
+	private AudioSource soundEffectAlert;
+	private AudioSource soundEffectMotor;
+	private AudioSource soundEffectMotorStart;
+	private AudioSource[] soundDialoguesSeesPlayer;
+	private AudioSource[] soundDialoguesBackToPatrol;
+	private AudioSource[] soundDialoguesInvestigate;
+
+	private Animator animator;
+
 	protected override void Start() {
 		base.Start();
-		emoticon = GetComponentInChildren<TextMesh> ();
-		agent = GetComponent<NavMeshAgent> ();
-		movementEnabled = true;
-		vision = GetComponentInChildren<EnemyVision> ();
-		rewindingManager = GetComponent<RewindManager> ();
 
-		//characterMovement = GetComponent<characterMovement> ();
+		// Sound stuff
+		soundBank = this.transform.FindChild ("SoundBank");
+		soundEffectAlert = soundBank.FindChild ("Alert").GetComponent<AudioSource> ();
+		soundEffectMotor = soundBank.FindChild ("Motor").GetComponent<AudioSource> ();
+		soundEffectMotorStart = soundBank.FindChild ("MotorStart").GetComponent<AudioSource> ();
+		soundDialoguesSeesPlayer = soundBank.FindChild ("SeesPlayer").GetComponents<AudioSource> ();
+		soundDialoguesBackToPatrol = soundBank.FindChild ("ReturnToPatrol").GetComponents<AudioSource> ();
+		soundDialoguesInvestigate = soundBank.FindChild ("Investigating").GetComponents<AudioSource> ();
+		soundEffectMotor.Play ();
+
+		// Initialize Components
+		animator = GetComponent<Animator>();
+		emoticon = GetComponentInChildren<TextMesh>();
+		agent = GetComponent<NavMeshAgent>();
+		vision = GetComponentInChildren<EnemyVision>();
+
+		// Initialize default variables
+		movementEnabled = true;
+		targetWaypoint = 0;
+		chasing = false;
+		pauseAfterKillTimer = 0.0f;
+		isPausingAfterKill = false;
 		initialRotation = this.transform.rotation;
 		initialPosition = this.transform.position;
 
 		// Fix the y axis of the waypoint to our y position
-
 		if (!standingGuard) {
-				patrolWaypoints = path.GetComponentsInChildren<Transform> ();
-				foreach (Transform waypoint in patrolWaypoints) {
-						Vector3 fixedPos = waypoint.position;
-						waypoint.position = fixedPos;
-				}
+			patrolWaypoints = path.GetComponentsInChildren<Transform>();
+			foreach (Transform waypoint in patrolWaypoints) {
+				Vector3 fixedPos = waypoint.position;
+				fixedPos.y = this.transform.position.y;
+				waypoint.position = fixedPos;
+			}
 		}
-	}
-
-	public Transform[] GetWaypoints() {
-		return patrolWaypoints;
-	}
-
-	public void SetNextWaypointIndex(int i) {
-		nextWaypointIndex = i;
-	}
-
-	public int GetNextWaypointIndex() {
-		return nextWaypointIndex;
-	}
-
-	public void ResetTarget() {
-		vision.ResetTarget ();
-		pausingAfterKill = false;
-		chasing = false;
 	}
 
 	void FixedUpdate () {
-
-		if (rewindingManager.isRewinding) {
-			agent.Stop();
-			vision.ResetTarget();
-
-			return;
-		}
-
+		// Implies that we are being moved by some other force (RewindManager, etc)
 		if (!Activated || !movementEnabled) {
+			if (!standingGuard && hasArrivedAt(GetPreviousWaypoint())) {
+				if(--targetWaypoint < 0)
+					targetWaypoint = patrolWaypoints.Length-1;
+			}
+			agent.Stop();
 			return;
 		}
 
-		// WE HAVE A CLEAR SIGHT TO TARGET SO PURSUE
-		if (vision.HasTarget ()) {
-			Chase ();
-		} else if (chasing) {
-			// NO TARGET BUT WE ARE IN PURSUIT 
+		if (vision.HasTarget()) { 	// WE HAVE A CLEAR SIGHT TO TARGET SO PURSUE
+			Chase();
+		} else if (chasing) { 		// NO TARGET BUT WE ARE IN PURSUIT
 			Investigate();
-		}
-		// NO TARGET AND NOT IN PURSUIT, RETURN TO PATROL
-		else {
+		} else { 					// NO TARGET AND NOT IN PURSUIT, RETURN TO PATROL
 			Patrol();
 		}
+
+		UpdateMotorSound();
+	}
+
+
+	float maxValPatrol = 0.5f;
+	float maxValPursuit = 1.0f;
+	void UpdateMotorSound() {
+		// Volume and Pitch double if guard is in pursuit
+		float maxValue = this.agent.speed == PatrolSpeed ? maxValPatrol : maxValPursuit;
+		this.soundEffectMotor.volume = map(agent.velocity.magnitude, 0.0f, this.agent.speed, 0.0f, maxValue);
+		this.soundEffectMotor.pitch = map(agent.velocity.magnitude, 0.0f, this.agent.speed, 0.0f, maxValue);
 	}
 
 	void Investigate() {
+		// We arrived at the last spot we saw the player
 		if (hasArrivedAt(lastSeenPosition)) {
-			// We arrived at the last spot we saw the player
+			// This is the first iteration that we are in investigate mode
+			if (investigateTimer == 0.0f) {
+				playSoundInvestigating();
+			}
+
+			this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Confused);
 			if (investigateTimer >= investigateTime) {
 				chasing = false;
 				investigateTimer = 0.0f;
+				playSoundBackToPatrol();
 			} else {
 				emoticon.text = "?";
 				investigateTimer += Time.deltaTime;
 			}
 		} else {
 			// We haven't reached the spot where we last saw the player
+			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Chasing);
 			emoticon.text = "Investigating";
 			investigateTimer = 0.0f;
 			SetDestination(lastSeenPosition, PursuitSpeed);
@@ -128,71 +153,78 @@ public class EnemyGuard : Activatable {
 
 	void Chase() {
 		emoticon.text = "Chase!!!!";
+		this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Chasing); 
 		chasing = true;
 		offPatrolRoute = true;
-		lastSeenPosition = vision.GetTarget ().position;
-		SetDestination (lastSeenPosition, PursuitSpeed);
+		lastSeenPosition = vision.GetTarget().position;
+		SetDestination(lastSeenPosition, PursuitSpeed);
 	}
 
 	void Patrol() {
-		// If the guard is standing guard, just go to the initial position
-		if (!pausingAfterKill) {
-			emoticon.text = "Patrolling";
-			this.agent.speed = PatrolSpeed;
-			if (standingGuard) {
-				offPatrolRoute = false;
-				// If the guard isn't at his station, go to it
-				if (!hasArrivedAt(initialPosition)) {
-					// Setting in motion
-					SetDestination(initialPosition, PatrolSpeed);
-					return;
-				}
-				// We are already at our position, so face the right way
-				else {
-					this.agent.Stop ();
-					this.transform.rotation = initialRotation;
-					return;
-				}	
-			}
-			// The guard has a path, so follow it
-			else {
-				// Guard is off route from chasing the player and needs to pick a point to return to
-				if (offPatrolRoute) {
-					offPatrolRoute = false;
-					// Find the nearest position in the Patrol Route and go there
-					float shortestDistance = Mathf.Infinity;
-					for (int i = 0; i < patrolWaypoints.Length; i++) {
-						if ((patrolWaypoints [i].position - this.transform.position).magnitude < shortestDistance) {
-							nextWaypointIndex = i;
-							shortestDistance = (patrolWaypoints [i].position - this.transform.position).magnitude;
-						}
-					}
-				}
-				// We've made it to our waypoint, so choose another one
-				if (this.hasArrivedAt (patrolWaypoints[nextWaypointIndex].position)) {
-					if (nextWaypointIndex >= patrolWaypoints.Length - 1) {
-						nextWaypointIndex = 0;
-					} else {
-						nextWaypointIndex++;
-					}
-				}
-				Vector3 positionToGoTo = patrolWaypoints [nextWaypointIndex].position;
-				SetDestination(positionToGoTo, PatrolSpeed);
-			}
-		}
-		// PAUSING AFTER KILLING THE ENEMY
-		else {
+		// PAUSE AFTER KILLING THE ENEMY
+		if (isPausingAfterKill) {
 			emoticon.text = "Hahaha :)";
+			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Confused);
 			if (pauseAfterKillTimer >= pauseAfterKillTime) {
-				pausingAfterKill = false;
+				isPausingAfterKill = false;
 				pauseAfterKillTimer = 0.0f;
 			} else {
 				pauseAfterKillTimer += Time.deltaTime;  
 			}
+
+			return;
+		}
+
+		// Else if the guard is standing guard, just go to the initial position
+		emoticon.text = "Patrolling";
+		this.agent.speed = PatrolSpeed;
+		if (standingGuard) {
+			offPatrolRoute = false;
+			// If the guard isn't at his station, go to it
+			if (!hasArrivedAt(initialPosition)) {
+				// Setting in motion
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
+				SetDestination(initialPosition, PatrolSpeed);
+				return;
+			}
+			// We are already at our position, so face the right way
+			else {
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Idle);
+				this.agent.Stop();
+				this.transform.rotation = initialRotation;
+				return;
+			}	
+		}
+
+		// The guard has a path, so follow it
+		else if (patrolWaypoints != null) {
+			// Guard is off route from chasing the player and needs to pick a point to return to
+			if (offPatrolRoute) {
+				offPatrolRoute = false;
+				// Find the nearest position in the Patrol Route and go there
+				float shortestDistance = Mathf.Infinity;
+				for (int i = 0; i < patrolWaypoints.Length; i++) {
+					if ((patrolWaypoints [i].position - this.transform.position).magnitude < shortestDistance) {
+						targetWaypoint = i;
+						shortestDistance = (patrolWaypoints [i].position - this.transform.position).magnitude;
+					}
+				}
+			}
+			// We've made it to our waypoint, so choose another one
+			if (this.hasArrivedAt (patrolWaypoints[targetWaypoint].position)) {
+				soundEffectMotorStart.Play();
+				if (targetWaypoint >= patrolWaypoints.Length - 1) {
+					targetWaypoint = 0;
+				} else {
+					targetWaypoint++;
+				}
+			}
+			Vector3 positionToGoTo = patrolWaypoints [targetWaypoint].position;
+			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
+			SetDestination(positionToGoTo, PatrolSpeed);
 		}
 	}
 
-	
 	public void SetDestination(Vector3 pos, float speed) {
 		Vector3 targetPos = pos;
 		targetPos.y = this.transform.position.y;  // So we never move in the y direction
@@ -204,7 +236,7 @@ public class EnemyGuard : Activatable {
 
 	public bool hasArrivedAt(Vector3 pos) {
 		pos.y = this.transform.position.y;
-		if ((pos - this.transform.position).magnitude == 0) {
+		if ((pos - this.transform.position).magnitude <= 0.01f) {
 			return true;
 		}
 		return false;
@@ -218,7 +250,7 @@ public class EnemyGuard : Activatable {
 			CharacterStatus characterStatus = collision.gameObject.GetComponent<CharacterStatus>();
 			characterStatus.Hit(2);
 			agent.Stop();
-			pausingAfterKill = true;
+			isPausingAfterKill = true;
 			chasing = false;
 			pauseAfterKillTimer = 0.0f;
 		}
@@ -241,5 +273,52 @@ public class EnemyGuard : Activatable {
 			}
 		}
 		return false;
+	}
+
+	public void playSoundAlert() {
+		soundEffectAlert.Play ();
+	}
+
+	public void playSoundSeesPlayer() {
+		int randomIndex = Random.Range (0, soundDialoguesSeesPlayer.Length - 1);
+		soundDialoguesSeesPlayer [randomIndex].Play ();
+		playSoundAlert ();
+	}
+
+	public void playSoundBackToPatrol() {
+		int randomIndex = Random.Range (0, soundDialoguesBackToPatrol.Length - 1);
+		soundDialoguesBackToPatrol [randomIndex].Play ();
+	}
+
+	public void playSoundInvestigating() {
+		int randomIndex = Random.Range (0, soundDialoguesInvestigate.Length - 1);
+		soundDialoguesInvestigate [randomIndex].Play ();
+	}
+
+	float map(float s, float a1, float a2, float b1, float b2) {
+		return b1 + (s-a1)*(b2-b1)/(a2-a1);
+	}
+
+
+	private int GetNextWaypoint() {
+		return (targetWaypoint+1) % patrolWaypoints.Length;
+	}
+
+	private Vector3 GetPreviousWaypoint() {
+		if (targetWaypoint - 1 < 0)
+			return patrolWaypoints[patrolWaypoints.Length - 1].position;
+		else
+			return patrolWaypoints[targetWaypoint - 1].position;
+	}
+
+	public void preRewind() {
+		movementEnabled = false;
+	}
+
+	public void postRewind() {
+		movementEnabled = true;
+		isPausingAfterKill = false;
+		chasing = false;
+        offPatrolRoute = false;
 	}
 }

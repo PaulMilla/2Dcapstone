@@ -8,8 +8,10 @@ public class Footsteps : MonoBehaviour {
 	private Vector3 lastFootstep;
 	private bool isRewinding;
 
-	// Use this for initialization
+	AudioSource audioFootstep;
+		// Use this for initialization
 	void Start () {
+		audioFootstep = this.transform.FindChild ("Sound").FindChild ("Audio_Footsteps").GetComponent<AudioSource> ();
 		lastFootstep = Vector3.zero;
 		isRewinding = false;
 	}
@@ -22,6 +24,12 @@ public class Footsteps : MonoBehaviour {
 		if(Input.GetButtonUp("Rewind")) {
 			isRewinding = false;
 		}
+	}
+
+	// Called from animation Event
+	void PlayFootstepSound() {
+		audioFootstep.pitch = Random.Range (0.6f, 1.0f);;
+		audioFootstep.Play ();
 	}
 
 	void FixedUpdate() {
