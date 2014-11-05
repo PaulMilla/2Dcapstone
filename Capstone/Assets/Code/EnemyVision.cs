@@ -6,12 +6,9 @@ using System.Collections;
  */
 
 public class EnemyVision : MonoBehaviour {
-
 	Transform target;
 	CharacterStatus targetStatus;
-
 	float fieldOfViewAngle = 60f;
-
 	EnemyGuard Enemy;
 
 	void Start () {
@@ -24,6 +21,7 @@ public class EnemyVision : MonoBehaviour {
 			return;
 		}
 	}
+
 	void OnTriggerStay(Collider other) {
 		if (Input.GetKey(KeyCode.Space)) {
 			return;
@@ -35,7 +33,7 @@ public class EnemyVision : MonoBehaviour {
 			Vector3 direction = other.transform.position - Enemy.transform.position;
 			float angle = Vector3.Angle(direction, transform.forward);
 
-			Debug.DrawRay(Enemy.transform.position,  direction.normalized * 1000,Color.white);
+			Debug.DrawRay(Enemy.transform.position,  direction.normalized * 1000, Color.white);
 
 			if (angle < fieldOfViewAngle) {
 				if (Enemy.HasLineOfSightTo(other.transform)) {
@@ -63,9 +61,6 @@ public class EnemyVision : MonoBehaviour {
 
 	void OnTriggerExit (Collider other)
 	{
-		if (Input.GetKey(KeyCode.Space)) {
-			return;
-		}
 		// If the target leaves the trigger zone...
 		if(other.gameObject.transform.Equals(target)) {
 			target = null;
@@ -85,9 +80,4 @@ public class EnemyVision : MonoBehaviour {
 		target = t;
 		targetStatus = t.GetComponent<CharacterStatus> ();
 	}
-
-	public void ResetTarget() {
-		target = null;
-	}
-
 }
