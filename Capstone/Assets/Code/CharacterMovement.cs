@@ -10,6 +10,7 @@ public class CharacterMovement : MonoBehaviour {
 	public bool movementEnabled {get; set;}
 	protected bool rewind;
     protected bool hasInteracted;
+	private bool resetHasInteracted;
 	protected RaycastHit target;
     private Interactable interactable;
     public Interactable Interactable {
@@ -53,16 +54,18 @@ public class CharacterMovement : MonoBehaviour {
 		current.rigidbody.velocity = Vector3.zero;
 		current.rigidbody.MovePosition(Vector3.MoveTowards(current.position, targetPosition, movementSpeed * Time.fixedDeltaTime));*/
 		CheckActivations();
-        recordedEvents.Push(new Event(targetPosition, current.position, current.rotation, interactable, hasInteracted));
+		recordedEvents.Push(new Event(targetPosition, current.position, current.rotation, interactable, resetHasInteracted));
+		resetHasInteracted = false;
 	}
 	
 	protected virtual Event DoRewind() {
 
 		if (recordedEvents.Count == 0) return null;
-
 		Event previous = recordedEvents.Pop();
+		if (previous.hasInteracted) {
+			hasInteracted = false;
+		}
 		this.transform.rotation = previous.rotation;
-		this.hasInteracted = previous.hasInteracted;
 		Vector3 current = this.transform.position;
 		Vector3 past = previous.position;
 		if ((current - past).magnitude > 0) {
@@ -76,23 +79,27 @@ public class CharacterMovement : MonoBehaviour {
 
         Interactable = previous.interactable;
 		this.transform.rigidbody.MovePosition(step);
-
 		CheckActivations();
 		return previous;
 	}
 
 	public virtual void MoveTo(RaycastHit hit, bool resetHasInteracted = false) {
         Interactable = hit.transform.gameObject.GetComponent<Interactable>();
-		if (resetHasInteracted)
+		if (resetHasInteracted) {
 			hasInteracted = false;
+			this.resetHasInteracted = true;
+		}
 		targetPosition.x = hit.point.x;
         targetPosition.z = hit.point.z;
 		agent.SetDestination(hit.point);
 	}
 
-    public virtual void MoveTo(Vector3 targetPosition, Interactable interactable) {
+    public virtual void MoveTo(Vector3 targetPosition, Interactable interactable, bool resetHasInteracted = false) {
         this.targetPosition.x = targetPosition.x;
         this.targetPosition.z = targetPosition.z;
+		if (resetHasInteracted) {
+			hasInteracted = false;
+		}
         this.Interactable = interactable;
 		agent.SetDestination(targetPosition);
     }
