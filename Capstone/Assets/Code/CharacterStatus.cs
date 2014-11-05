@@ -3,11 +3,22 @@ using System.Collections;
 
 public class CharacterStatus : MonoBehaviour {
 	protected CharacterMovement characterMovement;
-	public bool isDead { get; private set; }
+	private bool _isDead;
+	public bool isDead { 
+		get { return _isDead; } 
+		private set { 
+			if (Died != null) { 
+				Died(value); 
+			} 
+			_isDead = value; } 
+	}
 
 	public bool dissolve = false;
 	Animator animator;
 	private Vector3 deathPosition;
+
+	public delegate void BoolHandler(bool b); 
+	public BoolHandler Died;
 
 	SkinnedMeshRenderer meshRenderer;
 	// Use this for initialization
