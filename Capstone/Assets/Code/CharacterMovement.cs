@@ -53,7 +53,7 @@ public class CharacterMovement : MonoBehaviour {
 		current.rigidbody.velocity = Vector3.zero;
 		current.rigidbody.MovePosition(Vector3.MoveTowards(current.position, targetPosition, movementSpeed * Time.fixedDeltaTime));*/
 		CheckActivations();
-        recordedEvents.Push(new Event(targetPosition, current.position, current.rotation, interactable));
+        recordedEvents.Push(new Event(targetPosition, current.position, current.rotation, interactable, hasInteracted));
 	}
 	
 	protected virtual Event DoRewind() {
@@ -62,6 +62,7 @@ public class CharacterMovement : MonoBehaviour {
 
 		Event previous = recordedEvents.Pop();
 		this.transform.rotation = previous.rotation;
+		this.hasInteracted = previous.hasInteracted;
 		Vector3 current = this.transform.position;
 		Vector3 past = previous.position;
 		if ((current - past).magnitude > 0) {
@@ -80,8 +81,10 @@ public class CharacterMovement : MonoBehaviour {
 		return previous;
 	}
 
-	public virtual void MoveTo(RaycastHit hit) {
+	public virtual void MoveTo(RaycastHit hit, bool resetHasInteracted = false) {
         Interactable = hit.transform.gameObject.GetComponent<Interactable>();
+		if (resetHasInteracted)
+			hasInteracted = false;
 		targetPosition.x = hit.point.x;
         targetPosition.z = hit.point.z;
 		agent.SetDestination(hit.point);
