@@ -32,7 +32,6 @@ public class EnemyVision : MonoBehaviour {
 			// Create a vector from the enemy to the player
 			Vector3 direction = other.transform.position - Enemy.transform.position;
 			float angle = Vector3.Angle(direction, transform.forward);
-
 			Debug.DrawRay(Enemy.transform.position,  direction.normalized * 1000, Color.white);
 
 			if (angle < fieldOfViewAngle) {
@@ -51,6 +50,7 @@ public class EnemyVision : MonoBehaviour {
 						target = other.transform;
 						targetStatus = target.GetComponent<CharacterStatus>();
 						Enemy.playSoundSeesPlayer();
+						Enemy.ChaseTarget(target);
 					}
 				} else if (other.transform.Equals(target)) {
 					target = null;
