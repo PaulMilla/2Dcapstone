@@ -65,6 +65,7 @@ public class EnemyVision : MonoBehaviour {
 		if(other.gameObject.transform.Equals(target)) {
 			target = null;
 			targetStatus = null;
+            Enemy.Investigate(other.transform.position);
 		}
 	}
 
