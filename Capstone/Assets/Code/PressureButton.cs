@@ -94,4 +94,13 @@ public class PressureButton : MonoBehaviour {
 			}			
 		}
 	}
+
+	void SetActivated(bool value) {
+		if (_pressed != value) {
+			foreach (Activatable activatable in activatableArray) {
+				activatable.Toggle();
+			}
+		}
+		_pressed = value;
+	}
 }

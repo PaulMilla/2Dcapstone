@@ -26,20 +26,19 @@ public class CharacterStatus : MonoBehaviour {
 		characterMovement = GetComponent<CharacterMovement>();
 		animator = GetComponent<Animator>();
 		meshRenderer = gameObject.GetComponentInChildren<SkinnedMeshRenderer> ();
+		PlayerMovement.Instance.RewindBegin += () => {
+			if (isDead) {
+				Time.timeScale = 1.0f;
+				characterMovement.movementEnabled = true;
+				isDead = false;
+			}
+		};
 	}
 
 	void Update() {
 		if (isDead) {
 			transform.position = deathPosition;
 		}
-		if (Input.GetButtonDown("Rewind")) {
-			if (isDead) {
-				Time.timeScale = 1.0f;
-				characterMovement.movementEnabled = true;
-				isDead = false;
-			}
-		}
-
 		if (dissolve) {						
 			Dissolve ();				
 		}
@@ -55,7 +54,7 @@ public class CharacterStatus : MonoBehaviour {
 	}
 
 	public void Hit(float killTime) {
-		if (Input.GetButton("Rewind")) {
+		if (PlayerMovement.Instance.Rewind) {
 			return;
 		}
 		characterMovement.StopMovement();

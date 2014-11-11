@@ -5,33 +5,67 @@ using System.Collections.Generic;
 public class PlayerMovement : CharacterMovement {
 	
 	public Stack<Event> cloneEvents {get; private set;}
+
+	public static PlayerMovement Instance;
+
 	public bool Rewind {
 		get { return rewind; }
 		set {
+			if (rewind == true && value == false && !OutOfGuardVision()) {
+				StartCoroutine(RewindUntilOutOfVision());
+				return;
+			}
 			hasInteracted = false;
 			rewind = value;
 			if (rewind) {
+				if (RewindBegin != null) {
+					RewindBegin();
+				}
 				cloneEvents = new Stack<Event>();
 			} else {
+				if (RewindEnd != null) {
+					RewindEnd();
+				}
 				ClearTarget();
 			}
 		}
 	}
 
-
+	public delegate void PlayerEvent();
+	public PlayerEvent RewindEnd;
+	public PlayerEvent RewindBegin;
 	/* Inherited from CharacterMovement */
 	/* overrive protected void Move() */
 	/* override public void MoveTo(RaycastHit target) */
+	void Awake() {
+		Instance = this;
+	}
 
 	override protected void Start() {
 		base.Start();
 	}
 
 	void FixedUpdate() {
-		if(rewind) {
+		if(Rewind) {
 			cloneEvents.Push(DoRewind());
 		} else {
 			Move();
 		}
+	}
+	IEnumerator RewindUntilOutOfVision() {
+		while (true) {
+			if (OutOfGuardVision()) {
+				Rewind = false;
+				break;
+			}
+			yield return new WaitForEndOfFrame();
+		}
+	}
+	public bool OutOfGuardVision() {
+		if (!Rewind) {
+			return true;
+		}
+		Collider[] nearyByEnemies = Physics.OverlapSphere(transform.position, 10, 1 << LayerMask.NameToLayer("Enemy"));
+		return nearyByEnemies.Length == 0;
 	}
 }

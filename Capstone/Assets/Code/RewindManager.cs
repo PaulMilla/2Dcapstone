@@ -12,19 +12,14 @@ public class RewindManager : MonoBehaviour {
 		guard = GetComponent<EnemyGuard>();
 		recordedEvents = new Stack<Position>();
 		isRewinding = false;
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetButtonDown ("Rewind")) {
+		PlayerMovement.Instance.RewindBegin += () => {
 			isRewinding = true;
 			guard.preRewind();
-		}
-		else if(Input.GetButtonUp("Rewind")) {
+		};
+		PlayerMovement.Instance.RewindEnd += () => {
 			isRewinding = false;
 			guard.postRewind();
-		}
+		};
 	}
 
 	// Save movements via FixedUpdate

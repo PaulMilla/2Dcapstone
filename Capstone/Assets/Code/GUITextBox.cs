@@ -15,6 +15,8 @@ public class GUITextBox : MonoBehaviour {
 	}
 	
     public static void ShowMessageForDuration(string message, float duration) {
+		if (text == null)
+			return;
         text.text = message;
         showTime = duration;
         if (showTime > 0.0f) {
