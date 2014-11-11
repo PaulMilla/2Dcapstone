@@ -16,6 +16,11 @@ public class PlayerInput : MonoBehaviour {
 		audioRewindLoop = transform.Find ("Sound").Find("Audio_Rewind_Loop").gameObject.GetComponent<AudioSource> ();
 		audioRewindBegin = transform.Find ("Sound").Find ("Audio_Rewind_Begin").gameObject.GetComponent<AudioSource> ();
 		audioRewindEnd = transform.Find ("Sound").Find ("Audio_Rewind_End").gameObject.GetComponent<AudioSource> ();
+		playerMovement.RewindEnd = () => {
+			audioRewindBegin.Play();
+			audioRewindLoop.Play();
+			createClone(playerMovement.cloneEvents);
+		};
 	}
 
 	void Update() {
@@ -27,34 +32,29 @@ public class PlayerInput : MonoBehaviour {
 	void ReadInput() {
 		if(Input.GetButtonDown("Rewind")) {
 			playerMovement.Rewind = true;
-			audioRewindBegin.Play();
-			audioRewindLoop.Play();
 		}
 
 		if(Input.GetButtonUp("Rewind")) {
-			if(playerMovement.Rewind) {
-				createClone(playerMovement.cloneEvents);
-			}
 			playerMovement.Rewind = false;
-			audioRewindEnd.Play();
-			audioRewindLoop.Stop();
 		}
 
-		if (Input.GetMouseButtonDown(0)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Interactable"))) {
-				playerMovement.MoveTo(hit, true);
+		if (!playerMovement.Rewind) {
+			if (Input.GetMouseButtonDown(0)) {
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hit;
+				if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Interactable"))) {
+					playerMovement.MoveTo(hit, true);
+				}
 			}
-		}
-		else if(Input.GetMouseButton(0)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Interactable"))) {
-                playerMovement.MoveTo(hit);
-            }
-			else if(Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Floor"))) {
-				playerMovement.MoveTo(hit);
+			else if (Input.GetMouseButton(0)) {
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hit;
+				if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Interactable"))) {
+					playerMovement.MoveTo(hit);
+				}
+				else if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Floor"))) {
+					playerMovement.MoveTo(hit);
+				}
 			}
 		}
 	}
