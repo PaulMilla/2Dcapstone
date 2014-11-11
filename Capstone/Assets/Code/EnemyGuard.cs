@@ -13,7 +13,7 @@ public class EnemyGuard : Activatable {
 
 	public float confusedTime = 3.0f;
 	public float pauseAfterKillTime = 3.0f;
-	public float hesitateTime = 1.0f;
+	public float hesitateTime = 0.3f;
 	private float confusedTimer;
 	private float pauseAfterKillTimer;
 	private float hesitateTimer;
@@ -231,6 +231,7 @@ public class EnemyGuard : Activatable {
 
     void Hesitate() {
         hesitateTimer -= Time.deltaTime;
+		this.transform.LookAt(chaseTarget);
         if (hesitateTimer <= 0.0f) {
             myState = State.Chasing;
         }
