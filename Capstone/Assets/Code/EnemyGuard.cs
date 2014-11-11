@@ -6,36 +6,92 @@ using System.Collections;
 // But since the AI is simple, we might not need to do that
 
 public class EnemyGuard : Activatable {
-	// An int to keep track of which direction we are along the patrol route
-	// If 1, we are incrementing our route, we are going backwards
-	public bool offPatrolRoute = false;
 	public float PursuitSpeed;
 	public float PatrolSpeed;
+	public bool standingGuard;
 	public Transform path;
-	public bool standingGuard = false;
-	public bool movementEnabled {get; set;}
 
+	public float confusedTime = 3.0f;
 	public float pauseAfterKillTime = 3.0f;
-	float pauseAfterKillTimer;
-	bool isPausingAfterKill;
+	public float hesitateTime = 0.3f;
+	private float confusedTimer;
+	private float pauseAfterKillTimer;
+	private float hesitateTimer;
 
-	Transform[] patrolWaypoints; 
+	bool offPatrolRoute = false;
+
 	int targetWaypoint; 
+	Vector3[] patrolWaypoints; 
 
 	NavMeshAgent agent;
-	EnemyVision vision;
-
-	Vector3 lastSeenPosition;
-	Vector3 initialPosition;
-	Quaternion initialRotation;
-	bool chasing = false;
-
 	TextMesh emoticon;
-	
-	[SerializeField]
-	private float investigateTime = 3.0f;
-	private float investigateTimer = 0.0f;
 
+	Transform chaseTarget;
+	Vector3 lastSeenPosition;
+	Quaternion initialRotation;
+
+	enum State {
+		Idle,
+		StandGuard,
+		Patrolling,
+		Chasing,
+		Confused,
+        Hesitating,
+		Satisfied,
+        Rewinding,
+		Investigating
+	}
+	State _myState;
+	State myState {
+		get{ return _myState; }
+		set{
+			_myState = value;
+			switch(value) {
+			case State.Idle:
+				break;
+			case State.Patrolling:
+				emoticon.text = "Patrolling";
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
+				this.agent.speed = PatrolSpeed;
+                offPatrolRoute = false;
+				break;
+			case State.Chasing:
+				emoticon.text = "Chase!!!!";
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Chasing); 
+                this.agent.speed = PursuitSpeed;
+				offPatrolRoute = true;
+				break;
+			case State.Confused:
+				emoticon.text = "?";
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Confused);
+				confusedTimer = confusedTime;
+				break;
+            case State.Hesitating:
+                emoticon.text = "!";
+                //TODO: Animation?
+                hesitateTimer = hesitateTime;
+                break;
+			case State.Satisfied:
+				emoticon.text = "Hahaha :)";
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Confused);
+				pauseAfterKillTimer = pauseAfterKillTime;
+				break;
+			case State.StandGuard:
+				emoticon.text = "Standing Guard!";
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Idle);
+				break;
+            case State.Rewinding:
+                break;
+			case State.Investigating:
+				emoticon.text = "Investigating";
+				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Chasing);
+				playSoundInvestigating();
+				break;
+			}
+		}
+	}
+
+	private Animator animator;
 	private const string ANIMATION_NUMBER_STRING = "AnimationNumber";
 	enum AnimationNumber {
 		Idle,
@@ -51,8 +107,6 @@ public class EnemyGuard : Activatable {
 	private AudioSource[] soundDialoguesSeesPlayer;
 	private AudioSource[] soundDialoguesBackToPatrol;
 	private AudioSource[] soundDialoguesInvestigate;
-
-	private Animator animator;
 
 	protected override void Start() {
 		base.Start();
@@ -71,45 +125,46 @@ public class EnemyGuard : Activatable {
 		animator = GetComponent<Animator>();
 		emoticon = GetComponentInChildren<TextMesh>();
 		agent = GetComponent<NavMeshAgent>();
-		vision = GetComponentInChildren<EnemyVision>();
 
 		// Initialize default variables
-		movementEnabled = true;
 		targetWaypoint = 0;
-		chasing = false;
+        confusedTimer = 0.0f;
+        hesitateTimer = 0.0f;
 		pauseAfterKillTimer = 0.0f;
-		isPausingAfterKill = false;
+		offPatrolRoute = false;
 		initialRotation = this.transform.rotation;
-		initialPosition = this.transform.position;
 
-		// Fix the y axis of the waypoint to our y position
-		if (!standingGuard) {
-			patrolWaypoints = path.GetComponentsInChildren<Transform>();
-			foreach (Transform waypoint in patrolWaypoints) {
-				Vector3 fixedPos = waypoint.position;
-				fixedPos.y = this.transform.position.y;
-				waypoint.position = fixedPos;
+		if(path == null || standingGuard) {
+			patrolWaypoints = new Vector3[]{this.transform.position};
+			standingGuard = true;
+		} else {
+			Transform[] pathPoints = path.GetComponentsInChildren<Transform>();
+			patrolWaypoints = new Vector3[pathPoints.Length];
+			for (int i = 0; i < pathPoints.Length; ++i) {
+				patrolWaypoints[i] = pathPoints[i].position;
+				patrolWaypoints[i].y = this.transform.position.y;
 			}
 		}
+
+		myState = State.Patrolling;
 	}
 
 	void FixedUpdate () {
-		// Implies that we are being moved by some other force (RewindManager, etc)
-		if (!Activated || !movementEnabled) {
-			if (!standingGuard && hasArrivedAt(GetPreviousWaypoint())) {
-				if(--targetWaypoint < 0)
-					targetWaypoint = patrolWaypoints.Length-1;
-			}
-			agent.Stop();
+        // Should probably be turned into it's own state?
+		if (!Activated) {
 			return;
 		}
 
-		if (vision.HasTarget()) { 	// WE HAVE A CLEAR SIGHT TO TARGET SO PURSUE
-			Chase();
-		} else if (chasing) { 		// NO TARGET BUT WE ARE IN PURSUIT
-			Investigate();
-		} else { 					// NO TARGET AND NOT IN PURSUIT, RETURN TO PATROL
-			Patrol();
+		switch(myState) {
+		case State.Idle: break;
+		case State.Patrolling:	Patrol(); break;
+		case State.Chasing:		Chase(); break;
+		case State.Confused:	Confused(); break;
+        case State.Hesitating:  Hesitate(); break;
+		case State.Satisfied:	Satisfied(); break;
+		case State.StandGuard:	StandGuard(); break;
+        case State.Rewinding:   CheckRewind(); break;
+		case State.Investigating: Investigating(); break;
 		}
 
 		UpdateMotorSound();
@@ -125,114 +180,122 @@ public class EnemyGuard : Activatable {
 		this.soundEffectMotor.pitch = map(agent.velocity.magnitude, 0.0f, this.agent.speed, 0.0f, maxValue);
 	}
 
-	void Investigate() {
-		// We arrived at the last spot we saw the player
-		if (hasArrivedAt(lastSeenPosition)) {
-			// This is the first iteration that we are in investigate mode
-			if (investigateTimer == 0.0f) {
-				playSoundInvestigating();
-			}
-
-			this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Confused);
-			if (investigateTimer >= investigateTime) {
-				chasing = false;
-				investigateTimer = 0.0f;
-				playSoundBackToPatrol();
-			} else {
-				emoticon.text = "?";
-				investigateTimer += Time.deltaTime;
-			}
-		} else {
-			// We haven't reached the spot where we last saw the player
-			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Chasing);
-			emoticon.text = "Investigating";
-			investigateTimer = 0.0f;
-			SetDestination(lastSeenPosition, PursuitSpeed);
-		}
-	}
-
 	void Chase() {
-		emoticon.text = "Chase!!!!";
-		this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Chasing); 
-		chasing = true;
-		offPatrolRoute = true;
-		lastSeenPosition = vision.GetTarget().position;
-		SetDestination(lastSeenPosition, PursuitSpeed);
+        if (chaseTarget == null || !HasLineOfSightTo(chaseTarget))
+            myState = State.Investigating;
+        else
+            lastSeenPosition = chaseTarget.position;
+
+		SetDestination(lastSeenPosition);
 	}
 
 	void Patrol() {
-		// PAUSE AFTER KILLING THE ENEMY
-		if (isPausingAfterKill) {
-			emoticon.text = "Hahaha :)";
-			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Confused);
-			if (pauseAfterKillTimer >= pauseAfterKillTime) {
-				isPausingAfterKill = false;
-				pauseAfterKillTimer = 0.0f;
-			} else {
-				pauseAfterKillTimer += Time.deltaTime;  
-			}
-
-			return;
-		}
-
-		// Else if the guard is standing guard, just go to the initial position
-		emoticon.text = "Patrolling";
-		this.agent.speed = PatrolSpeed;
-		if (standingGuard) {
+		// Guard is off route from chasing the player and needs to pick a point to return to
+		if (offPatrolRoute) {
 			offPatrolRoute = false;
-			// If the guard isn't at his station, go to it
-			if (!hasArrivedAt(initialPosition)) {
-				// Setting in motion
-				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
-				SetDestination(initialPosition, PatrolSpeed);
-				return;
-			}
-			// We are already at our position, so face the right way
-			else {
-				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Idle);
-				this.agent.Stop();
-				this.transform.rotation = initialRotation;
-				return;
-			}	
+			soundEffectMotorStart.Play();
+			targetWaypoint = ClosestWaypoint();
 		}
 
-		// The guard has a path, so follow it
-		else if (patrolWaypoints != null) {
-			// Guard is off route from chasing the player and needs to pick a point to return to
-			if (offPatrolRoute) {
-				offPatrolRoute = false;
-				// Find the nearest position in the Patrol Route and go there
-				float shortestDistance = Mathf.Infinity;
-				for (int i = 0; i < patrolWaypoints.Length; i++) {
-					if ((patrolWaypoints [i].position - this.transform.position).magnitude < shortestDistance) {
-						targetWaypoint = i;
-						shortestDistance = (patrolWaypoints [i].position - this.transform.position).magnitude;
-					}
-				}
+		// We've made it to our waypoint, so choose another one
+		if (this.hasArrivedAt (patrolWaypoints[targetWaypoint])) {
+			if (standingGuard) {
+				myState = State.StandGuard;
+				return;
 			}
-			// We've made it to our waypoint, so choose another one
-			if (this.hasArrivedAt (patrolWaypoints[targetWaypoint].position)) {
-				soundEffectMotorStart.Play();
-				if (targetWaypoint >= patrolWaypoints.Length - 1) {
-					targetWaypoint = 0;
-				} else {
-					targetWaypoint++;
-				}
-			}
-			Vector3 positionToGoTo = patrolWaypoints [targetWaypoint].position;
-			this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
-			SetDestination(positionToGoTo, PatrolSpeed);
+			soundEffectMotorStart.Play();
+			targetWaypoint = (targetWaypoint + 1) % patrolWaypoints.Length;
+		}
+
+		// Start moving to our new location
+		Vector3 positionToGoTo = patrolWaypoints[targetWaypoint];
+		SetDestination(positionToGoTo);
+	}
+
+	void Satisfied() {
+		pauseAfterKillTimer -= Time.deltaTime;
+		if (pauseAfterKillTimer <= 0.0f) {
+			myState = State.Patrolling;
+		}
+        agent.Stop();
+	}
+
+	void Confused() {
+		confusedTimer -= Time.deltaTime;
+		if(confusedTimer <= 0.0f) {
+			playSoundBackToPatrol();
+			myState = State.Patrolling;
+		}
+        agent.Stop();
+	}
+
+    void Hesitate() {
+        hesitateTimer -= Time.deltaTime;
+		this.transform.LookAt(chaseTarget);
+        if (hesitateTimer <= 0.0f) {
+            myState = State.Chasing;
+        }
+        agent.Stop();
+    }
+
+	void StandGuard() {
+		this.transform.rotation = initialRotation;
+		this.agent.Stop();
+	}
+
+    void CheckRewind() {
+        if (!standingGuard && hasArrivedAt(GetPreviousWaypoint())) {
+            targetWaypoint -= 1;
+            if(targetWaypoint < 0)
+                targetWaypoint = patrolWaypoints.Length-1;
+        }
+        agent.Stop();
+    }
+
+	void Investigating() {
+		if(hasArrivedAt(lastSeenPosition)) {
+			myState = State.Confused;
+		} else {
+			SetDestination(lastSeenPosition);
 		}
 	}
 
+	/**
+	 * We want to investigate the spot at the next available time. We don't want to
+	 * immediately send the Guard into Investigating mode in case we are still
+	 * hesitating/pausing for kill/confused/etc.
+	 */
+    public void Investigate(Vector3 spot) {
+        lastSeenPosition = spot;
+		chaseTarget = null;
+    }
+
+	int ClosestWaypoint() {
+		// Find the nearest position in the Patrol Route
+		int closest = 0;
+		float shortestDistance = Mathf.Infinity;
+		for (int i = 0; i < patrolWaypoints.Length; i++) {
+			if ((patrolWaypoints[i] - this.transform.position).magnitude < shortestDistance) {
+				closest = i;
+				shortestDistance = (patrolWaypoints[i] - this.transform.position).magnitude;
+			}
+		}
+		return closest;
+	}
+
 	public void SetDestination(Vector3 pos, float speed) {
+		this.agent.speed = speed;
+        SetDestination(pos);
+	}
+
+    private void SetDestination(Vector3 pos) {
 		Vector3 targetPos = pos;
 		targetPos.y = this.transform.position.y;  // So we never move in the y direction
 		this.transform.rigidbody.velocity = Vector3.zero;
 		this.transform.LookAt(targetPos);
-		this.agent.speed = speed;
-		this.agent.SetDestination (targetPos);
-	}
+		this.agent.SetDestination(targetPos);
+
+    }
 
 	public bool hasArrivedAt(Vector3 pos) {
 		pos.y = this.transform.position.y;
@@ -250,14 +313,18 @@ public class EnemyGuard : Activatable {
 			CharacterStatus characterStatus = collision.gameObject.GetComponent<CharacterStatus>();
 			characterStatus.Hit(2);
 			agent.Stop();
-			isPausingAfterKill = true;
-			chasing = false;
-			pauseAfterKillTimer = 0.0f;
+			myState = State.Satisfied;
 		}
 	}
 
-	public void SetTarget(Transform t) {
-		vision.SetTarget (t);
+	public void FoundTarget(Transform target) {
+		chaseTarget = target;
+        lastSeenPosition = target.position;
+		switch(myState) {
+		case State.Chasing: 		break;
+		case State.Investigating: 	myState = State.Chasing; break;
+		default: 					myState = State.Hesitating; break;
+		}
 	}
 
 	public bool HasLineOfSightTo(Transform t) {
@@ -267,8 +334,7 @@ public class EnemyGuard : Activatable {
 		if (Physics.Raycast (this.transform.position, direction.normalized, out hit, 1000)) {
 			if (hit.transform.Equals (t)) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -299,26 +365,22 @@ public class EnemyGuard : Activatable {
 		return b1 + (s-a1)*(b2-b1)/(a2-a1);
 	}
 
-
 	private int GetNextWaypoint() {
 		return (targetWaypoint+1) % patrolWaypoints.Length;
 	}
 
 	private Vector3 GetPreviousWaypoint() {
 		if (targetWaypoint - 1 < 0)
-			return patrolWaypoints[patrolWaypoints.Length - 1].position;
+			return patrolWaypoints[patrolWaypoints.Length - 1];
 		else
-			return patrolWaypoints[targetWaypoint - 1].position;
+			return patrolWaypoints[targetWaypoint - 1];
 	}
 
 	public void preRewind() {
-		movementEnabled = false;
+        myState = State.Rewinding;
 	}
 
 	public void postRewind() {
-		movementEnabled = true;
-		isPausingAfterKill = false;
-		chasing = false;
-        offPatrolRoute = false;
+        myState = State.Patrolling;
 	}
 }

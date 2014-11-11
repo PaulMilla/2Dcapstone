@@ -7,7 +7,6 @@ using System.Collections;
 
 public class EnemyVision : MonoBehaviour {
 	Transform target;
-	CharacterStatus targetStatus;
 	float fieldOfViewAngle = 60f;
 	EnemyGuard Enemy;
 
@@ -22,58 +21,37 @@ public class EnemyVision : MonoBehaviour {
 		if (PlayerMovement.Instance.Rewind) {
 			return;
 		}
+
 		// If the player is in the trigger sphere
 		if (other.tag.Equals("Player") || other.tag.Equals("Hologram")) {
 				
 			// Create a vector from the enemy to the player
 			Vector3 direction = other.transform.position - Enemy.transform.position;
 			float angle = Vector3.Angle(direction, transform.forward);
-
 			Debug.DrawRay(Enemy.transform.position,  direction.normalized * 1000, Color.white);
 
 			if (angle < fieldOfViewAngle) {
 				if (Enemy.HasLineOfSightTo(other.transform)) {
-					if (target != null) {
-						// Already have a target, switch if new target is closer
-						if (direction.magnitude < (other.transform.position - Enemy.transform.position).magnitude) {
-							// New Target!!
-							target = other.transform;
-							targetStatus = target.GetComponent<CharacterStatus>();
-							Enemy.playSoundSeesPlayer();
-						}
-					}
-					else {
+					if (target == null) {
 						// New Target!!
 						target = other.transform;
-						targetStatus = target.GetComponent<CharacterStatus>();
 						Enemy.playSoundSeesPlayer();
+						Enemy.FoundTarget(target);
 					}
 				} else if (other.transform.Equals(target)) {
+					//If we don't have line of sight, cancel target
 					target = null;
 				}
 			}
 		}
 	}
 
-	void OnTriggerExit (Collider other)
-	{
-		// If the target leaves the trigger zone...
-		if(other.gameObject.transform.Equals(target)) {
+	// If the target leaves the trigger zone...
+	void OnTriggerExit (Collider other) {
+		//if(other.gameObject.transform.Equals(target)) {
+		if (other.tag.Equals("Player") || other.tag.Equals("Hologram")) {
+            Enemy.Investigate(other.transform.position);
 			target = null;
-			targetStatus = null;
 		}
-	}
-
-	public bool HasTarget() {
-		return target != null && targetStatus.isDead == false;
-	}
-
-	public Transform GetTarget() {
-		return target;
-	}
-
-	public void SetTarget(Transform t) {
-		target = t;
-		targetStatus = t.GetComponent<CharacterStatus> ();
 	}
 }

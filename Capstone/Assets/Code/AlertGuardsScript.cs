@@ -15,7 +15,7 @@ public class AlertGuardsScript : Activatable {
 		if (!beenActivated) {
 			beenActivated = true;
 			foreach (EnemyGuard enemy in enemies) {
-				enemy.SetTarget(player.transform);
+				enemy.FoundTarget(player.transform);
 			}
 		}
 	}
