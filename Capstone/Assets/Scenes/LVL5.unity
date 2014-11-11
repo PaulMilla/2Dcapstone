@@ -19,7 +19,7 @@ RenderSettings:
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 5aab239cac7fe8a4c931693a7535da5c, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -3745,16 +3745,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 78c3410393765427899b1a6057f9e444, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -4630,7 +4630,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400004, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5.86199999
+      value: 5.86200047
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: m_LocalPosition.y
@@ -4638,7 +4638,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.27499998
+      value: 1.27500153
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4662,7 +4662,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: m_LocalScale.x
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: defaultActivated
@@ -6483,11 +6483,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -18.8299999
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -9.69999981
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -6515,7 +6515,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: orthographic size
-      value: -15
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: target
@@ -6532,6 +6532,18 @@ Prefab:
     - target: {fileID: 2000000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: near clip plane
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: m_BackGroundColor.r
+      value: .000738177623
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: m_BackGroundColor.g
+      value: .0126847243
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: m_BackGroundColor.b
+      value: .0313725509
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
@@ -8240,7 +8252,7 @@ Transform:
   m_PrefabInternal: {fileID: 231088508}
   m_GameObject: {fileID: 304913701}
   m_LocalRotation: {x: .369643867, y: .239117637, z: -.892399132, w: .0990457386}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -18.8299999, y: -9.69999981, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1671221635}
@@ -8317,7 +8329,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: .000738177623, g: .0126847243, b: .0313725509, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -8328,7 +8340,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: -15
+  orthographic size: -10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -10300,16 +10312,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: feb270a00cd771f4ba87d8b313019f79, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -12257,7 +12269,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: m_LocalScale.x
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: defaultActivated
@@ -18388,7 +18400,7 @@ NavMeshAgent:
   m_Height: 1.85000002
   m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &726291295
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21191,16 +21203,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 78c3410393765427899b1a6057f9e444, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -22381,7 +22393,7 @@ NavMeshAgent:
   m_Height: 1.85000002
   m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &867403948
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28315,7 +28327,7 @@ NavMeshAgent:
   m_Height: 1.85000002
   m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &1143241172
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29926,7 +29938,7 @@ Transform:
   m_GameObject: {fileID: 1180315503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.86200047, y: 8.23830032, z: -.724998474}
-  m_LocalScale: {x: 3.5, y: 4, z: .100000001}
+  m_LocalScale: {x: 4, y: 4, z: .100000001}
   m_Children:
   - {fileID: 1378187476}
   - {fileID: 389808397}
@@ -30008,8 +30020,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 5}
-  m_Center: {x: 0, y: 0, z: .5}
+  m_Size: {x: 1, y: 1, z: 10.5462046}
+  m_Center: {x: 1.44621026e-09, y: 0, z: -.727901518}
 --- !u!33 &1180315508
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -31427,16 +31439,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: feb270a00cd771f4ba87d8b313019f79, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -31840,7 +31852,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.47598743, z: 5.37079191}
+  m_Size: {x: 3, y: 5, z: 5.37079191}
   m_Center: {x: -1.41368446e-08, y: -.737993717, z: -.237176925}
 --- !u!33 &1226622428
 MeshFilter:
@@ -34570,16 +34582,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: feb270a00cd771f4ba87d8b313019f79, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -36003,16 +36015,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 78c3410393765427899b1a6057f9e444, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -36231,7 +36243,7 @@ NavMeshAgent:
   m_Height: 1.85000002
   m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &1379857965
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38087,7 +38099,7 @@ NavMeshAgent:
   m_Height: 1.85000002
   m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &1471349627
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38957,8 +38969,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 5}
-  m_Center: {x: 0, y: 0, z: .5}
+  m_Size: {x: 1, y: 1, z: 10.5462046}
+  m_Center: {x: 1.44621026e-09, y: 0, z: -.727901518}
 --- !u!33 &1493534825
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -39721,8 +39733,8 @@ Transform:
   m_PrefabInternal: {fileID: 198068179}
   m_GameObject: {fileID: 1502198867}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 5.86199999, y: 8.23830032, z: 1.27499998}
-  m_LocalScale: {x: 3.5, y: 4, z: .100000001}
+  m_LocalPosition: {x: 5.86200047, y: 8.23830032, z: 1.27500153}
+  m_LocalScale: {x: 4, y: 4, z: .100000001}
   m_Children:
   - {fileID: 823749666}
   - {fileID: 1217419840}
@@ -39804,8 +39816,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 5}
-  m_Center: {x: 0, y: 0, z: .5}
+  m_Size: {x: 1, y: 1, z: 10.5462046}
+  m_Center: {x: 1.44621026e-09, y: 0, z: -.727901518}
 --- !u!33 &1502198872
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -40017,16 +40029,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 78c3410393765427899b1a6057f9e444, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -41992,7 +42004,7 @@ NavMeshAgent:
   m_Height: 1.85000002
   m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &1587839171
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42260,7 +42272,7 @@ NavMeshAgent:
   m_Height: 1.85000002
   m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &1594943389
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42403,16 +42415,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: feb270a00cd771f4ba87d8b313019f79, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -49268,16 +49280,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 78c3410393765427899b1a6057f9e444, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -52277,8 +52289,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 5}
-  m_Center: {x: 0, y: 0, z: .5}
+  m_Size: {x: 1, y: 1, z: 10.5462046}
+  m_Center: {x: 1.44621026e-09, y: 0, z: -.727901518}
 --- !u!33 &2050748327
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -52826,7 +52838,7 @@ NavMeshAgent:
   m_Height: 1.85000002
   m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &2072746442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -54365,7 +54377,7 @@ NavMeshAgent:
   m_Height: 1.85000002
   m_BaseOffset: .910000026
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &2114046142
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -54480,16 +54492,16 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: feb270a00cd771f4ba87d8b313019f79, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
-  m_Pitch: 1.5
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
-  DopplerLevel: 0
-  MinDistance: 0
-  MaxDistance: 40
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -55052,8 +55064,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 5}
-  m_Center: {x: 0, y: 0, z: .5}
+  m_Size: {x: 1, y: 1, z: 10.5462046}
+  m_Center: {x: 1.44621026e-09, y: 0, z: -.727901518}
 --- !u!33 &2138534241
 MeshFilter:
   m_ObjectHideFlags: 0
