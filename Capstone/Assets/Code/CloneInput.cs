@@ -20,7 +20,7 @@ public class CloneInput : MonoBehaviour {
 	}
 	
 	void ReadInput() {
-		if (Input.GetButton ("Rewind")) {
+		if (PlayerMovement.Instance.Rewind) {
 			cloneMovement.Rewind = true;
 		} else {
 			cloneMovement.Rewind = false;

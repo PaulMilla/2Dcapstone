@@ -13,17 +13,13 @@ public class EnemyVision : MonoBehaviour {
 
 	void Start () {
 		Enemy = GetComponentInParent<EnemyGuard>();
-	}
-
-	void FixedUpdate() {
-		if (Input.GetKeyUp(KeyCode.Space)) {
+		PlayerMovement.Instance.RewindEnd += () => {
 			target = null;
-			return;
-		}
+		};
 	}
 
 	void OnTriggerStay(Collider other) {
-		if (Input.GetKey(KeyCode.Space)) {
+		if (PlayerMovement.Instance.Rewind) {
 			return;
 		}
 		// If the player is in the trigger sphere
