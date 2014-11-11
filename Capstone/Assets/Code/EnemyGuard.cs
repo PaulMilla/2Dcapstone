@@ -8,29 +8,27 @@ using System.Collections;
 public class EnemyGuard : Activatable {
 	public float PursuitSpeed;
 	public float PatrolSpeed;
-	public Transform path;
 	public bool standingGuard;
+	public Transform path;
 
-	private const float confusedTime = 3.0f;
-	private const float pauseAfterKillTime = 3.0f;
-	private const float hesitateTime = 1.0f;
+	public float confusedTime = 3.0f;
+	public float pauseAfterKillTime = 3.0f;
+	public float hesitateTime = 1.0f;
 	private float confusedTimer;
 	private float pauseAfterKillTimer;
 	private float hesitateTimer;
 
-	private bool offPatrolRoute = false;
+	bool offPatrolRoute = false;
 
-	Transform chaseTarget;
-	Transform[] patrolWaypoints; 
 	int targetWaypoint; 
+	Vector3[] patrolWaypoints; 
 
 	NavMeshAgent agent;
-	EnemyVision vision;
+	TextMesh emoticon;
 
+	Transform chaseTarget;
 	Vector3 lastSeenPosition;
 	Quaternion initialRotation;
-
-	TextMesh emoticon;
 
 	enum State {
 		Idle,
@@ -53,14 +51,14 @@ public class EnemyGuard : Activatable {
 				break;
 			case State.Patrolling:
 				emoticon.text = "Patrolling";
-				this.agent.speed = PatrolSpeed;
 				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Patrolling);
+				this.agent.speed = PatrolSpeed;
                 offPatrolRoute = false;
 				break;
 			case State.Chasing:
 				emoticon.text = "Chase!!!!";
-                this.agent.speed = PursuitSpeed;
 				this.animator.SetInteger(ANIMATION_NUMBER_STRING, (int)AnimationNumber.Chasing); 
+                this.agent.speed = PursuitSpeed;
 				offPatrolRoute = true;
 				break;
 			case State.Confused:
@@ -127,27 +125,24 @@ public class EnemyGuard : Activatable {
 		animator = GetComponent<Animator>();
 		emoticon = GetComponentInChildren<TextMesh>();
 		agent = GetComponent<NavMeshAgent>();
-		vision = GetComponentInChildren<EnemyVision>();
 
 		// Initialize default variables
 		targetWaypoint = 0;
-
         confusedTimer = 0.0f;
         hesitateTimer = 0.0f;
 		pauseAfterKillTimer = 0.0f;
 		offPatrolRoute = false;
 		initialRotation = this.transform.rotation;
-		if(patrolWaypoints == null) {
-			patrolWaypoints = new Transform[]{this.transform};
-		}
 
-		// Fix the y axis of the waypoint to our y position
-		if (!standingGuard) {
-			patrolWaypoints = path.GetComponentsInChildren<Transform>();
-			foreach (Transform waypoint in patrolWaypoints) {
-				Vector3 fixedPos = waypoint.position;
-				fixedPos.y = this.transform.position.y;
-				waypoint.position = fixedPos;
+		if(path == null || standingGuard) {
+			patrolWaypoints = new Vector3[]{this.transform.position};
+			standingGuard = true;
+		} else {
+			Transform[] pathPoints = path.GetComponentsInChildren<Transform>();
+			patrolWaypoints = new Vector3[pathPoints.Length];
+			for (int i = 0; i < pathPoints.Length; ++i) {
+				patrolWaypoints[i] = pathPoints[i].position;
+				patrolWaypoints[i].y = this.transform.position.y;
 			}
 		}
 
@@ -155,7 +150,7 @@ public class EnemyGuard : Activatable {
 	}
 
 	void FixedUpdate () {
-        // Should probably be turned into their own states?
+        // Should probably be turned into it's own state?
 		if (!Activated) {
 			return;
 		}
@@ -169,7 +164,7 @@ public class EnemyGuard : Activatable {
 		case State.Satisfied:	Satisfied(); break;
 		case State.StandGuard:	StandGuard(); break;
         case State.Rewinding:   CheckRewind(); break;
-		case State.Investigating: Investigate(); break;
+		case State.Investigating: Investigating(); break;
 		}
 
 		UpdateMotorSound();
@@ -186,16 +181,10 @@ public class EnemyGuard : Activatable {
 	}
 
 	void Chase() {
-		//offPatrolRoute = true; //TODO: Check if we really need this
-		// The hologram we were chasing suddenly dissappeared
-        if (chaseTarget == null)
-            myState = State.Confused;
-        else if (!vision.HasTarget())
+        if (chaseTarget == null || !HasLineOfSightTo(chaseTarget))
             myState = State.Investigating;
-        else if (HasLineOfSightTo(chaseTarget))
-            lastSeenPosition = chaseTarget.position;
         else
-            myState = State.Investigating;
+            lastSeenPosition = chaseTarget.position;
 
 		SetDestination(lastSeenPosition);
 	}
@@ -209,7 +198,7 @@ public class EnemyGuard : Activatable {
 		}
 
 		// We've made it to our waypoint, so choose another one
-		if (this.hasArrivedAt (patrolWaypoints[targetWaypoint].position)) {
+		if (this.hasArrivedAt (patrolWaypoints[targetWaypoint])) {
 			if (standingGuard) {
 				myState = State.StandGuard;
 				return;
@@ -219,7 +208,7 @@ public class EnemyGuard : Activatable {
 		}
 
 		// Start moving to our new location
-		Vector3 positionToGoTo = patrolWaypoints[targetWaypoint].position;
+		Vector3 positionToGoTo = patrolWaypoints[targetWaypoint];
 		SetDestination(positionToGoTo);
 	}
 
@@ -234,8 +223,8 @@ public class EnemyGuard : Activatable {
 	void Confused() {
 		confusedTimer -= Time.deltaTime;
 		if(confusedTimer <= 0.0f) {
-			myState = State.Patrolling;
 			playSoundBackToPatrol();
+			myState = State.Patrolling;
 		}
         agent.Stop();
 	}
@@ -262,7 +251,7 @@ public class EnemyGuard : Activatable {
         agent.Stop();
     }
 
-	void Investigate() {
+	void Investigating() {
 		if(hasArrivedAt(lastSeenPosition)) {
 			myState = State.Confused;
 		} else {
@@ -270,14 +259,24 @@ public class EnemyGuard : Activatable {
 		}
 	}
 
+	/**
+	 * We want to investigate the spot at the next available time. We don't want to
+	 * immediately send the Guard into Investigating mode in case we are still
+	 * hesitating/pausing for kill/confused/etc.
+	 */
+    public void Investigate(Vector3 spot) {
+        lastSeenPosition = spot;
+		chaseTarget = null;
+    }
+
 	int ClosestWaypoint() {
-		// Find the nearest position in the Patrol Route and go there
+		// Find the nearest position in the Patrol Route
 		int closest = 0;
 		float shortestDistance = Mathf.Infinity;
 		for (int i = 0; i < patrolWaypoints.Length; i++) {
-			if ((patrolWaypoints [i].position - this.transform.position).magnitude < shortestDistance) {
+			if ((patrolWaypoints[i] - this.transform.position).magnitude < shortestDistance) {
 				closest = i;
-				shortestDistance = (patrolWaypoints [i].position - this.transform.position).magnitude;
+				shortestDistance = (patrolWaypoints[i] - this.transform.position).magnitude;
 			}
 		}
 		return closest;
@@ -317,19 +316,15 @@ public class EnemyGuard : Activatable {
 		}
 	}
 
-	public void SetTarget(Transform t) {
-		vision.SetTarget (t);
+	public void FoundTarget(Transform target) {
+		chaseTarget = target;
+        lastSeenPosition = target.position;
+		switch(myState) {
+		case State.Chasing: 		break;
+		case State.Investigating: 	myState = State.Chasing; break;
+		default: 					myState = State.Hesitating; break;
+		}
 	}
-
-	public void ChaseTarget(Transform t) {
-		chaseTarget = t;
-        lastSeenPosition = t.position;
-		myState = State.Hesitating;
-	}
-
-    public void Investigate(Vector3 spot) {
-        lastSeenPosition = spot;
-    }
 
 	public bool HasLineOfSightTo(Transform t) {
 		Vector3 direction = t.position - this.transform.position;
@@ -338,8 +333,7 @@ public class EnemyGuard : Activatable {
 		if (Physics.Raycast (this.transform.position, direction.normalized, out hit, 1000)) {
 			if (hit.transform.Equals (t)) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -376,9 +370,9 @@ public class EnemyGuard : Activatable {
 
 	private Vector3 GetPreviousWaypoint() {
 		if (targetWaypoint - 1 < 0)
-			return patrolWaypoints[patrolWaypoints.Length - 1].position;
+			return patrolWaypoints[patrolWaypoints.Length - 1];
 		else
-			return patrolWaypoints[targetWaypoint - 1].position;
+			return patrolWaypoints[targetWaypoint - 1];
 	}
 
 	public void preRewind() {
