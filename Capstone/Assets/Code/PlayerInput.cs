@@ -17,8 +17,8 @@ public class PlayerInput : MonoBehaviour {
 		audioRewindBegin = transform.Find ("Sound").Find ("Audio_Rewind_Begin").gameObject.GetComponent<AudioSource> ();
 		audioRewindEnd = transform.Find ("Sound").Find ("Audio_Rewind_End").gameObject.GetComponent<AudioSource> ();
 		playerMovement.RewindEnd = () => {
-			audioRewindBegin.Play();
-			audioRewindLoop.Play();
+			audioRewindEnd.Play();
+			audioRewindLoop.Stop();
 			createClone(playerMovement.cloneEvents);
 		};
 	}
@@ -32,6 +32,8 @@ public class PlayerInput : MonoBehaviour {
 	void ReadInput() {
 		if(Input.GetButtonDown("Rewind")) {
 			playerMovement.Rewind = true;
+			audioRewindBegin.Play();
+			audioRewindLoop.Play();
 		}
 
 		if(Input.GetButtonUp("Rewind")) {
