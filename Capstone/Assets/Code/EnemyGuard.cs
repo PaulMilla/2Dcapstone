@@ -9,7 +9,7 @@ public class EnemyGuard : Activatable {
 	public Transform path;
 	public float PursuitSpeed = 7.0f;
 	public float PatrolSpeed  = 3.0f;
-	public float RotationSpeed = 5.0f;
+	public float RotationSpeed = 180.0f;
 	public bool standingGuard = false;
 
 	public float confusedTime = 3.0f;
