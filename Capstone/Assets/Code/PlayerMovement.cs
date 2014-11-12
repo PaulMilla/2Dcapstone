@@ -7,7 +7,8 @@ public class PlayerMovement : CharacterMovement {
 	public Stack<Event> cloneEvents {get; private set;}
 
 	public static PlayerMovement Instance;
-
+	[SerializeField]
+	private float rewindRadius = 8;
 	public bool Rewind {
 		get { return rewind; }
 		set {
@@ -65,7 +66,7 @@ public class PlayerMovement : CharacterMovement {
 		if (!Rewind) {
 			return true;
 		}
-		Collider[] nearyByEnemies = Physics.OverlapSphere(transform.position, 10, 1 << LayerMask.NameToLayer("Enemy"));
+		Collider[] nearyByEnemies = Physics.OverlapSphere(transform.position, rewindRadius, 1 << LayerMask.NameToLayer("Enemy"));
 		return nearyByEnemies.Length == 0;
 	}
 }
