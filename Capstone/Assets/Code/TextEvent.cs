@@ -7,7 +7,7 @@ public class TextEvent : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.tag.Equals("Player")) {
-            GUITextBox.ShowMessageForDuration(text, duration);
+            UI.Dialog.ShowMessageForDuration(text, duration);
         }
     }
 }
