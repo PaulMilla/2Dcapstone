@@ -4623,13 +4623,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultActivated: 1
-  offPatrolRoute: 0
+  path: {fileID: 1468345025}
   PursuitSpeed: 7
   PatrolSpeed: 3
-  path: {fileID: 1468345025}
+  RotationSpeed: 180
   standingGuard: 0
+  confusedTime: 3
   pauseAfterKillTime: 3
-  investigateTime: 3
+  hesitateTime: .300000012
 --- !u!195 &171214816
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5728,13 +5729,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultActivated: 1
-  offPatrolRoute: 0
+  path: {fileID: 1273802942}
   PursuitSpeed: 7
   PatrolSpeed: 3
-  path: {fileID: 1273802942}
+  RotationSpeed: 180
   standingGuard: 0
+  confusedTime: 3
   pauseAfterKillTime: 3
-  investigateTime: 3
+  hesitateTime: .300000012
 --- !u!195 &220363478
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6587,6 +6589,10 @@ Prefab:
       propertyPath: m_Name
       value: EnemyGuard
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
+      propertyPath: RotationSpeed
+      value: 180
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
   m_RootGameObject: {fileID: 220363473}
@@ -6801,13 +6807,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultActivated: 1
-  offPatrolRoute: 0
+  path: {fileID: 0}
   PursuitSpeed: 3
   PatrolSpeed: 3
-  path: {fileID: 0}
+  RotationSpeed: 180
   standingGuard: 1
+  confusedTime: 3
   pauseAfterKillTime: 3
-  investigateTime: 3
+  hesitateTime: .300000012
 --- !u!195 &298554281
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -13829,6 +13836,10 @@ Prefab:
       propertyPath: path
       value: 
       objectReference: {fileID: 634288091}
+    - target: {fileID: 11400002, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
+      propertyPath: RotationSpeed
+      value: 180
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
   m_RootGameObject: {fileID: 1848283826}
@@ -28470,6 +28481,10 @@ Prefab:
       propertyPath: path
       value: 
       objectReference: {fileID: 1468345025}
+    - target: {fileID: 11400002, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
+      propertyPath: RotationSpeed
+      value: 180
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
   m_RootGameObject: {fileID: 171214811}
@@ -29693,6 +29708,10 @@ Prefab:
       propertyPath: path
       value: 
       objectReference: {fileID: 1396994886}
+    - target: {fileID: 11400002, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
+      propertyPath: RotationSpeed
+      value: 180
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
   m_RootGameObject: {fileID: 2144859411}
@@ -30796,6 +30815,10 @@ Prefab:
     - target: {fileID: 11400002, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
       propertyPath: PursuitSpeed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
+      propertyPath: RotationSpeed
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
@@ -33937,13 +33960,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultActivated: 1
-  offPatrolRoute: 0
+  path: {fileID: 634288091}
   PursuitSpeed: 7
   PatrolSpeed: 3
-  path: {fileID: 634288091}
+  RotationSpeed: 180
   standingGuard: 0
+  confusedTime: 3
   pauseAfterKillTime: 3
-  investigateTime: 3
+  hesitateTime: .300000012
 --- !u!195 &1848283831
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -34489,7 +34513,7 @@ GameObject:
   - 223: {fileID: 1908620038}
   - 114: {fileID: 1908620037}
   m_Layer: 5
-  m_Name: User Interface
+  m_Name: UserInterface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39191,13 +39215,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultActivated: 1
-  offPatrolRoute: 0
+  path: {fileID: 1396994886}
   PursuitSpeed: 7
   PatrolSpeed: 3
-  path: {fileID: 1396994886}
+  RotationSpeed: 180
   standingGuard: 0
+  confusedTime: 3
   pauseAfterKillTime: 3
-  investigateTime: 3
+  hesitateTime: .300000012
 --- !u!195 &2144859416
 NavMeshAgent:
   m_ObjectHideFlags: 0
