@@ -6,10 +6,11 @@ using System.Collections;
 // But since the AI is simple, we might not need to do that
 
 public class EnemyGuard : Activatable {
-	public float PursuitSpeed;
-	public float PatrolSpeed;
-	public bool standingGuard;
 	public Transform path;
+	public float PursuitSpeed = 7.0f;
+	public float PatrolSpeed  = 3.0f;
+	public float RotationSpeed = 5.0f;
+	public bool standingGuard = false;
 
 	public float confusedTime = 3.0f;
 	public float pauseAfterKillTime = 3.0f;
@@ -207,9 +208,22 @@ public class EnemyGuard : Activatable {
 			targetWaypoint = (targetWaypoint + 1) % patrolWaypoints.Length;
 		}
 
-		// Start moving to our new location
+		/**
+		 * Start moving to our target position. Small rotations are taken care of in
+		 * SetDestination. For any rotations larget than 10 degrees we take the time
+		 * to stop and rotate in place before continue moving.
+		 */
 		Vector3 positionToGoTo = patrolWaypoints[targetWaypoint];
-		SetDestination(positionToGoTo);
+		Vector3 direction = (positionToGoTo - transform.position).normalized;
+		Quaternion lookRotation = Quaternion.LookRotation(direction);
+		float angleDifference = Vector3.Angle(transform.forward, direction);
+		// Snap the last 10 angles to allow for leeway
+		// Multiply by Time.deltaTime to allow us to freeze when setting deltaTime to 0
+		if (angleDifference > 10.0f) {
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, RotationSpeed*Time.deltaTime);
+		} else {
+			SetDestination(positionToGoTo);
+		}
 	}
 
 	void Satisfied() {
@@ -292,7 +306,9 @@ public class EnemyGuard : Activatable {
 		Vector3 targetPos = pos;
 		targetPos.y = this.transform.position.y;  // So we never move in the y direction
 		this.transform.rigidbody.velocity = Vector3.zero;
-		this.transform.LookAt(targetPos);
+		Vector3 direction = (targetPos - transform.position).normalized;
+		Quaternion _lookRotation = Quaternion.LookRotation(direction);
+		transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * this.agent.speed);
 		this.agent.SetDestination(targetPos);
 
     }
