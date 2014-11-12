@@ -47,7 +47,7 @@ public class PressureButton : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 newPosition = transform.position;
-		if (!Pressed && transform.position.y < upRestY) {
+		/*if (!Pressed && transform.position.y < upRestY) {
 			if ((transform.position.y + ButtonSpeed * Time.fixedDeltaTime) > upRestY) {
 				newPosition.y = upRestY;
 			} else {
@@ -62,7 +62,7 @@ public class PressureButton : MonoBehaviour {
 			}
 		}
 		transform.position = newPosition;
-
+		*/
 		framesSinceLastDetected++;
 		if (framesSinceLastDetected > 3) {
 				Pressed = false;
