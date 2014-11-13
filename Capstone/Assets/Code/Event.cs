@@ -10,7 +10,7 @@ public class Event {
 
     public Event(Vector3 tpos, Vector3 cpos, Quaternion rot, Interactable interact, bool hasInteracted)
     {
-        targetPosition = tpos;
+        targetPosition = cpos;
         position = cpos;
         interactable = interact;
         rotation = rot;
