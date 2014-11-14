@@ -16,14 +16,14 @@ public class GuardKillMessage : MonoBehaviour {
 	void Update() {
 		float dist = Vector3.Distance(this.transform.position, player.transform.position);
 		if(dist < 2.0f && showCount > 0) {
-			GUITextBox.ShowMessageForDuration(text, duration);
+			UI.Dialog.ShowMessageForDuration(text, duration);
 			--showCount;
 		}
 	}
 	
 	void OnTriggerExit(Collider other) {
 		if (other.tag.Equals("Player")) {
-			GUITextBox.Hide();
+			UI.Dialog.Hide();
 		}
 	}
 }

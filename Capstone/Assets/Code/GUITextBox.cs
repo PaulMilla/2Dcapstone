@@ -3,9 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class GUITextBox : MonoBehaviour {
-    private static Animator dialog;
-    private static Text text;
-    private static float showTime;
+    private Animator dialog;
+    private Text text;
+    private float showTime;
 
 	// Use this for initialization
 	void Start () {
@@ -14,9 +14,8 @@ public class GUITextBox : MonoBehaviour {
         showTime = 0.0f;
 	}
 	
-    public static void ShowMessageForDuration(string message, float duration) {
-		if (text == null)
-			return;
+    public void ShowMessageForDuration(string message, float duration) {
+		if (text == null) return;
         text.text = message;
         showTime = duration;
         if (showTime > 0.0f) {
@@ -24,11 +23,11 @@ public class GUITextBox : MonoBehaviour {
         }
     }
 
-    public static void Hide() {
+    public void Hide() {
         dialog.Play("GUITextBox_Hide");
     }
 
-    public static void Show() {
+    public void Show() {
         dialog.Play("GUITextBox_Show");
     }
 
