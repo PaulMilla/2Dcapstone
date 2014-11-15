@@ -15,10 +15,12 @@ public class ClickLocationIndicator : MonoBehaviour {
 	}
 
 
-	public void MoveTo (Vector3 indicatorPos)
+	public void MoveTo (Vector3 indicatorPos, bool animate)
 	{
 		this.renderer.enabled = true;
 		this.transform.position = indicatorPos;
-		this.animator.Play("Click", 0, 0.0f);
+		if(animate) {
+			this.animator.Play("Click", 0, 0.0f);
+		}
 	}
 }

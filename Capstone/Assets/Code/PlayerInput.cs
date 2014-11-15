@@ -33,6 +33,7 @@ public class PlayerInput : MonoBehaviour {
 
 	void ReadInput() {
 		if(Input.GetButtonDown("Rewind")) {
+			ClickLocationIndicator.Instance.MoveTo(this.transform.position, false);
 			playerMovement.Rewind = true;
 			audioRewindBegin.Play();
 			audioRewindLoop.Play();
@@ -59,7 +60,7 @@ public class PlayerInput : MonoBehaviour {
 				else if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Floor"))) {
 					Vector3 indicatorPos = hit.point;
 					indicatorPos.y += 0.1f;
-					ClickLocationIndicator.Instance.MoveTo(indicatorPos);
+					ClickLocationIndicator.Instance.MoveTo(indicatorPos, true);
 					playerMovement.MoveTo(hit);
 				}
 			}
