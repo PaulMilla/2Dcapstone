@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerInput : MonoBehaviour {
 	public GameObject hologramPrefab;
+	public GameObject clickLocationIndicatorPrefab;
 	protected PlayerMovement playerMovement;
 	protected GameObject clone;
 
@@ -21,6 +22,7 @@ public class PlayerInput : MonoBehaviour {
 			audioRewindLoop.Stop();
 			createClone(playerMovement.cloneEvents);
 		};
+		GameObject.Instantiate(clickLocationIndicatorPrefab);
 	}
 
 	void Update() {
@@ -55,6 +57,9 @@ public class PlayerInput : MonoBehaviour {
 					playerMovement.MoveTo(hit);
 				}
 				else if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Floor"))) {
+					Vector3 indicatorPos = hit.point;
+					indicatorPos.y += 0.1f;
+					ClickLocationIndicator.Instance.MoveTo(indicatorPos);
 					playerMovement.MoveTo(hit);
 				}
 			}
