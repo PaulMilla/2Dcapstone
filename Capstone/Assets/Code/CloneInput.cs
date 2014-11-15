@@ -35,6 +35,6 @@ public class CloneInput : MonoBehaviour {
 		   recordedInputs.Peek() == null)
 			return;
 		Event recordedEvent = recordedInputs.Pop();
-		cloneMovement.MoveTo(recordedEvent.targetPosition, recordedEvent.interactable, recordedEvent.hasInteracted);
+		cloneMovement.MoveTo(recordedEvent.position, recordedEvent.interactable, recordedEvent.hasInteracted);
     }
 }
