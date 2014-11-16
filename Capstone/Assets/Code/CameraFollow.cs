@@ -17,7 +17,6 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		Debug.LogError("Trnsfrom " + transform.position);
 		if (panning)
 			return;
 		Vector3 targetCamPos = target.position + offset;

@@ -54,7 +54,7 @@ public class CharacterMovement : MonoBehaviour {
 		current.rigidbody.velocity = Vector3.zero;
 		current.rigidbody.MovePosition(Vector3.MoveTowards(current.position, targetPosition, movementSpeed * Time.fixedDeltaTime));*/
 		CheckActivations();
-		recordedEvents.Push(new Event(targetPosition, current.position, current.rotation, interactable, resetHasInteracted));
+		recordedEvents.Push(new Event(current.position, current.rotation, interactable, resetHasInteracted));
 		resetHasInteracted = false;
 	}
 	
