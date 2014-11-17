@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -44,6 +45,9 @@ public class PlayerInput : MonoBehaviour {
 		}
 
 		if (!playerMovement.Rewind) {
+			if (EventSystem.current.IsPointerOverGameObject())
+				return;
+
 			if (Input.GetMouseButtonDown(0)) {
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
