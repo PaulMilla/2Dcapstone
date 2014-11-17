@@ -47,6 +47,9 @@ public class PlayerMovement : CharacterMovement {
 	}
 
 	void FixedUpdate() {
+		if (GameState.Paused) {
+			return;
+		}
 		if(Rewind) {
 			cloneEvents.Push(DoRewind());
 		} else {

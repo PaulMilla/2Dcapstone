@@ -112,6 +112,8 @@ public class EnemyGuard : Activatable {
 	protected override void Start() {
 		base.Start();
 
+		GameState.StartPaused += () => { agent.Stop(); };
+		GameState.EndPaused += () => { agent.Resume(); };
 		// Sound stuff
 		soundBank = this.transform.FindChild ("SoundBank");
 		soundEffectAlert = soundBank.FindChild ("Alert").GetComponent<AudioSource> ();
@@ -151,6 +153,9 @@ public class EnemyGuard : Activatable {
 	}
 
 	void FixedUpdate () {
+		if (GameState.Paused) {
+			return;
+		}
         // Should probably be turned into it's own state?
 		if (!Activated) {
 			return;

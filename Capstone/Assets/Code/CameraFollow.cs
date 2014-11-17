@@ -25,6 +25,7 @@ public class CameraFollow : MonoBehaviour {
 			if (target.collider.bounds.Intersects(PanEvents[i].triggerCollider.bounds)) {
 				StartCoroutine(PanCamera(PanEvents[i]));
 				PanEvents.RemoveAt(i--);
+				GameState.Paused = true;
 				break;
 			}
 		}
@@ -52,6 +53,7 @@ public class CameraFollow : MonoBehaviour {
 			yield return new WaitForEndOfFrame();
 		}
 		panning = false;
+		GameState.Paused = false;
 		yield return null;
 	}
 }
