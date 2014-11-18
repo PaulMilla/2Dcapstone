@@ -6,6 +6,7 @@ public class SystemMessage : MonoBehaviour {
     private Text text;
 	private Image image;
 	private Image buttonImage;
+	private Text buttonText;
 	private Button button;
 	private float oldTimeScale;
 	private bool _active;
@@ -17,6 +18,7 @@ public class SystemMessage : MonoBehaviour {
 			image.enabled = value;
 			button.enabled = value && clickToGoAway;
 			buttonImage.enabled = value && clickToGoAway;
+			buttonText.enabled = value && clickToGoAway;
 		}
 	}
 	public bool clickToGoAway {get;set;}
@@ -26,7 +28,8 @@ public class SystemMessage : MonoBehaviour {
         text = GetComponentInChildren<Text>();
 		image = GetComponent<Image>();
 		button = GetComponentInChildren<Button>();
-		buttonImage = GetComponentInChildren<Button>().image;
+		buttonImage = GameObject.Find("Checkmark").GetComponent<Image>();
+		buttonText = GameObject.Find("Got it").GetComponent<Text>();
 		oldTimeScale = Time.timeScale;
 		Active = false;
 	}
