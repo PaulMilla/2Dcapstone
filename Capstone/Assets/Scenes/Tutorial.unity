@@ -13759,6 +13759,7 @@ GameObject:
   - 114: {fileID: 643037465}
   - 114: {fileID: 643037464}
   - 114: {fileID: 643037463}
+  - 95: {fileID: 643037466}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -13934,6 +13935,21 @@ MonoBehaviour:
   shader: {fileID: 4800000, guid: e9ba2083ad114a07d000fbfb8d76c639, type: 3}
   blurAmount: .800000012
   extraBlur: 0
+--- !u!95 &643037466
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 643037455}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0adda01c37950554dbd8d5dad066c86f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &643098385
 GameObject:
   m_ObjectHideFlags: 0
@@ -25965,18 +25981,6 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -5.78000021
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: m_LocalRotation.x
       value: .369643897
       objectReference: {fileID: 0}
@@ -25995,10 +25999,6 @@ Prefab:
     - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
-      propertyPath: orthographic size
-      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: target
