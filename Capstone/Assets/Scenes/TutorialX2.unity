@@ -11310,7 +11310,7 @@ Transform:
   - {fileID: 1240698687}
   - {fileID: 643037456}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 24
 --- !u!1 &537743436
 GameObject:
   m_ObjectHideFlags: 0
@@ -11569,7 +11569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd389cd16d37847008b594037256b9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: HOLD DOWN space to rewind.
+  text: HOLD DOWN space to rewind a bit.
   clickToGoAway: 0
   keepActivating: 0
   ActivateCount: 1
@@ -13690,7 +13690,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1240698687}
   smoothing: 5
-  PanEvents: []
+  PanEvents:
+  - cameraPosition: {x: -2.8499999, y: .0299999993, z: 7.59000015}
+    triggerCollider: {fileID: 1391898732}
+    zoomCameraSize: -2
+    panSpeed: 1
+    lookDuration: 1
+  - cameraPosition: {x: 11, y: -6, z: 28}
+    triggerCollider: {fileID: 100054481}
+    zoomCameraSize: -3
+    panSpeed: 1
+    lookDuration: 1
 --- !u!114 &643037459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15751,7 +15761,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: f25483c2671a146d2bd6985bf2fcb5fe, type: 2}
       propertyPath: m_Name
@@ -18625,6 +18635,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22400018, guid: 16a4be681de1f4ecf92f61be903b6e86, type: 2}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 16a4be681de1f4ecf92f61be903b6e86, type: 2}
+      propertyPath: m_Color.r
+      value: .992647052
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 16a4be681de1f4ecf92f61be903b6e86, type: 2}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 16a4be681de1f4ecf92f61be903b6e86, type: 2}
+      propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -25676,7 +25698,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: PanEvents.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: m_LocalPosition.x
@@ -25732,15 +25754,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: PanEvents.Array.data[0].cameraPosition.x
-      value: -20
+      value: -2.8499999
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: PanEvents.Array.data[0].cameraPosition.y
-      value: 2
+      value: .0299999993
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: PanEvents.Array.data[0].cameraPosition.z
-      value: 13
+      value: 7.59000015
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: PanEvents.Array.data[0].triggerCollider
@@ -25752,7 +25774,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: PanEvents.Array.data[0].lookDuration
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: m_BackGroundColor.r
@@ -25768,6 +25790,566 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: PanEvents.Array.data[0].zoomCameraSize
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[1].cameraPosition.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[1].cameraPosition.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[1].cameraPosition.z
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[1].triggerCollider
+      value: 
+      objectReference: {fileID: 100054481}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[1].zoomCameraSize
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[1].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[1].lookDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[2].cameraPosition.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[2].cameraPosition.y
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[2].cameraPosition.z
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[2].triggerCollider
+      value: 
+      objectReference: {fileID: 1488773094}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[2].zoomCameraSize
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[2].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[2].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[3].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[3].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[3].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[3].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[3].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[3].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[3].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[4].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[4].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[4].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[4].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[4].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[4].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[4].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[5].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[5].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[5].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[5].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[5].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[5].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[5].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[6].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[6].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[6].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[6].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[6].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[6].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[6].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[7].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[7].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[7].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[7].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[7].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[7].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[7].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[8].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[8].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[8].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[8].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[8].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[8].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[8].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[9].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[9].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[9].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[9].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[9].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[9].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[9].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[10].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[10].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[10].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[10].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[10].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[10].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[10].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[11].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[11].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[11].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[11].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[11].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[11].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[11].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[12].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[12].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[12].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[12].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[12].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[12].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[12].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[13].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[13].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[13].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[13].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[13].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[13].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[13].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[14].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[14].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[14].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[14].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[14].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[14].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[14].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[15].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[15].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[15].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[15].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[15].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[15].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[15].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[16].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[16].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[16].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[16].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[16].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[16].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[16].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[17].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[17].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[17].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[17].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[17].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[17].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[17].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[18].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[18].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[18].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[18].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[18].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[18].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[18].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[19].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[19].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[19].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[19].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[19].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[19].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[19].lookDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[20].cameraPosition.x
+      value: -2.8499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[20].cameraPosition.y
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[20].cameraPosition.z
+      value: 7.59000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[20].triggerCollider
+      value: 
+      objectReference: {fileID: 1391898732}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[20].zoomCameraSize
+      value: -1.45000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[20].panSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.data[20].lookDuration
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -26602,7 +27184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd389cd16d37847008b594037256b9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: AGENT, WELCOME TO TRAINING. Left click to move.
+  text: AGENT, Welcome to training. Left click to move.
   clickToGoAway: 1
   keepActivating: 0
   ActivateCount: 1
@@ -26618,7 +27200,7 @@ Transform:
   m_LocalScale: {x: 14.2248611, y: 2.60395312, z: 2.60395312}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
 --- !u!1 &1472078065
 GameObject:
   m_ObjectHideFlags: 0
@@ -29626,7 +30208,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 55db47bb6d234bf489270512381fe0f3, type: 2}
       propertyPath: path
@@ -30215,7 +30797,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e1166bd0f95084e04b827b6b19ae7af1, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1166bd0f95084e04b827b6b19ae7af1, type: 2}
@@ -30821,7 +31403,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: bb5dd04f46d944c10921ff12a54ef96a, type: 2}
       propertyPath: text
-      value: AGENT, WELCOME TO TRAINING. Left click to move.
+      value: AGENT, Welcome to training. Left click to move.
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bb5dd04f46d944c10921ff12a54ef96a, type: 2}
       propertyPath: m_LocalScale.x
@@ -32721,7 +33303,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: bb5dd04f46d944c10921ff12a54ef96a, type: 2}
       propertyPath: text
-      value: HOLD DOWN space to rewind.
+      value: HOLD DOWN space to rewind a bit.
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bb5dd04f46d944c10921ff12a54ef96a, type: 2}
       propertyPath: m_LocalScale.x
@@ -38434,7 +39016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .992647052, g: 0, b: 0, a: 1}
   m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 1

@@ -213,10 +213,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 469762176}
   m_RootOrder: 0
-  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMin: {x: .910192966, y: .78050971}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 22, y: 22}
+  m_AnchoredPosition: {x: -1.52587891e-05, y: 7.62939453e-06}
+  m_SizeDelta: {x: .200012207, y: .100006104}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &7965376
 MonoBehaviour:
@@ -253,8 +253,8 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_TargetGraphic: {fileID: 7965377}
   m_Interactable: 1
+  m_TargetGraphic: {fileID: 7965377}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -269,7 +269,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_Enabled: 1
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &7965377
@@ -284,11 +284,11 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1462,14 +1462,14 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_TargetGraphic: {fileID: 84275090}
   m_Interactable: 1
+  m_TargetGraphic: {fileID: 84275090}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 84275088}
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 84275087}
+        m_MethodName: Clicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
@@ -1478,7 +1478,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: GUITextBox_Hide
           m_BoolArgument: 0
-        m_Enabled: 1
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &84275090
@@ -1493,7 +1493,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: .882352948}
   m_Sprite: {fileID: 21300000, guid: 77094456563a88b408f2ef71e23086c0, type: 3}
   m_Type: 1
@@ -3534,7 +3534,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_Sprite: {fileID: 0}
   m_Type: 0
@@ -4138,12 +4138,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: text
-      value: You HAVE TO trap that patrol guard in this room.  It's too fast to sneak
-        past.
+      value: You HAVE TO lock that patrol guard in this room.  The guard is too fast
+        to sneak by.
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: duration
-      value: 5
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: clickToGoAway
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
@@ -4804,8 +4808,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.5, y: -1.78813934e-07}
-  m_SizeDelta: {x: -27, y: -10}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -82.3079987, y: -10}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &309212465
 MonoBehaviour:
@@ -4819,7 +4823,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -5329,6 +5333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
 --- !u!4 &342803206
 Transform:
   m_ObjectHideFlags: 0
@@ -6911,6 +6917,8 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!224 &406669319
@@ -7611,6 +7619,8 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!1 &421872035
@@ -8114,10 +8124,10 @@ RectTransform:
   - {fileID: 309212464}
   m_Father: {fileID: 421136170}
   m_RootOrder: 4
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -.5, y: 0}
-  m_SizeDelta: {x: -430, y: -175}
+  m_AnchorMin: {x: .239223495, y: .241764069}
+  m_AnchorMax: {x: .760882735, y: .755764067}
+  m_AnchoredPosition: {x: -.5, y: .5}
+  m_SizeDelta: {x: -2, y: -2}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &469762177
 MonoBehaviour:
@@ -8143,7 +8153,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: .588235319}
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
@@ -13559,9 +13569,9 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 4bff7dae17d0ebc498b51ce69abffa0e, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 4bff7dae17d0ebc498b51ce69abffa0e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18160,8 +18170,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d923e3a3f2bb84e90b8725a6a2177a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: You HAVE TO trap that patrol guard in this room.  It's too fast to sneak past.
-  duration: 5
+  text: You HAVE TO lock that patrol guard in this room.  The guard is too fast to
+    sneak by.
+  clickToGoAway: 0
+  keepActivating: 0
+  ActivateCount: 1
+  closeOnButton: 27
+  isTimed: 1
+  duration: 8
 --- !u!65 &978458230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22872,7 +22888,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 21300000, guid: a4fa626587c3acd46af6a585e7c98c29, type: 3}
   m_Type: 0
@@ -23358,7 +23374,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 38ce5e3a33bbad1419355017d52176c5, type: 3}
@@ -28168,6 +28184,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Watch out, a lot of guards on this floor.
+  clickToGoAway: 1
+  keepActivating: 0
+  ActivateCount: 1
+  closeOnButton: 27
+  isTimed: 1
   duration: 3
 --- !u!65 &1503341435
 BoxCollider:
@@ -35314,6 +35335,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 532506083}
     m_Modifications:
+    - target: {fileID: 11400006, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
+      propertyPath: PanEvents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0d48c7fa1d40c49ef8baf1284bf4725e, type: 2}
       propertyPath: m_LocalPosition.x
       value: 11.6099997
@@ -37346,7 +37371,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -38522,7 +38547,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: .117647052, g: .117647052, b: .117647052, a: .698039234}
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
