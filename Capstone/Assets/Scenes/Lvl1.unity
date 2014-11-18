@@ -2968,8 +2968,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.5, y: -1.78813934e-07}
-  m_SizeDelta: {x: -27, y: -10}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -82.3079987, y: -10}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &109590961
 MonoBehaviour:
@@ -2983,7 +2983,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -5741,7 +5741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd389cd16d37847008b594037256b9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Agent, you're in.  You're wired to the Tech Team who have the layout.  They'll
+  text: Agent, you're in.  You're wired to the Tech Team who have the floorplan.  They'll
     try to help you.
   clickToGoAway: 1
   keepActivating: 0
@@ -9581,7 +9581,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -11732,6 +11732,7 @@ GameObject:
   - 114: {fileID: 643037465}
   - 114: {fileID: 643037464}
   - 114: {fileID: 643037463}
+  - 95: {fileID: 643037466}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -11897,6 +11898,21 @@ MonoBehaviour:
   shader: {fileID: 4800000, guid: e9ba2083ad114a07d000fbfb8d76c639, type: 3}
   blurAmount: .800000012
   extraBlur: 0
+--- !u!95 &643037466
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 643037455}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b2ffeb3bf1678343b51f74d9c6cbb74, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &648586123
 Prefab:
   m_ObjectHideFlags: 0
@@ -13940,7 +13956,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: duration
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: m_Size.x
@@ -13973,6 +13989,10 @@ Prefab:
     - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: m_LocalScale.x
       value: .102406502
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: clickToGoAway
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
@@ -14812,7 +14832,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: duration
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: m_Size.x
@@ -14845,6 +14865,10 @@ Prefab:
     - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: m_LocalScale.x
       value: .22285682
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: clickToGoAway
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
@@ -16574,7 +16598,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: .117647052, g: .117647052, b: .117647052, a: .698039234}
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
@@ -16937,8 +16961,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d923e3a3f2bb84e90b8725a6a2177a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: WAIT, a guard. Maybe you can trap him in that room there.
-  duration: 10
+  text: WAIT, a guard. Maybe you can shut him in that room there.
+  clickToGoAway: 0
+  keepActivating: 0
+  ActivateCount: 1
+  closeOnButton: 27
+  isTimed: 1
+  duration: 8
 --- !u!65 &1014065310
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17305,7 +17334,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: bb5dd04f46d944c10921ff12a54ef96a, type: 2}
       propertyPath: text
-      value: Agent, you're in.  You're wired to the Tech Team who have the layout.  They'll
+      value: Agent, you're in.  You're wired to the Tech Team who have the floorplan.  They'll
         try to help you.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -19496,10 +19525,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1742121796}
   m_RootOrder: 0
-  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMin: {x: .910192966, y: .78050971}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 22, y: 22}
+  m_AnchoredPosition: {x: -1.52587891e-05, y: 7.62939453e-06}
+  m_SizeDelta: {x: .200012207, y: .100006104}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1235695071
 MonoBehaviour:
@@ -19536,8 +19565,8 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_TargetGraphic: {fileID: 1235695072}
   m_Interactable: 1
+  m_TargetGraphic: {fileID: 1235695072}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -19552,7 +19581,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_Enabled: 1
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1235695072
@@ -19567,11 +19596,11 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -22743,6 +22772,8 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!1 &1418221674
@@ -23330,14 +23361,14 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_TargetGraphic: {fileID: 1446221770}
   m_Interactable: 1
+  m_TargetGraphic: {fileID: 1446221770}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1446221768}
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 1446221767}
+        m_MethodName: Clicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
@@ -23346,7 +23377,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: GUITextBox_Hide
           m_BoolArgument: 0
-        m_Enabled: 1
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1446221770
@@ -23361,7 +23392,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: .882352948}
   m_Sprite: {fileID: 21300000, guid: 77094456563a88b408f2ef71e23086c0, type: 3}
   m_Type: 1
@@ -23512,7 +23543,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Tech here. Coast is clear.
-  duration: 8
+  clickToGoAway: 0
+  keepActivating: 0
+  ActivateCount: 1
+  closeOnButton: 27
+  isTimed: 1
+  duration: 5
 --- !u!65 &1461128373
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25125,9 +25161,9 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 4bff7dae17d0ebc498b51ce69abffa0e, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 4bff7dae17d0ebc498b51ce69abffa0e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -25389,7 +25425,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Some patrolling guards ahead. You can sneak past but don't forget you also
     have the TimeTurner.
-  duration: 12
+  clickToGoAway: 0
+  keepActivating: 0
+  ActivateCount: 1
+  closeOnButton: 27
+  isTimed: 1
+  duration: 8
 --- !u!65 &1594119501
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25699,7 +25740,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 21300000, guid: a4fa626587c3acd46af6a585e7c98c29, type: 3}
   m_Type: 0
@@ -25757,11 +25798,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: text
-      value: WAIT, a guard. Maybe you can trap him in that room there.
+      value: WAIT, a guard. Maybe you can shut him in that room there.
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: duration
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: m_Size.x
@@ -25794,6 +25835,10 @@ Prefab:
     - target: {fileID: 400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
       propertyPath: m_LocalScale.x
       value: .0431316383
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
+      propertyPath: clickToGoAway
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d94ec2d0a85247e4d93d94dfc7e8bb15, type: 2}
@@ -27960,10 +28005,10 @@ RectTransform:
   - {fileID: 109590960}
   m_Father: {fileID: 1414929622}
   m_RootOrder: 4
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -.5, y: 0}
-  m_SizeDelta: {x: -430, y: -175}
+  m_AnchorMin: {x: .239223495, y: .241764069}
+  m_AnchorMax: {x: .760882735, y: .755764067}
+  m_AnchoredPosition: {x: -.5, y: .5}
+  m_SizeDelta: {x: -2, y: -2}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1742121797
 MonoBehaviour:
@@ -27989,7 +28034,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: .588235319}
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
@@ -28399,6 +28444,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
 --- !u!4 &1788178670
 Transform:
   m_ObjectHideFlags: 0
@@ -32728,7 +32775,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Mat: {fileID: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 38ce5e3a33bbad1419355017d52176c5, type: 3}
