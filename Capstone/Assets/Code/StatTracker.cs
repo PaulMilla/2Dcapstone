@@ -61,8 +61,8 @@ public class StatTracker : MonoBehaviour {
 
 		if (PlayerPrefs.HasKey(timeKey) && PlayerPrefs.GetFloat(timeKey) > 0) {
 			bestTime = Mathf.Min(time, PlayerPrefs.GetFloat(timeKey));
-			bestTrueTime = Mathf.Min(PlayerPrefs.GetFloat(trueTimeKey));
-			bestTimesCaught = Mathf.Min(PlayerPrefs.GetFloat(timesCaughtKey));
+			bestTrueTime = Mathf.Min(trueTime, PlayerPrefs.GetFloat(trueTimeKey));
+			bestTimesCaught = Mathf.Min(timesCaught, PlayerPrefs.GetFloat(timesCaughtKey));
 		}
 		else {
 			bestTime = time;
