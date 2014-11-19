@@ -10,16 +10,12 @@ public class RewindEffect : MonoBehaviour {
 	void Start () {
 		motionBlur = this.GetComponent<MotionBlur>();
 		noiseEffect = this.GetComponent<NoiseEffect>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetButtonDown("Rewind")) {
+		PlayerMovement.Instance.RewindBegin += () => {
 			applyEffects();
-		} 
-		if(Input.GetButtonUp("Rewind")) {
+		};
+		PlayerMovement.Instance.RewindEnd += () => {
 			removeEffects();
-		}
+		};
 	}
 
 	void applyEffects() {
