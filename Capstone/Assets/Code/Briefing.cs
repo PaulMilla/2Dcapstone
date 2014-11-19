@@ -8,7 +8,7 @@ public class Briefing : MonoBehaviour {
 	GameObject button1;
 	GameObject button2;
 	GameObject playButton;
-	public string nextScene = "TutorialX2";
+	public string nextScene = "Tutorial";
 
 	public AudioSource AudioClick;
 	public AudioSource AudioMouseOver;
