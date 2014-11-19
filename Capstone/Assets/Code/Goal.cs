@@ -15,7 +15,7 @@ public class Goal : MonoBehaviour {
 
 	void Start() {
 		initialScale = rightDoor.localScale;
-		OpenDoor();
+		StartCoroutine(OpenDoor());
 		tracker = (GameObject.FindGameObjectWithTag("UI") as GameObject).GetComponent<StatTracker>();
 	}
 	void OnTriggerEnter(Collider collider) {
@@ -46,6 +46,7 @@ public class Goal : MonoBehaviour {
 		if (player != null) {
 			player.gameObject.SetActive(false);
 		}
+		yield return new WaitForSeconds(1);
 		tracker.ShowStats();
 		yield return null;
 	}
