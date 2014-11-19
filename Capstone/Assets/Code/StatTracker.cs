@@ -87,8 +87,12 @@ public class StatTracker : MonoBehaviour {
 	}
 
 	string FormatTime(float time) {
-		if (time % 60 > 9)
+		if (time % 60 >= 10)
 			return (int)time / 60 + ":" + (int)(time % 60);
 		return (int)time / 60 + ":0" + (int)(time % 60);
+	}
+
+	public void LoadNextLevel() {
+		GameManager.Instance.LoadNextLevel();
 	}
 }

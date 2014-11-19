@@ -26,7 +26,7 @@ public class Goal : MonoBehaviour {
 	IEnumerator OpenDoor() {
 		while (rightDoor.localScale.x > 0) {
 			Vector3 newScale = rightDoor.localScale;
-			newScale.x -= doorSpeed;
+			newScale.x -= doorSpeed * Time.deltaTime;
 			newScale.x = Mathf.Max(0, newScale.x);
 			rightDoor.localScale = newScale;
 			leftDoor.localScale = newScale;
@@ -37,7 +37,7 @@ public class Goal : MonoBehaviour {
 	IEnumerator CloseDoor(Collider player) {
 		while (rightDoor.localScale.x < initialScale.x) {
 			Vector3 newScale = rightDoor.localScale;
-			newScale.x += doorSpeed;
+			newScale.x += doorSpeed * Time.deltaTime;
 			newScale.x = Mathf.Min(initialScale.x, newScale.x);
 			rightDoor.localScale = newScale;
 			leftDoor.localScale = newScale;
