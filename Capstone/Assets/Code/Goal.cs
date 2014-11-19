@@ -35,6 +35,10 @@ public class Goal : MonoBehaviour {
 		yield return null;
 	}
 	IEnumerator CloseDoor(Collider player) {
+		if (player != null) {
+			Destroy(player.gameObject.GetComponent<PlayerInput>());
+			Destroy(player);
+		}
 		while (rightDoor.localScale.x < initialScale.x) {
 			Vector3 newScale = rightDoor.localScale;
 			newScale.x += doorSpeed * Time.deltaTime;
@@ -44,7 +48,6 @@ public class Goal : MonoBehaviour {
 			yield return new WaitForEndOfFrame();
 		}
 		if (player != null) {
-			Destroy(player.gameObject.GetComponent<PlayerInput>());
 			PlayerMovement.Instance.StopMovement();
 		}
 		yield return new WaitForSeconds(1);
