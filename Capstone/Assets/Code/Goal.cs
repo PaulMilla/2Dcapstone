@@ -44,7 +44,8 @@ public class Goal : MonoBehaviour {
 			yield return new WaitForEndOfFrame();
 		}
 		if (player != null) {
-			player.gameObject.SetActive(false);
+			Destroy(player.gameObject.GetComponent<PlayerInput>());
+			PlayerMovement.Instance.StopMovement();
 		}
 		yield return new WaitForSeconds(1);
 		tracker.ShowStats();
