@@ -5,6 +5,7 @@ public class StartScreen : MonoBehaviour {
 
 	public MovieTexture movieTexture;
 	public Texture playButton;
+	public AudioSource Audioclick;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +22,7 @@ public class StartScreen : MonoBehaviour {
 
 		if (GUI.Button(r , "", new GUIStyle()))
 		{
+			Audioclick.Play();
 			Application.LoadLevel("Briefing");
 		}
 
