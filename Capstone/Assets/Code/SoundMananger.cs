@@ -6,6 +6,10 @@ public class SoundMananger : MonoBehaviour {
 	private AudioSource levelMusic;
 	private AudioSource currentMusic;
 
+	void Awake() {
+		DontDestroyOnLoad (this.gameObject);
+	}
+
 	// Use this for initialization
 	void Start () {
 		levelMusic = this.GetComponent<AudioSource> ();
