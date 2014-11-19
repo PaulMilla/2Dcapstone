@@ -39,7 +39,6 @@ public class CameraFollow : MonoBehaviour {
 		float distance = 0;
 		while (transform.position != panEvent.cameraPosition) {
 			transform.position = Vector3.Lerp(initialPosition, panEvent.cameraPosition, Mathf.Min(1, distance + panEvent.panSpeed * Time.deltaTime));
-			Debug.Log(panEvent.cameraPosition + " " + transform.position);
 			Camera.main.orthographicSize = Mathf.Lerp(initialSize, panEvent.zoomCameraSize, Mathf.Min(1, distance + panEvent.panSpeed * Time.deltaTime));
 			distance += panEvent.panSpeed * Time.deltaTime;
 			yield return new WaitForEndOfFrame();
