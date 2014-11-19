@@ -13,12 +13,12 @@ public class Footstep : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButton ("Rewind")) {
-			sprite.color += new Color(0.0f, 0.0f, 0.0f, fadeRate);
+			sprite.color += new Color(0.0f, 0.0f, 0.0f, fadeRate*Time.deltaTime);
 			if (sprite.color.a > 1) {
 				Destroy(this.gameObject);
 			}
 		} else {
-			sprite.color -= new Color(0.0f, 0.0f, 0.0f, fadeRate);
+			sprite.color -= new Color(0.0f, 0.0f, 0.0f, fadeRate*Time.deltaTime);
 		}
 	}
 }
