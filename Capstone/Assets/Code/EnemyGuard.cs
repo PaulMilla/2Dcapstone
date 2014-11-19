@@ -219,16 +219,18 @@ public class EnemyGuard : Activatable {
 		 * to stop and rotate in place before continue moving.
 		 */
 		Vector3 positionToGoTo = patrolWaypoints[targetWaypoint];
-		Vector3 direction = (positionToGoTo - transform.position).normalized;
-		Quaternion lookRotation = Quaternion.LookRotation(direction);
-		float angleDifference = Vector3.Angle(transform.forward, direction);
-		// Snap the last 10 angles to allow for leeway
-		// Multiply by Time.deltaTime to allow us to freeze when setting deltaTime to 0
-		if (angleDifference > 10.0f) {
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, RotationSpeed*Time.deltaTime);
-		} else {
+		//Vector3 direction = (positionToGoTo - transform.position).normalized;
+		//Quaternion lookRotation = Quaternion.LookRotation(direction);
+		//float angleDifference = Vector3.Angle(transform.forward, direction);
+		/**
+		 * Snap the last 10 angles to allow for leeway
+		 * Multiply by Time.deltaTime to allow us to freeze when setting deltaTime to 0
+		 */
+		//if (angleDifference > 15.0f) {
+			//transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, RotationSpeed*Time.deltaTime);
+		//} else {
 			SetDestination(positionToGoTo);
-		}
+		//}
 	}
 
 	void Satisfied() {
