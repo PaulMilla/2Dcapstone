@@ -22,6 +22,9 @@ public class CloneMovement : CharacterMovement {
 	}
 	
 	void FixedUpdate () {
+		if (GameState.Paused) {
+			return;
+		}
 		if (dead) {
 			return;
 		}

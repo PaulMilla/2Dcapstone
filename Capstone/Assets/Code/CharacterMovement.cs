@@ -38,6 +38,8 @@ public class CharacterMovement : MonoBehaviour {
 		recordedEvents = new Stack<Event>();
 		targetPosition = transform.position;
 		animator = GetComponent<Animator>();
+		GameState.StartPaused += () => { agent.Stop(); };
+		GameState.EndPaused += () => { agent.Resume(); };
 	}
 	protected virtual void Move() {
 		Transform current = this.transform;
