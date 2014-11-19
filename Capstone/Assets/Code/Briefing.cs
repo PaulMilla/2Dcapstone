@@ -10,6 +10,9 @@ public class Briefing : MonoBehaviour {
 	GameObject playButton;
 	public string nextScene = "TutorialX2";
 
+	public AudioSource AudioClick;
+	public AudioSource AudioMouseOver;
+
 	// Use this for initialization
 	void Start () {
 		briefing1 = GameObject.Find("Briefing1");
@@ -21,6 +24,7 @@ public class Briefing : MonoBehaviour {
 	}
 
 	public void GoToPage1() {
+		AudioClick.Play ();
 		briefing2.SetActive(false);
 		button1.SetActive(false);
 		button2.SetActive(true);
@@ -29,6 +33,7 @@ public class Briefing : MonoBehaviour {
 	}
 
 	public void GoToPage2() {
+		AudioClick.Play ();
 		briefing2.SetActive(true);
 		button1.SetActive(true);
 		button2.SetActive(false);
@@ -37,6 +42,7 @@ public class Briefing : MonoBehaviour {
 	}
 
 	public void PlayGame() {
+		AudioClick.Play ();
 		Application.LoadLevel(nextScene);
 	}
 }
