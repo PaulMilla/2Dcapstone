@@ -51,9 +51,9 @@ public class StatTracker : MonoBehaviour {
 
 	}
 
-	public void ShowStats() {	
-		time = Time.time;
-		trueTime = Time.time - trueTime;
+	public void ShowStats() {
+		time = Time.timeSinceLevelLoad;
+		trueTime = Time.timeSinceLevelLoad - trueTime;
 
 		float bestTime;
 		float bestTrueTime;
