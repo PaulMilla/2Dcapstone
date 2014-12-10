@@ -354,7 +354,7 @@ public class EnemyGuard : Activatable {
 		Vector3 direction = t.position - this.transform.position;
 		float angle = Vector3.Angle(direction, this.transform.forward);
 
-		if (angle < EnemyVision.fieldOfViewAngle) {
+		if (angle < EnemyVision.fieldOfViewAngle+10f) {
 			if (this.HasLineOfSightTo(t)) {
 				return true;
 			}

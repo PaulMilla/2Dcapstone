@@ -7,7 +7,7 @@ using System.Collections;
 
 public class EnemyVision : MonoBehaviour {
 	Transform target;
-	public static float fieldOfViewAngle = 60f;
+	public static float fieldOfViewAngle = 50f;
 	EnemyGuard Enemy;
 
 	void Start () {
