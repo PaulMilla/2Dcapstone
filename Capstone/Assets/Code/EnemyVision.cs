@@ -7,7 +7,7 @@ using System.Collections;
 
 public class EnemyVision : MonoBehaviour {
 	Transform target;
-	float fieldOfViewAngle = 60f;
+	public static float fieldOfViewAngle = 50f;
 	EnemyGuard Enemy;
 
 	void Start () {
@@ -45,6 +45,8 @@ public class EnemyVision : MonoBehaviour {
 			}
 		}
 	}
+
+
 
 	// If the target leaves the trigger zone...
 	void OnTriggerExit (Collider other) {

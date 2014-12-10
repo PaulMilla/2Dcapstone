@@ -350,6 +350,20 @@ public class EnemyGuard : Activatable {
 		}
 	}
 
+	public bool InVisionCone(Transform t) {
+		Vector3 direction = t.position - this.transform.position;
+		float angle = Vector3.Angle(direction, this.transform.forward);
+
+		if (angle < EnemyVision.fieldOfViewAngle+10f) {
+			if (this.HasLineOfSightTo(t)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} return false;
+	}
+
 	public bool HasLineOfSightTo(Transform t) {
 		Vector3 direction = t.position - this.transform.position;
 		// Raycast to make sure we have straight line of sight
