@@ -86,7 +86,6 @@ public class EnemyGuard : Activatable {
 			case State.Investigating:
 				emoticon.text = "Investigating";
 				this.animator.SetInteger(ANIMATION_NUMBER_STRING,(int) AnimationNumber.Chasing);
-				playSoundInvestigating();
 				break;
 			}
 		}
@@ -242,6 +241,9 @@ public class EnemyGuard : Activatable {
 	}
 
 	void Confused() {
+		if (confusedTimer == confusedTime) {
+			playSoundConfused();
+		}
 		confusedTimer -= Time.deltaTime;
 		if(confusedTimer <= 0.0f) {
 			playSoundBackToPatrol();
@@ -393,7 +395,7 @@ public class EnemyGuard : Activatable {
 		soundDialoguesBackToPatrol [randomIndex].Play ();
 	}
 
-	public void playSoundInvestigating() {
+	public void playSoundConfused() {
 		int randomIndex = Random.Range (0, soundDialoguesInvestigate.Length - 1);
 		soundDialoguesInvestigate [randomIndex].Play ();
 	}
