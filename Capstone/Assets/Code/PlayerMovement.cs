@@ -70,6 +70,12 @@ public class PlayerMovement : CharacterMovement {
 			return true;
 		}
 		Collider[] nearyByEnemies = Physics.OverlapSphere(transform.position, rewindRadius, 1 << LayerMask.NameToLayer("Enemy"));
-		return nearyByEnemies.Length == 0;
+		bool outOfGuardVision = true;
+		foreach (Collider enemyCollider in nearyByEnemies) {
+			if(enemyCollider.gameObject.GetComponent<EnemyGuard>().InVisionCone(this.transform)) {
+				return false;
+			} 
+		}
+		return outOfGuardVision;
 	}
 }
