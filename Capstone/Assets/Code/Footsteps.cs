@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Footsteps : MonoBehaviour {
-	public GameObject footstepPrefab;
-	public float footstepDistances;
+	public GameObject leftFootstepPrefab;
+	public GameObject rightFootstepPrefab;
 
 	private Vector3 lastFootstep;
 	private bool isRewinding;
@@ -32,18 +32,29 @@ public class Footsteps : MonoBehaviour {
 		audioFootstep.Play ();
 	}
 
+	void LeftFootstepDown() {
+		Vector3 newPosition = this.transform.position;
+		Quaternion newRotation = this.transform.rotation;
+		newRotation.eulerAngles = new Vector3(90, newRotation.eulerAngles.y, newRotation.eulerAngles.z);
+
+		GameObject.Instantiate(leftFootstepPrefab, newPosition, newRotation);
+		lastFootstep = newPosition;
+		PlayFootstepSound();
+	}
+
+	void RightFootstepDown() {
+		Vector3 newPosition = this.transform.position;
+		Quaternion newRotation = this.transform.rotation;
+		newRotation.eulerAngles = new Vector3(90, newRotation.eulerAngles.y, newRotation.eulerAngles.z);
+
+		GameObject.Instantiate(rightFootstepPrefab, newPosition, newRotation);
+		lastFootstep = newPosition;
+		PlayFootstepSound();
+	}
+
 	void FixedUpdate() {
 		if (isRewinding) {
 			return;
-		}
-
-		if (Vector3.Distance(lastFootstep, transform.position) > footstepDistances) {
-			Vector3 newPosition = this.transform.position;
-			Quaternion newRotation = this.transform.rotation;
-			newRotation.eulerAngles = new Vector3(90, newRotation.eulerAngles.y, newRotation.eulerAngles.z);
-
-			GameObject.Instantiate(footstepPrefab, newPosition, newRotation);
-			lastFootstep = newPosition;
 		}
 	}
 }
