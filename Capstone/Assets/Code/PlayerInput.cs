@@ -53,6 +53,8 @@ public class PlayerInput : MonoBehaviour {
 				RaycastHit hit;
 				if (Physics.Raycast(ray, out hit, 1000, 1 << LayerMask.NameToLayer("Interactable"))) {
 					playerMovement.MoveTo(hit, true);
+					if(hit.collider.GetComponent<ParticleSystem>() != null)
+						hit.collider.GetComponent<ParticleSystem>().Play();
 				}
 			}
 			else if (Input.GetMouseButton(0)) {

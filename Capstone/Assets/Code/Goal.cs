@@ -13,10 +13,13 @@ public class Goal : MonoBehaviour {
 
 	StatTracker tracker;
 
+	AudioSource elevatorClose;
+
 	void Start() {
 		initialScale = rightDoor.localScale;
 		StartCoroutine(OpenDoor());
 		tracker = (GameObject.FindGameObjectWithTag("UI") as GameObject).GetComponent<StatTracker>();
+		elevatorClose = this.GetComponent<AudioSource> ();
 	}
 	void OnTriggerEnter(Collider collider) {
 		if (collider.gameObject.layer == LayerMask.NameToLayer("Player")) {
@@ -36,6 +39,7 @@ public class Goal : MonoBehaviour {
 	}
 	IEnumerator CloseDoor(Collider player) {
 		if (player != null) {
+			elevatorClose.Play();
 			Destroy(player.gameObject.GetComponent<PlayerInput>());
 			Destroy(player);
 		}
