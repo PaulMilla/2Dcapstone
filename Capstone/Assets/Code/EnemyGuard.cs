@@ -390,23 +390,23 @@ public class EnemyGuard : Activatable {
 	}
 
 	public void playSoundSeesPlayer() {
-		int randomIndex = Random.Range (0, soundDialoguesSeesPlayer.Length - 1);
+		int randomIndex = Random.Range (0, soundDialoguesSeesPlayer.Length);
 		soundDialoguesSeesPlayer [randomIndex].Play ();
 		playSoundAlert ();
 	}
 
 	public void playSoundBackToPatrol() {
-		int randomIndex = Random.Range (0, soundDialoguesBackToPatrol.Length - 1);
+		int randomIndex = Random.Range (0, soundDialoguesBackToPatrol.Length);
 		soundDialoguesBackToPatrol [randomIndex].Play ();
 	}
 
 	public void playSoundConfused() {
-		int randomIndex = Random.Range (0, soundDialoguesInvestigate.Length - 1);
+		int randomIndex = Random.Range (0, soundDialoguesInvestigate.Length);
 		soundDialoguesInvestigate [randomIndex].Play ();
 	}
 
 	public void playSoundCelebrate() {
-		int randomIndex = Random.Range (0, soundDialoguesCelebrate.Length - 1);
+		int randomIndex = Random.Range (0, soundDialoguesCelebrate.Length);
 		soundDialoguesCelebrate [randomIndex].Play ();
 	}
 
