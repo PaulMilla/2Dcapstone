@@ -107,6 +107,7 @@ public class EnemyGuard : Activatable {
 	private AudioSource[] soundDialoguesSeesPlayer;
 	private AudioSource[] soundDialoguesBackToPatrol;
 	private AudioSource[] soundDialoguesInvestigate;
+	private AudioSource[] soundDialoguesCelebrate;
 
 	protected override void Start() {
 		base.Start();
@@ -121,6 +122,7 @@ public class EnemyGuard : Activatable {
 		soundDialoguesSeesPlayer = soundBank.FindChild ("SeesPlayer").GetComponents<AudioSource> ();
 		soundDialoguesBackToPatrol = soundBank.FindChild ("ReturnToPatrol").GetComponents<AudioSource> ();
 		soundDialoguesInvestigate = soundBank.FindChild ("Investigating").GetComponents<AudioSource> ();
+		soundDialoguesCelebrate = soundBank.FindChild ("Celebrating").GetComponents<AudioSource> ();
 		soundEffectMotor.Play ();
 
 		// Initialize Components
@@ -233,6 +235,9 @@ public class EnemyGuard : Activatable {
 	}
 
 	void Satisfied() {
+		if (pauseAfterKillTimer == pauseAfterKillTime) {
+			playSoundCelebrate();
+		}
 		pauseAfterKillTimer -= Time.deltaTime;
 		if (pauseAfterKillTimer <= 0.0f) {
 			myState = State.Patrolling;
@@ -385,19 +390,24 @@ public class EnemyGuard : Activatable {
 	}
 
 	public void playSoundSeesPlayer() {
-		int randomIndex = Random.Range (0, soundDialoguesSeesPlayer.Length - 1);
+		int randomIndex = Random.Range (0, soundDialoguesSeesPlayer.Length);
 		soundDialoguesSeesPlayer [randomIndex].Play ();
 		playSoundAlert ();
 	}
 
 	public void playSoundBackToPatrol() {
-		int randomIndex = Random.Range (0, soundDialoguesBackToPatrol.Length - 1);
+		int randomIndex = Random.Range (0, soundDialoguesBackToPatrol.Length);
 		soundDialoguesBackToPatrol [randomIndex].Play ();
 	}
 
 	public void playSoundConfused() {
-		int randomIndex = Random.Range (0, soundDialoguesInvestigate.Length - 1);
+		int randomIndex = Random.Range (0, soundDialoguesInvestigate.Length);
 		soundDialoguesInvestigate [randomIndex].Play ();
+	}
+
+	public void playSoundCelebrate() {
+		int randomIndex = Random.Range (0, soundDialoguesCelebrate.Length);
+		soundDialoguesCelebrate [randomIndex].Play ();
 	}
 
 	float map(float s, float a1, float a2, float b1, float b2) {
