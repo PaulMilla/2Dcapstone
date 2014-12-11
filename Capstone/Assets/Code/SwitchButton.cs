@@ -27,6 +27,11 @@ public class SwitchButton : Interactable {
 			audioOff.Play ();
 			renderer.material.color = Color.blue;
 		}
+
+		// Play some particles
+		if(GetComponent<ParticleSystem>() != null)
+			GetComponent<ParticleSystem>().Play();
+
 		// The reason this class exists
 		foreach (Activatable activatable in activatableArray) {
 			activatable.Toggle();

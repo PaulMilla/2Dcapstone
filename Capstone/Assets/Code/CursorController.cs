@@ -2,23 +2,14 @@
 using System.Collections;
 
 public class CursorController : MonoBehaviour {
-
-	public LensFlare flarePrefab;
-	private LensFlare flare;
-	
+	public Texture2D mouseCursor;
 	void Update () {
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit, 100, 1 << LayerMask.NameToLayer ("Interactable"))) {
-			if (flare == null) {
-				flare = Instantiate(flarePrefab, hit.point, Quaternion.identity) as LensFlare;
-			} else {
-				flare.transform.position = hit.point;
-			}
+			Cursor.SetCursor(mouseCursor, Vector2.zero, CursorMode.Auto);
 		} else {
-			if (flare != null) {
-				GameObject.Destroy(flare.gameObject);
-			}
+			Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 		}
 	}
 }
