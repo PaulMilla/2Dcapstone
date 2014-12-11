@@ -235,7 +235,7 @@ public class EnemyGuard : Activatable {
 	}
 
 	void Satisfied() {
-		if (confusedTime == confusedTimer) {
+		if (pauseAfterKillTimer == pauseAfterKillTime) {
 			playSoundCelebrate();
 		}
 		pauseAfterKillTimer -= Time.deltaTime;
@@ -407,7 +407,7 @@ public class EnemyGuard : Activatable {
 
 	public void playSoundCelebrate() {
 		int randomIndex = Random.Range (0, soundDialoguesCelebrate.Length - 1);
-		soundDialoguesInvestigate [randomIndex].Play ();
+		soundDialoguesCelebrate [randomIndex].Play ();
 	}
 
 	float map(float s, float a1, float a2, float b1, float b2) {
