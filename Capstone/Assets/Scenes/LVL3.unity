@@ -6790,6 +6790,69 @@ MeshFilter:
   m_PrefabInternal: {fileID: 962760227}
   m_GameObject: {fileID: 329193307}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &331038648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 331038649}
+  - 108: {fileID: 331038650}
+  m_Layer: 0
+  m_Name: Point light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &331038649
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 331038648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.05999994, y: 1.44000006, z: 14.5200005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1692782827}
+  m_RootOrder: 16
+--- !u!108 &331038650
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 331038648}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Type: 2
+  m_Color: {r: .91911763, g: .304259539, b: .263570487, a: 1}
+  m_Intensity: 1.39999998
+  m_Range: 14.0469284
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_Softness: 4
+    m_SoftnessFade: 1
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_ActuallyLightmapped: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_ShadowSamples: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_IndirectIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
 --- !u!1 &332361935
 GameObject:
   m_ObjectHideFlags: 0
@@ -25464,7 +25527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740accfbc95574788bf5988992c15766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultActivated: 1
+  defaultActivated: 0
   images:
   - {fileID: 2800000, guid: b84a697108990894f8563d678b6fc370, type: 3}
   - {fileID: 2800000, guid: c19a95846928924469e6747e2bd54506, type: 3}
@@ -33086,6 +33149,7 @@ Transform:
   - {fileID: 1969521873}
   - {fileID: 220368511}
   - {fileID: 1148132301}
+  - {fileID: 331038649}
   m_Father: {fileID: 0}
   m_RootOrder: 19
 --- !u!1 &1696216390
