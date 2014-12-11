@@ -107,6 +107,7 @@ public class EnemyGuard : Activatable {
 	private AudioSource[] soundDialoguesSeesPlayer;
 	private AudioSource[] soundDialoguesBackToPatrol;
 	private AudioSource[] soundDialoguesInvestigate;
+	private AudioSource[] soundDialoguesCelebrate;
 
 	protected override void Start() {
 		base.Start();
@@ -121,6 +122,7 @@ public class EnemyGuard : Activatable {
 		soundDialoguesSeesPlayer = soundBank.FindChild ("SeesPlayer").GetComponents<AudioSource> ();
 		soundDialoguesBackToPatrol = soundBank.FindChild ("ReturnToPatrol").GetComponents<AudioSource> ();
 		soundDialoguesInvestigate = soundBank.FindChild ("Investigating").GetComponents<AudioSource> ();
+		soundDialoguesCelebrate = soundBank.FindChild ("Celebrating").GetComponents<AudioSource> ();
 		soundEffectMotor.Play ();
 
 		// Initialize Components
@@ -233,6 +235,9 @@ public class EnemyGuard : Activatable {
 	}
 
 	void Satisfied() {
+		if (confusedTime == confusedTimer) {
+			playSoundCelebrate();
+		}
 		pauseAfterKillTimer -= Time.deltaTime;
 		if (pauseAfterKillTimer <= 0.0f) {
 			myState = State.Patrolling;
@@ -397,6 +402,11 @@ public class EnemyGuard : Activatable {
 
 	public void playSoundConfused() {
 		int randomIndex = Random.Range (0, soundDialoguesInvestigate.Length - 1);
+		soundDialoguesInvestigate [randomIndex].Play ();
+	}
+
+	public void playSoundCelebrate() {
+		int randomIndex = Random.Range (0, soundDialoguesCelebrate.Length - 1);
 		soundDialoguesInvestigate [randomIndex].Play ();
 	}
 
